@@ -10,7 +10,6 @@ Firebase Realtime Database を使って複数プレイヤーがデータを同�
 
 - 対応基盤: RPGツクールMZ
 - 通信基盤: Firebase Realtime Database
-- 認証: Firebase Anonymous Authentication
 - 主要要素:
   - ルーム参加
   - PC選択
