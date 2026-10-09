@@ -1,4 +1,4 @@
-<img src="title_a.png">
+<img src="title_A.png">
 
 RPGツクールMZ をベースにした、オンライン向けのマーダーミステリー製作テンプレート / デモプロジェクトです。
 Firebase Realtime Database を使って複数プレイヤーがデータを同期し、RPGツクールMZの強みである表示系、プログラム処理、自動動作を簡単に組み立てることができます。
