@@ -25,25 +25,11 @@ Firebase Realtime Database を使って複数プレイヤーがデータを同�
 - [プラグイン一覧]
 - [ContentRenderer HTMLガイド]
 
-## ディレクトリ構成
-
-MZMurder20261115/
-├─ js/
-│  └─ plugins/            # プラグイン本体
-├─ img/
-│  ├─ pictures/           # 画像素材
-│  ├─ icon/               # UIアイコン
-│  └─ system/             # システム画像
-└─マニュアル/
-   ├─ MZ_Murder_制作マニュアル.html
-   ├─ プラグイン一覧.html
-   └─ plugins/
-
 ## 事前準備
 
 - RPGツクールMZ をインストールしていること
-- Firebase の Google アカウントを用意していること
 - インターネット接続ができる環境があること
+- 使用できるGoogleアカウントがあること
 
 ## 使い方の流れ
 
