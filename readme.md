@@ -61,7 +61,7 @@ Firebase Realtime Database を使って複数プレイヤーがデータを同�
 - SequenceController
 - LogicProcessor
 
-詳細は [プラグイン一覧](./マニュアル/プラグイン一覧.html) を参照してください。
+詳細はプラグイン一覧を参照してください。
 
 ## 重要な注意事項
 
