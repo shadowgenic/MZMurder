@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ConfirmWindowClose | MZ Murder</title>
+  <link rel="stylesheet" href="../plugin_reference.css">
+</head>
+<body>
+  <header class="site-header"><div class="wrap">
+    <p class="eyebrow">MZ Murder · プラグインリファレンス</p>
+    <h1>ConfirmWindowClose</h1>
+    <p>PC版でウィンドウを閉じるとき、終了確認を表示します。</p>
+  </div></header>
+  <div class="wrap page">
+      <div class="breadcrumbs"><a href="../MZ_Murder_制作マニュアル.html">制作マニュアル</a> <span>›</span> <a href="../プラグイン一覧.html">プラグイン一覧</a> <span>›</span> ConfirmWindowClose</div>
+      <div class="page-layout">
+        <aside class="sidebar" aria-label="ページ内目次">
+          <strong>このページ</strong>
+          <a href="#overview">役割</a><a href="#parameters">プラグインパラメータ <em>1</em></a><a href="#commands">プラグインコマンド <em>0</em></a>
+          
+          
+          <div class="sidebar-commands"></div>
+        </aside>
+        <main>
+          <section class="panel" id="overview"><h2>役割</h2><p>PC版でウィンドウを閉じるとき、終了確認を表示します。</p><div class="callout">プラグイン管理でDisableFunctionの直後に追加してONにします。PC版でウィンドウの閉じるボタンを押すと確認を表示し、OKで終了、キャンセルで続行します。確認文はconfirmMessageで変更できます。</div>
+            <p class="source">実装ファイル：<a href="../../js/plugins/ConfirmWindowClose.js"><code>js/plugins/ConfirmWindowClose.js</code></a></p>
+            
+          </section>
+          <section class="panel" id="parameters"><h2>プラグインパラメータ <span class="count">1件</span></h2>
+            <p class="hint">「ヘッダー初期値」はプラグインに記載された値、「デモ設定値」はこの作品の <code>js/plugins.js</code> に保存された値です。0や空欄は、実装側で代替値に置き換わる場合があります。</p><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">終了確認の文章<small><code>confirmMessage</code></small></th><td>ウィンドウの閉じるボタンを押したときに表示する確認文です。</td><td>型: <code>string</code><br>ヘッダー初期値: <code>ゲームを終了しますか？</code><br>デモ設定値: <code>ゲームを終了しますか？</code></td></tr></tbody></table></div>
+          </section>
+          <section class="panel" id="commands"><h2>プラグインコマンド <span class="count">0件</span></h2><p class="empty">プラグインコマンドはありません。ONにすると自動的に動作します。</p></section>
+          
+          
+          <div class="pager"><a href="DisableFunction.html">← DisableFunction</a><a href="../プラグイン一覧.html">一覧へ戻る</a><a href="ErasePictures.html">ErasePictures →</a></div>
+        </main>
+      </div>
+    </div>
+  <footer class="wrap">このデモの <code>js/plugins.js</code> とプラグインヘッダー・実装を基準に生成しています。</footer>
+</body>
+</html>

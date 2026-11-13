@@ -1,0 +1,69 @@
+:root { color-scheme:light; --ink:#20303b; --muted:#566b77; --navy:#123950; --blue:#17618e; --line:#d7e2e9; --paper:#fff; --pale:#edf5f9; }
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { margin:0; background:#f3f6f8; color:var(--ink); font:16px/1.75 system-ui,"Yu Gothic","Meiryo",sans-serif; }
+a { color:var(--blue); }
+a:focus-visible, input:focus-visible { outline:3px solid #ee9e49; outline-offset:2px; }
+code { padding:.08em .32em; border-radius:4px; background:#ebf1f4; font-family:Consolas,"Yu Gothic",monospace; overflow-wrap:anywhere; }
+h1,h2,h3,h4,p { margin-top:0; }
+h1 { font-size:clamp(2rem,4vw,2.8rem); line-height:1.25; margin-bottom:.35rem; }
+h2 { font-size:1.55rem; line-height:1.4; border-bottom:2px solid var(--line); padding-bottom:.45rem; margin-bottom:1rem; }
+h3 { font-size:1.18rem; line-height:1.5; margin-bottom:.3rem; }
+h4 { font-size:.95rem; margin:1rem 0 .45rem; }
+.wrap { max-width:1200px; margin:0 auto; padding-left:1.25rem; padding-right:1.25rem; }
+.site-header { padding:2.15rem 0 2.3rem; color:white; background:linear-gradient(115deg,#123950,#1c607c); }
+.site-header p { max-width:70rem; margin-bottom:0; color:#e1f0f6; }
+.site-header .eyebrow { margin-bottom:.6rem; font-size:.82rem; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:#a9d5e8; }
+.breadcrumbs { display:flex; gap:.5rem; flex-wrap:wrap; align-items:center; margin:1.2rem 0; color:var(--muted); font-size:.9rem; }
+.breadcrumbs a { text-decoration:none; }
+.breadcrumbs a:hover { text-decoration:underline; }
+.page-layout { display:grid; grid-template-columns:230px minmax(0,1fr); gap:1.5rem; align-items:start; }
+.sidebar,.panel { background:var(--paper); border:1px solid var(--line); border-radius:12px; }
+.sidebar { position:sticky; top:1rem; padding:1rem; max-height:calc(100vh - 2rem); overflow:auto; }
+.sidebar strong { display:block; margin:.1rem .4rem .5rem; }
+.sidebar a { display:block; padding:.35rem .45rem; text-decoration:none; border-radius:5px; }
+.sidebar a:hover,.sidebar a:focus-visible { background:var(--pale); text-decoration:underline; }
+.sidebar em { float:right; color:var(--muted); font-style:normal; }
+.sidebar-commands { border-top:1px solid var(--line); margin-top:.8rem; padding-top:.7rem; }
+.sidebar-commands a { font-size:.86rem; line-height:1.45; }
+.panel { padding:1.4rem 1.7rem; margin-bottom:1.3rem; }
+.panel p:last-child { margin-bottom:0; }
+.count { color:var(--muted); font-size:.7em; font-weight:normal; }
+.callout { background:var(--pale); border-left:4px solid #3b89aa; border-radius:4px; padding:.8rem 1rem; margin:1rem 0; }
+.source,.hint,.muted { color:var(--muted); }
+.hint,.source { font-size:.92rem; }
+.source { margin-top:1.1rem; }
+.empty { background:var(--pale); padding:.8rem 1rem; border-radius:6px; }
+.table-wrap { overflow-x:auto; }
+table { width:100%; border-collapse:collapse; font-size:.92rem; }
+th,td { border:1px solid var(--line); text-align:left; vertical-align:top; padding:.65rem .7rem; }
+thead th { background:#e9f2f7; white-space:nowrap; }
+tbody th { width:27%; min-width:175px; background:#f9fbfc; font-weight:600; }
+tbody th small { display:block; font-size:.76rem; font-weight:normal; margin-top:.2rem; }
+tbody td:nth-child(2) { min-width:220px; }
+tbody td:nth-child(3) { min-width:190px; font-size:.87rem; }
+.command-card { border:1px solid var(--line); border-radius:10px; padding:1.1rem; margin:1rem 0; scroll-margin-top:1rem; }
+.command-card:nth-of-type(even) { background:#fbfdfe; }
+.command-card h3 { display:flex; gap:.7rem; align-items:baseline; }
+.number { color:#3f7b9d; font-size:.83rem; font-variant-numeric:tabular-nums; }
+.key { font-size:.84rem; color:var(--muted); margin-bottom:.5rem; }
+.pager { display:flex; justify-content:space-between; gap:1rem; margin:0 0 1.5rem; flex-wrap:wrap; }
+.pager a { padding:.55rem .8rem; background:white; border:1px solid var(--line); border-radius:7px; text-decoration:none; }
+.pager a:hover { background:var(--pale); text-decoration:underline; }
+.index-main { padding-bottom:.3rem; }
+.summary { display:flex; gap:.65rem; flex-wrap:wrap; margin:1.2rem 0 1.5rem; }
+.summary span,.badges span { display:inline-block; border-radius:999px; background:#e4f1f7; color:#145a7e; padding:.14rem .6rem; font-size:.83rem; font-weight:600; }
+.search-label { display:block; font-weight:700; margin-bottom:.4rem; }
+input[type=search] { width:100%; max-width:450px; min-height:2.7rem; border:1px solid #abc4d2; border-radius:8px; padding:.45rem .7rem; font:inherit; background:white; color:var(--ink); }
+.plugin-grid { list-style:none; margin:1rem 0 0; padding:0; display:grid; grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); gap:.8rem; }
+.plugin-card { min-width:0; }
+.plugin-card[hidden] { display:none; }
+.plugin-card a { display:block; height:100%; color:var(--ink); text-decoration:none; background:#fff; border:1px solid var(--line); border-radius:9px; padding:1rem; transition:border-color .15s,transform .15s; }
+.plugin-card a:hover { border-color:#3f89aa; transform:translateY(-2px); }
+.plugin-card strong { color:#124e70; font-size:1.08rem; overflow-wrap:anywhere; }
+.plugin-number { display:inline-block; margin-right:.55rem; color:var(--muted); font-size:.85rem; }
+.plugin-desc { display:block; min-height:3.4em; margin:.5rem 0 .8rem; font-size:.9rem; }
+.badges { display:flex; gap:.45rem; flex-wrap:wrap; }
+footer { color:var(--muted); padding-top:.4rem; padding-bottom:2rem; font-size:.84rem; }
+@media (max-width:840px) { .page-layout { display:block; } .sidebar { position:static; max-height:none; margin-bottom:1.2rem; } .sidebar-commands { display:none; } .panel { padding:1.1rem; } }
+@media print { body { background:white; font-size:10pt; } .site-header { background:white; color:black; padding:0 0 .8rem; } .site-header p,.site-header .eyebrow { color:black; } .page-layout { display:block; } .sidebar,.breadcrumbs,.pager,input,.search-label,#search-count { display:none; } .panel { border:0; padding:0; } .command-card { break-inside:avoid; } a { color:inherit; } .plugin-grid { display:block; } .plugin-card { break-inside:avoid; margin-bottom:.5rem; } }

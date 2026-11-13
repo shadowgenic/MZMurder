@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SyncMapTransfer | MZ Murder</title>
+  <link rel="stylesheet" href="../plugin_reference.css">
+</head>
+<body>
+  <header class="site-header"><div class="wrap">
+    <p class="eyebrow">MZ Murder · プラグインリファレンス</p>
+    <h1>SyncMapTransfer</h1>
+    <p>PC登録者の完了報告を待ち、観戦者も含めて全員を予約したマップへ移動させます。</p>
+  </div></header>
+  <div class="wrap page">
+      <div class="breadcrumbs"><a href="../MZ_Murder_制作マニュアル.html">制作マニュアル</a> <span>›</span> <a href="../プラグイン一覧.html">プラグイン一覧</a> <span>›</span> SyncMapTransfer</div>
+      <div class="page-layout">
+        <aside class="sidebar" aria-label="ページ内目次">
+          <strong>このページ</strong>
+          <a href="#overview">役割</a><a href="#parameters">プラグインパラメータ <em>0</em></a><a href="#commands">プラグインコマンド <em>4</em></a>
+          
+          
+          <div class="sidebar-commands"><a href="#command-1">一斉移動の予約</a><a href="#command-2">完了報告</a><a href="#command-3">現在のPC参加者数を固定する</a><a href="#command-4">保存されたマップへ移動（自分のみ）</a></div>
+        </aside>
+        <main>
+          <section class="panel" id="overview"><h2>役割</h2><p>PC登録者の完了報告を待ち、観戦者も含めて全員を予約したマップへ移動させます。</p><div class="callout">GMが先に移動先を予約します。membersの中でPC番号が登録されている人の完了報告が揃うと、観戦者も含めて全員が移動します。観戦者の完了報告は待ち人数に含みません。</div>
+            <p class="source">実装ファイル：<a href="../../js/plugins/SyncMapTransfer.js"><code>js/plugins/SyncMapTransfer.js</code></a></p>
+            
+          </section>
+          <section class="panel" id="parameters"><h2>プラグインパラメータ <span class="count">0件</span></h2>
+            <p class="hint">「ヘッダー初期値」はプラグインに記載された値、「デモ設定値」はこの作品の <code>js/plugins.js</code> に保存された値です。0や空欄は、実装側で代替値に置き換わる場合があります。</p><p class="empty">プラグインパラメータはありません。</p>
+          </section>
+          <section class="panel" id="commands"><h2>プラグインコマンド <span class="count">4件</span></h2><article class="command-card" id="command-1"><h3><span class="number">01</span> 一斉移動の予約</h3><p class="key">コマンドID <code>SetTransferReservation</code></p><p>GMが全員の移動先マップを予約します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">移動先マップ<small><code>mapId</code></small></th><td>全員が完了した後に移動するマップ番号です。</td><td>型: <code>map</code></td></tr></tbody></table></div></article>
+<article class="command-card" id="command-2"><h3><span class="number">02</span> 完了報告</h3><p class="key">コマンドID <code>CompleteEvent</code></p><p>現在のマップでの処理が完了したことを報告します。</p><h4>引数</h4><p class="empty">引数はありません。</p></article>
+<article class="command-card" id="command-3"><h3><span class="number">03</span> 現在のPC参加者数を固定する</h3><p class="key">コマンドID <code>FixCurrentMemberCount</code></p><p>現在のmembersのうちPC番号が登録された人数を、以後の完了待ち人数として固定します。GMのみ実行できます。</p><h4>引数</h4><p class="empty">引数はありません。</p></article>
+<article class="command-card" id="command-4"><h3><span class="number">04</span> 保存されたマップへ移動（自分のみ）</h3><p class="key">コマンドID <code>TransferToLastSystemMap</code></p><p>system/lastMapId に保存されているマップへ自分だけ移動します。</p><h4>引数</h4><p class="empty">引数はありません。</p></article></section>
+          
+          
+          <div class="pager"><a href="SideMenu.html">← SideMenu</a><a href="../プラグイン一覧.html">一覧へ戻る</a><a href="TimerEx.html">TimerEx →</a></div>
+        </main>
+      </div>
+    </div>
+  <footer class="wrap">このデモの <code>js/plugins.js</code> とプラグインヘッダー・実装を基準に生成しています。</footer>
+</body>
+</html>

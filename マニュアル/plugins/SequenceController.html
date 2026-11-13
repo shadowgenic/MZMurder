@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SequenceController | MZ Murder</title>
+  <link rel="stylesheet" href="../plugin_reference.css">
+</head>
+<body>
+  <header class="site-header"><div class="wrap">
+    <p class="eyebrow">MZ Murder · プラグインリファレンス</p>
+    <h1>SequenceController</h1>
+    <p>連番画像をピクチャアニメーションとして再生します。</p>
+  </div></header>
+  <div class="wrap page">
+      <div class="breadcrumbs"><a href="../MZ_Murder_制作マニュアル.html">制作マニュアル</a> <span>›</span> <a href="../プラグイン一覧.html">プラグイン一覧</a> <span>›</span> SequenceController</div>
+      <div class="page-layout">
+        <aside class="sidebar" aria-label="ページ内目次">
+          <strong>このページ</strong>
+          <a href="#overview">役割</a><a href="#parameters">プラグインパラメータ <em>0</em></a><a href="#commands">プラグインコマンド <em>1</em></a>
+          
+          
+          <div class="sidebar-commands"><a href="#command-1">連番アニメの再生</a></div>
+        </aside>
+        <main>
+          <section class="panel" id="overview"><h2>役割</h2><p>連番画像をピクチャアニメーションとして再生します。</p><div class="callout">loopCountは0で無限ループ、1以上で指定した周回数だけ再生します。有限回の再生終了後はendDisplayで消去・最初の画像・最後の画像を選べます。</div>
+            <p class="source">実装ファイル：<a href="../../js/plugins/SequenceController.js"><code>js/plugins/SequenceController.js</code></a></p>
+            
+          </section>
+          <section class="panel" id="parameters"><h2>プラグインパラメータ <span class="count">0件</span></h2>
+            <p class="hint">「ヘッダー初期値」はプラグインに記載された値、「デモ設定値」はこの作品の <code>js/plugins.js</code> に保存された値です。0や空欄は、実装側で代替値に置き換わる場合があります。</p><p class="empty">プラグインパラメータはありません。</p>
+          </section>
+          <section class="panel" id="commands"><h2>プラグインコマンド <span class="count">1件</span></h2><article class="command-card" id="command-1"><h3><span class="number">01</span> 連番アニメの再生</h3><p class="key">コマンドID <code>play</code></p><p>連番画像を指定ピクチャ番号で、指定した周回数だけアニメーション表示します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">ピクチャ番号<small><code>pictureId</code></small></th><td>アニメーションを表示するピクチャ番号です。</td><td>型: <code>number</code><br>範囲: 1～100<br>ヘッダー初期値: <code>1</code></td></tr>
+<tr><th scope="row">最初の画像を選択<small><code>file</code></small></th><td>連番画像の先頭ファイルです。ファイル名の番号部分から後続画像を検出します。</td><td>型: <code>file</code><br>参照先: <code>img/pictures</code></td></tr>
+<tr><th scope="row">原点<small><code>origin</code></small></th><td>ピクチャ座標を画像の左上基準と中央基準のどちらで扱うか指定します。</td><td>型: <code>select</code><br>ヘッダー初期値: <code>0</code><br>選択肢: 左上 (<code>0</code>)、中央 (<code>1</code>)</td></tr>
+<tr><th scope="row">X座標<small><code>x</code></small></th><td>アニメーションの表示X座標です。</td><td>型: <code>number</code><br>範囲: -9999～9999<br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">Y座標<small><code>y</code></small></th><td>アニメーションの表示Y座標です。</td><td>型: <code>number</code><br>範囲: -9999～9999<br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">幅拡大率<small><code>scaleX</code></small></th><td>画像の横方向の表示倍率をパーセントで指定します。</td><td>型: <code>number</code><br>範囲: -2000～2000<br>ヘッダー初期値: <code>100</code></td></tr>
+<tr><th scope="row">高さ拡大率<small><code>scaleY</code></small></th><td>画像の縦方向の表示倍率をパーセントで指定します。</td><td>型: <code>number</code><br>範囲: -2000～2000<br>ヘッダー初期値: <code>100</code></td></tr>
+<tr><th scope="row">不透明度<small><code>opacity</code></small></th><td>アニメーションの不透明度を0から255で指定します。</td><td>型: <code>number</code><br>範囲: 0～255<br>ヘッダー初期値: <code>255</code></td></tr>
+<tr><th scope="row">合成方法<small><code>blendMode</code></small></th><td>画像を画面へ合成する方法を指定します。</td><td>型: <code>select</code><br>ヘッダー初期値: <code>0</code><br>選択肢: 通常 (<code>0</code>)、加算 (<code>1</code>)、乗算 (<code>2</code>)、スクリーン (<code>3</code>)</td></tr>
+<tr><th scope="row">基本ウェイト<small><code>defaultWait</code></small></th><td>各フレームを表示する基本待機フレーム数です。</td><td>型: <code>number</code><br>範囲: 1～指定なし<br>ヘッダー初期値: <code>1</code></td></tr>
+<tr><th scope="row">個別ウェイト設定<small><code>customWaits</code></small></th><td>フレームごとの待機時間を指定する設定文字列です。空欄なら基本ウェイトを使います。</td><td>型: <code>string</code></td></tr>
+<tr><th scope="row">ループ回数<small><code>loopCount</code></small></th><td>連番アニメーションを再生する周回数です。0なら無限ループ、1なら1周で終了します。</td><td>型: <code>number</code><br>範囲: 0～指定なし<br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">終了後の表示<small><code>endDisplay</code></small></th><td>指定した回数の再生後、ピクチャを消すか、最初または最後の画像を表示したままにするか選びます。</td><td>型: <code>select</code><br>ヘッダー初期値: <code>last</code><br>選択肢: 消去 (<code>erase</code>)、最初の画像 (<code>first</code>)、最後の画像 (<code>last</code>)</td></tr>
+<tr><th scope="row">【ブラウザ用】最大枚数<small><code>maxFrames</code></small></th><td>0なら自動検知。Web公開時に止まる場合は枚数を入れてください。</td><td>型: <code>number</code><br>範囲: 0～指定なし<br>ヘッダー初期値: <code>0</code></td></tr></tbody></table></div></article></section>
+          
+          
+          <div class="pager"><a href="Options_change.html">← Options_change</a><a href="../プラグイン一覧.html">一覧へ戻る</a><a href="SetVolume.html">SetVolume →</a></div>
+        </main>
+      </div>
+    </div>
+  <footer class="wrap">このデモの <code>js/plugins.js</code> とプラグインヘッダー・実装を基準に生成しています。</footer>
+</body>
+</html>

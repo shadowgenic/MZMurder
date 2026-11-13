@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CharacterSelection | MZ Murder</title>
+  <link rel="stylesheet" href="../plugin_reference.css">
+</head>
+<body>
+  <header class="site-header"><div class="wrap">
+    <p class="eyebrow">MZ Murder · プラグインリファレンス</p>
+    <h1>CharacterSelection</h1>
+    <p>PCキャラクター選択画面をプラグインコマンドで表示します。</p>
+  </div></header>
+  <div class="wrap page">
+      <div class="breadcrumbs"><a href="../MZ_Murder_制作マニュアル.html">制作マニュアル</a> <span>›</span> <a href="../プラグイン一覧.html">プラグイン一覧</a> <span>›</span> CharacterSelection</div>
+      <div class="page-layout">
+        <aside class="sidebar" aria-label="ページ内目次">
+          <strong>このページ</strong>
+          <a href="#overview">役割</a><a href="#parameters">プラグインパラメータ <em>33</em></a><a href="#commands">プラグインコマンド <em>1</em></a>
+          
+          
+          <div class="sidebar-commands"><a href="#command-1">キャラクター選択処理の実行</a></div>
+        </aside>
+        <main>
+          <section class="panel" id="overview"><h2>役割</h2><p>PCキャラクター選択画面をプラグインコマンドで表示します。</p><div class="callout">選択したPC番号はFirebaseSyncのpcIdVarに保存します。初期マップで一斉移動先を予約してから選択画面を開きます。startUnselectedをONにすると、部屋の作成者も含めて全員が未選択から始まります。入室者がtotalPlayers以上いる場合、PCを選ばなかった参加者は観戦者として進行します。選択完了後の処理はコモンイベントに置きます。</div>
+            <p class="source">実装ファイル：<a href="../../js/plugins/CharacterSelection.js"><code>js/plugins/CharacterSelection.js</code></a></p>
+            
+          </section>
+          <section class="panel" id="parameters"><h2>プラグインパラメータ <span class="count">33件</span></h2>
+            <p class="hint">「ヘッダー初期値」はプラグインに記載された値、「デモ設定値」はこの作品の <code>js/plugins.js</code> に保存された値です。0や空欄は、実装側で代替値に置き換わる場合があります。</p><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">参加人数<small><code>totalPlayers</code></small></th><td>GMを含む、選択画面に表示するキャラクター数と通常の開始人数です。FirebaseSyncの入室上限とは別の設定です。</td><td>型: <code>number</code><br>範囲: 1～指定なし<br>ヘッダー初期値: <code>6</code><br>デモ設定値: <code>6</code></td></tr>
+<tr><th scope="row">全員未選択で開始<small><code>startUnselected</code></small></th><td>ONのとき、部屋の作成者を含む全員がキャラクター未選択で選択画面を開きます。OFFでは作成者のGMキャラクターを初期選択します。</td><td>型: <code>boolean</code><br>ヘッダー初期値: <code>false</code><br>デモ設定値: <code>false</code><br>ON: ON / OFF: OFF</td></tr>
+<tr><th scope="row">GM変更許可<small><code>allowGmChange</code></small></th><td>ONのとき、GMキャラクターを選択中の人も空いている他のキャラクターへ変更できます。</td><td>型: <code>boolean</code><br>ヘッダー初期値: <code>false</code><br>デモ設定値: <code>true</code><br>ON: ON / OFF: OFF</td></tr>
+<tr><th scope="row">人数不足時の開始許可<small><code>allowEarlyStartSwitchId</code></small></th><td>ONのとき、人数が揃っていなくても開始ボタンを押せます。(テストプレイ時true推奨、開発完了後false推奨)</td><td>型: <code>boolean</code><br>ヘッダー初期値: <code>true</code><br>デモ設定値: <code>true</code><br>ON: ON / OFF: OFF</td></tr>
+<tr><th scope="row">全員選択時の自動開始<small><code>autoStartWhenReady</code></small></th><td>ONのとき、全員の選択が揃うと開始ボタンを押さずに選択画面を閉じます。</td><td>型: <code>boolean</code><br>ヘッダー初期値: <code>false</code><br>デモ設定値: <code>false</code><br>ON: ON / OFF: OFF</td></tr>
+<tr><th scope="row">背景画像<small><code>backgroundImage</code></small></th><td>キャラクター選択画面の背景に表示する画像です。未設定の場合は半透明の黒背景を使用します。</td><td>型: <code>file</code><br>参照先: <code>img/pictures</code><br>ヘッダー初期値: <code>（空欄）</code><br>デモ設定値: <code>CharaSelect</code></td></tr>
+<tr><th scope="row">PC画像<small><code>pcImages</code></small></th><td>PC1から順番に表示する画像です。GMもPCの一つとして、GMの番号に対応する画像を設定します。設定しない場合は顔グラフィックを使用します。</td><td>型: <code>file[]</code><br>参照先: <code>img/pictures</code><br>ヘッダー初期値: <code>[]</code><br>デモ設定値: <code>[]</code></td></tr>
+<tr><th scope="row">1ファイル1キャラ設定<small><code>isSingleFace</code></small></th><td>顔グラフィックを使用する場合に画像を4x2分割せず、1画像全体を1キャラクターとして表示します。</td><td>型: <code>boolean</code><br>ヘッダー初期値: <code>false</code><br>デモ設定値: <code>true</code><br>ON: ON / OFF: OFF</td></tr>
+<tr><th scope="row">選択カーソル画像<small><code>cursorImage</code></small></th><td>自分が選択したキャラクターの右下に表示するカーソル画像です。</td><td>型: <code>file</code><br>参照先: <code>img/pictures</code><br>ヘッダー初期値: <code>（空欄）</code><br>デモ設定値: <code>Thunb</code></td></tr>
+<tr><th scope="row">選択カーソルXオフセット<small><code>cursorOffsetX</code></small></th><td>選択カーソルの右下基準位置からのX座標のずれをピクセル単位で指定します。</td><td>型: <code>number</code><br>範囲: -1920～指定なし<br>ヘッダー初期値: <code>0</code><br>デモ設定値: <code>-160</code></td></tr>
+<tr><th scope="row">選択カーソルYオフセット<small><code>cursorOffsetY</code></small></th><td>選択カーソルの右下基準位置からのY座標のずれをピクセル単位で指定します。</td><td>型: <code>number</code><br>範囲: -1080～指定なし<br>ヘッダー初期値: <code>0</code><br>デモ設定値: <code>85</code></td></tr>
+<tr><th scope="row">画像表示幅<small><code>imageWidth</code></small></th><td>キャラクター画像を表示する幅をピクセル単位で指定します。</td><td>型: <code>number</code><br>範囲: 1～指定なし<br>ヘッダー初期値: <code>200</code><br>デモ設定値: <code>256</code></td></tr>
+<tr><th scope="row">画像表示高さ<small><code>imageHeight</code></small></th><td>キャラクター画像を表示する高さをピクセル単位で指定します。</td><td>型: <code>number</code><br>範囲: 1～指定なし<br>ヘッダー初期値: <code>140</code><br>デモ設定値: <code>256</code></td></tr>
+<tr><th scope="row">横方向の列数<small><code>columns</code></small></th><td>キャラクター画像を横に何枚並べてから次の行へ送るかを指定します。</td><td>型: <code>number</code><br>範囲: 1～指定なし<br>ヘッダー初期値: <code>6</code><br>デモ設定値: <code>6</code></td></tr>
+<tr><th scope="row">最初の画像X<small><code>firstX</code></small></th><td>左上に配置する最初の画像のX座標をピクセル単位で指定します。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>100</code><br>デモ設定値: <code>100</code></td></tr>
+<tr><th scope="row">最初の画像Y<small><code>firstY</code></small></th><td>左上に配置する最初の画像のY座標をピクセル単位で指定します。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>180</code><br>デモ設定値: <code>180</code></td></tr>
+<tr><th scope="row">画像間の横余白<small><code>spacingX</code></small></th><td>同じ行に並ぶ画像同士の横方向の間隔をピクセル単位で指定します。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>40</code><br>デモ設定値: <code>40</code></td></tr>
+<tr><th scope="row">画像間の縦余白<small><code>spacingY</code></small></th><td>行と行の間の縦方向の間隔をピクセル単位で指定します。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>80</code><br>デモ設定値: <code>80</code></td></tr>
+<tr><th scope="row">名前Xオフセット<small><code>nameOffsetX</code></small></th><td>キャラクター名の基準位置からのX座標のずれをピクセル単位で指定します。</td><td>型: <code>number</code><br>範囲: -1920～指定なし<br>ヘッダー初期値: <code>0</code><br>デモ設定値: <code>0</code></td></tr>
+<tr><th scope="row">名前Yオフセット<small><code>nameOffsetY</code></small></th><td>キャラクター名の基準位置からのY座標のずれをピクセル単位で指定します。</td><td>型: <code>number</code><br>範囲: -1080～指定なし<br>ヘッダー初期値: <code>0</code><br>デモ設定値: <code>0</code></td></tr>
+<tr><th scope="row">名前の揃え<small><code>nameAlign</code></small></th><td>キャラクター名の表示位置の揃えを選択します。</td><td>型: <code>select</code><br>ヘッダー初期値: <code>center</code><br>デモ設定値: <code>center</code><br>選択肢: 中央揃え (<code>center</code>)、左詰め (<code>left</code>)</td></tr>
+<tr><th scope="row">1行目の表示項目<small><code>textLine1</code></small></th><td>1行目に表示するキャラクター情報を選択します。</td><td>型: <code>select</code><br>ヘッダー初期値: <code>name</code><br>デモ設定値: <code>name</code><br>選択肢: なし (<code>none</code>)、名前 (<code>name</code>)、二つ名 (<code>nickname</code>)、職業 (<code>class</code>)</td></tr>
+<tr><th scope="row">2行目の表示項目<small><code>textLine2</code></small></th><td>2行目に表示するキャラクター情報を選択します。</td><td>型: <code>select</code><br>ヘッダー初期値: <code>none</code><br>デモ設定値: <code>nickname</code><br>選択肢: なし (<code>none</code>)、名前 (<code>name</code>)、二つ名 (<code>nickname</code>)、職業 (<code>class</code>)</td></tr>
+<tr><th scope="row">3行目の表示項目<small><code>textLine3</code></small></th><td>3行目に表示するキャラクター情報を選択します。</td><td>型: <code>select</code><br>ヘッダー初期値: <code>none</code><br>デモ設定値: <code>none</code><br>選択肢: なし (<code>none</code>)、名前 (<code>name</code>)、二つ名 (<code>nickname</code>)、職業 (<code>class</code>)</td></tr>
+<tr><th scope="row">開始ボタン画像<small><code>nextButtonImage</code></small></th><td>選択画面の開始ボタンに使用する画像です。img/pictures/から読み込みます。</td><td>型: <code>file</code><br>参照先: <code>img/pictures</code><br>ヘッダー初期値: <code>Button/NEXT_anim_01</code><br>デモ設定値: <code>Button/Game_Start</code></td></tr>
+<tr><th scope="row">開始ボタンX<small><code>nextButtonX</code></small></th><td>開始ボタンの左端のX座標をピクセル単位で指定します。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>1600</code><br>デモ設定値: <code>1600</code></td></tr>
+<tr><th scope="row">開始ボタンY<small><code>nextButtonY</code></small></th><td>開始ボタンの上端のY座標をピクセル単位で指定します。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>900</code><br>デモ設定値: <code>900</code></td></tr>
+<tr><th scope="row">開始ボタン幅<small><code>nextButtonWidth</code></small></th><td>開始ボタンを表示する幅をピクセル単位で指定します。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>260</code><br>デモ設定値: <code>260</code></td></tr>
+<tr><th scope="row">開始ボタン高さ<small><code>nextButtonHeight</code></small></th><td>開始ボタンを表示する高さをピクセル単位で指定します。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>100</code><br>デモ設定値: <code>100</code></td></tr>
+<tr><th scope="row">RoomID表示X<small><code>roomIdX</code></small></th><td>RoomIDを表示する左端のX座標をピクセル単位で指定します。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>80</code><br>デモ設定値: <code>80</code></td></tr>
+<tr><th scope="row">RoomID表示Y<small><code>roomIdY</code></small></th><td>RoomIDを表示する上端のY座標をピクセル単位で指定します。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>40</code><br>デモ設定値: <code>80</code></td></tr>
+<tr><th scope="row">全員選択後のコモンイベント<small><code>completionCommonEventId</code></small></th><td>開始ボタンで選択画面を閉じた後に自動予約します。0で無効です。</td><td>型: <code>common_event</code><br>ヘッダー初期値: <code>0</code><br>デモ設定値: <code>1</code></td></tr>
+<tr><th scope="row">全員選択後にONにするスイッチ<small><code>completionSwitchId</code></small></th><td>選択画面の完了時にONにするスイッチです。0で無効です。</td><td>型: <code>switch</code><br>ヘッダー初期値: <code>0</code><br>デモ設定値: <code>0</code></td></tr></tbody></table></div>
+          </section>
+          <section class="panel" id="commands"><h2>プラグインコマンド <span class="count">1件</span></h2><article class="command-card" id="command-1"><h3><span class="number">01</span> キャラクター選択処理の実行</h3><p class="key">コマンドID <code>open</code></p><p>キャラクター選択画面を表示します。呼び出し元を含むイベント処理は停止しません。</p><h4>引数</h4><p class="empty">引数はありません。</p></article></section>
+          
+          
+          <div class="pager"><a href="CustomMenuButton.html">← CustomMenuButton</a><a href="../プラグイン一覧.html">一覧へ戻る</a><a href="DisableFunction.html">DisableFunction →</a></div>
+        </main>
+      </div>
+    </div>
+  <footer class="wrap">このデモの <code>js/plugins.js</code> とプラグインヘッダー・実装を基準に生成しています。</footer>
+</body>
+</html>

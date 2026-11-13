@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Options_change | MZ Murder</title>
+  <link rel="stylesheet" href="../plugin_reference.css">
+</head>
+<body>
+  <header class="site-header"><div class="wrap">
+    <p class="eyebrow">MZ Murder · プラグインリファレンス</p>
+    <h1>Options_change</h1>
+    <p>タイトルレイアウト調整・フォント変更・音量1%単位変更</p>
+  </div></header>
+  <div class="wrap page">
+      <div class="breadcrumbs"><a href="../MZ_Murder_制作マニュアル.html">制作マニュアル</a> <span>›</span> <a href="../プラグイン一覧.html">プラグイン一覧</a> <span>›</span> Options_change</div>
+      <div class="page-layout">
+        <aside class="sidebar" aria-label="ページ内目次">
+          <strong>このページ</strong>
+          <a href="#overview">役割</a><a href="#parameters">プラグインパラメータ <em>11</em></a><a href="#commands">プラグインコマンド <em>0</em></a>
+          
+          
+          <div class="sidebar-commands"></div>
+        </aside>
+        <main>
+          <section class="panel" id="overview"><h2>役割</h2><p>タイトルレイアウト調整・フォント変更・音量1%単位変更</p>
+            <p class="source">実装ファイル：<a href="../../js/plugins/Options_change.js"><code>js/plugins/Options_change.js</code></a></p>
+            
+          </section>
+          <section class="panel" id="parameters"><h2>プラグインパラメータ <span class="count">11件</span></h2>
+            <p class="hint">「ヘッダー初期値」はプラグインに記載された値、「デモ設定値」はこの作品の <code>js/plugins.js</code> に保存された値です。0や空欄は、実装側で代替値に置き換わる場合があります。</p><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">ウィンドウのY座標<small><code>Window_Y</code></small></th><td>タイトルコマンドウィンドウの上端Y座標をピクセル単位で指定します。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>300</code><br>デモ設定値: <code>300</code></td></tr>
+<tr><th scope="row">「標準」フォントの表示名<small><code>DefaultFontName</code></small></th><td>オプション画面で「標準」として表示するフォント名です。</td><td>ヘッダー初期値: <code>標準</code><br>デモ設定値: <code>標準</code></td></tr>
+<tr><th scope="row">「常時ダッシュ」の表示<small><code>ShowAlwaysDash</code></small></th><td>オプション画面に常時ダッシュ設定を表示するか指定します。</td><td>型: <code>boolean</code><br>ヘッダー初期値: <code>false</code><br>デモ設定値: <code>false</code></td></tr>
+<tr><th scope="row">「BGM 音量」の表示<small><code>ShowBgmVolume</code></small></th><td>オプション画面にBGM音量設定を表示するか指定します。</td><td>型: <code>boolean</code><br>ヘッダー初期値: <code>true</code><br>デモ設定値: <code>false</code></td></tr>
+<tr><th scope="row">「BGS 音量」の表示<small><code>ShowBgsVolume</code></small></th><td>オプション画面にBGS音量設定を表示するか指定します。</td><td>型: <code>boolean</code><br>ヘッダー初期値: <code>true</code><br>デモ設定値: <code>true</code></td></tr>
+<tr><th scope="row">「ME 音量」の表示<small><code>ShowMeVolume</code></small></th><td>オプション画面にME音量設定を表示するか指定します。</td><td>型: <code>boolean</code><br>ヘッダー初期値: <code>true</code><br>デモ設定値: <code>false</code></td></tr>
+<tr><th scope="row">「SE 音量」の表示<small><code>ShowSeVolume</code></small></th><td>オプション画面にSE音量設定を表示するか指定します。</td><td>型: <code>boolean</code><br>ヘッダー初期値: <code>true</code><br>デモ設定値: <code>false</code></td></tr>
+<tr><th scope="row">右上の「戻るボタン」を消す<small><code>HideCancelButton</code></small></th><td>オプション画面右上の戻るボタンを隠すか指定します。</td><td>型: <code>boolean</code><br>ヘッダー初期値: <code>true</code><br>デモ設定値: <code>true</code></td></tr>
+<tr><th scope="row">タイトル枠・背景を消す<small><code>HideTitleWindowFrame</code></small></th><td>ON(true)にすると、タイトル画面の黒座布団やグレーの四角い枠を完全に消去し、文字だけにします。</td><td>型: <code>boolean</code><br>ヘッダー初期値: <code>true</code><br>デモ設定値: <code>true</code></td></tr>
+<tr><th scope="row">タイトル文字の大きさ<small><code>TitleFontSize</code></small></th><td>タイトル画面のコマンド文字のサイズ。デフォルトは 26 です。文字を浮かせるなら 32～36 等がおすすめ。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>32</code><br>デモ設定値: <code>32</code></td></tr>
+<tr><th scope="row">タイトルウィンドウの横幅<small><code>TitleWindowWidth</code></small></th><td>タイトル画面のコマンドウィンドウの横幅です。文字サイズを大きくして見切れる場合は広げてください。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>360</code><br>デモ設定値: <code>360</code></td></tr></tbody></table></div>
+          </section>
+          <section class="panel" id="commands"><h2>プラグインコマンド <span class="count">0件</span></h2><p class="empty">プラグインコマンドはありません。ONにすると自動的に動作します。</p></section>
+          
+          
+          <div class="pager"><a href="NonstopTimer.html">← NonstopTimer</a><a href="../プラグイン一覧.html">一覧へ戻る</a><a href="SequenceController.html">SequenceController →</a></div>
+        </main>
+      </div>
+    </div>
+  <footer class="wrap">このデモの <code>js/plugins.js</code> とプラグインヘッダー・実装を基準に生成しています。</footer>
+</body>
+</html>

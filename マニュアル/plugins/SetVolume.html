@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SetVolume | MZ Murder</title>
+  <link rel="stylesheet" href="../plugin_reference.css">
+</head>
+<body>
+  <header class="site-header"><div class="wrap">
+    <p class="eyebrow">MZ Murder · プラグインリファレンス</p>
+    <h1>SetVolume</h1>
+    <p>画面上のスライダーで各プレイヤーのマスター音量を個別に調整します。</p>
+  </div></header>
+  <div class="wrap page">
+      <div class="breadcrumbs"><a href="../MZ_Murder_制作マニュアル.html">制作マニュアル</a> <span>›</span> <a href="../プラグイン一覧.html">プラグイン一覧</a> <span>›</span> SetVolume</div>
+      <div class="page-layout">
+        <aside class="sidebar" aria-label="ページ内目次">
+          <strong>このページ</strong>
+          <a href="#overview">役割</a><a href="#parameters">プラグインパラメータ <em>8</em></a><a href="#commands">プラグインコマンド <em>0</em></a>
+          
+          
+          <div class="sidebar-commands"></div>
+        </aside>
+        <main>
+          <section class="panel" id="overview"><h2>役割</h2><p>画面上のスライダーで各プレイヤーのマスター音量を個別に調整します。</p>
+            <p class="source">実装ファイル：<a href="../../js/plugins/SetVolume.js"><code>js/plugins/SetVolume.js</code></a></p>
+            
+          </section>
+          <section class="panel" id="parameters"><h2>プラグインパラメータ <span class="count">8件</span></h2>
+            <p class="hint">「ヘッダー初期値」はプラグインに記載された値、「デモ設定値」はこの作品の <code>js/plugins.js</code> に保存された値です。0や空欄は、実装側で代替値に置き換わる場合があります。</p><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">デフォルト音量<small><code>DefaultVolume</code></small></th><td>ゲーム開始時のプレイヤー個別音量を0から100で指定します。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>30</code><br>デモ設定値: <code>30</code></td></tr>
+<tr><th scope="row">バーのX座標<small><code>BarX</code></small></th><td>音量バーの左端X座標をピクセル単位で指定します。</td><td>ヘッダー初期値: <code>1700</code><br>デモ設定値: <code>1700</code></td></tr>
+<tr><th scope="row">バーのY座標<small><code>BarY</code></small></th><td>音量バーの上端Y座標をピクセル単位で指定します。</td><td>ヘッダー初期値: <code>17</code><br>デモ設定値: <code>17</code></td></tr>
+<tr><th scope="row">スライダーのY座標<small><code>SliderBaseY</code></small></th><td>スライダーつまみの基準Y座標をピクセル単位で指定します。</td><td>ヘッダー初期値: <code>12</code><br>デモ設定値: <code>12</code></td></tr>
+<tr><th scope="row">通常時アイコン<small><code>NormalIconName</code></small></th><td>音声出力中に表示するアイコン画像名です。</td><td>ヘッダー初期値: <code>mute</code><br>デモ設定値: <code>mute</code></td></tr>
+<tr><th scope="row">ミュート時アイコン<small><code>MuteIconName</code></small></th><td>ミュート中に表示するアイコン画像名です。</td><td>ヘッダー初期値: <code>mute2</code><br>デモ設定値: <code>mute2</code></td></tr>
+<tr><th scope="row">アイコンX座標<small><code>MuteX</code></small></th><td>ミュートボタンのX座標をピクセル単位で指定します。</td><td>ヘッダー初期値: <code>1670</code><br>デモ設定値: <code>1670</code></td></tr>
+<tr><th scope="row">アイコンY座標<small><code>MuteY</code></small></th><td>ミュートボタンのY座標をピクセル単位で指定します。</td><td>ヘッダー初期値: <code>12</code><br>デモ設定値: <code>12</code></td></tr></tbody></table></div>
+          </section>
+          <section class="panel" id="commands"><h2>プラグインコマンド <span class="count">0件</span></h2><p class="empty">プラグインコマンドはありません。ONにすると自動的に動作します。</p></section>
+          
+          
+          <div class="pager"><a href="SequenceController.html">← SequenceController</a><a href="../プラグイン一覧.html">一覧へ戻る</a><a href="TextInput.html">TextInput →</a></div>
+        </main>
+      </div>
+    </div>
+  <footer class="wrap">このデモの <code>js/plugins.js</code> とプラグインヘッダー・実装を基準に生成しています。</footer>
+</body>
+</html>

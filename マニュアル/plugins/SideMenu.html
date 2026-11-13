@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SideMenu | MZ Murder</title>
+  <link rel="stylesheet" href="../plugin_reference.css">
+</head>
+<body>
+  <header class="site-header"><div class="wrap">
+    <p class="eyebrow">MZ Murder · プラグインリファレンス</p>
+    <h1>SideMenu</h1>
+    <p>情報カテゴリを画面端のスライドメニューに登録し、コンテンツタブを開きます。</p>
+  </div></header>
+  <div class="wrap page">
+      <div class="breadcrumbs"><a href="../MZ_Murder_制作マニュアル.html">制作マニュアル</a> <span>›</span> <a href="../プラグイン一覧.html">プラグイン一覧</a> <span>›</span> SideMenu</div>
+      <div class="page-layout">
+        <aside class="sidebar" aria-label="ページ内目次">
+          <strong>このページ</strong>
+          <a href="#overview">役割</a><a href="#parameters">プラグインパラメータ <em>3</em></a><a href="#commands">プラグインコマンド <em>6</em></a>
+          
+          
+          <div class="sidebar-commands"><a href="#command-1">情報の追加</a><a href="#command-2">情報の削除</a><a href="#command-3">カテゴリ内の全削除</a><a href="#command-4">カテゴリカラー変更</a><a href="#command-5">メニュー操作の許可/禁止</a><a href="#command-6">ソート順の再読み込み</a></div>
+        </aside>
+        <main>
+          <section class="panel" id="overview"><h2>役割</h2><p>情報カテゴリを画面端のスライドメニューに登録し、コンテンツタブを開きます。</p><div class="callout">資料ファイルをカテゴリへ登録します。HTMLは html/、画像資料は img/info/、アイコンは img/icon/ に配置します。</div>
+            <p class="source">実装ファイル：<a href="../../js/plugins/SideMenu.js"><code>js/plugins/SideMenu.js</code></a></p>
+            
+          </section>
+          <section class="panel" id="parameters"><h2>プラグインパラメータ <span class="count">3件</span></h2>
+            <p class="hint">「ヘッダー初期値」はプラグインに記載された値、「デモ設定値」はこの作品の <code>js/plugins.js</code> に保存された値です。0や空欄は、実装側で代替値に置き換わる場合があります。</p><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">メニューラベルリスト（最大6個）<small><code>MenuLabels</code></small></th><td>左側メニューに表示するカテゴリ名を順番に指定します。</td><td>型: <code>string[]</code><br>ヘッダー初期値: <code>[&quot;Common Info&quot;, &quot;Handouts&quot;, &quot;Items&quot;, &quot;Disclosed info&quot;]</code><br>デモ設定値: <code>[&quot;Common Info&quot;, &quot;Handouts&quot;, &quot;Items&quot;, &quot;Disclosed info&quot;]</code></td></tr>
+<tr><th scope="row">カテゴリカラーリスト<small><code>CatColors</code></small></th><td>各カテゴリの背景色をCSS色形式で順番に指定します。</td><td>型: <code>string[]</code><br>ヘッダー初期値: <code>[&quot;rgba(173, 216, 230, 0.6)&quot;, &quot;rgba(255, 182, 193, 0.6)&quot;, &quot;rgba(144, 238, 144, 0.6)&quot;, &quot;rgba(255, 255, 224, 0.6)&quot;]</code><br>デモ設定値: <code>[&quot;rgba(173, 216, 230, 0.6)&quot;, &quot;rgba(255, 182, 193, 0.6)&quot;, &quot;rgba(144, 238, 144, 0.6)&quot;, &quot;rgba(255, 255, 224, 0.6)&quot;]</code></td></tr>
+<tr><th scope="row">項目0の時に非表示<small><code>HideEmptyMenu</code></small></th><td>登録項目がないカテゴリをメニューから隠すか指定します。</td><td>型: <code>boolean</code><br>ヘッダー初期値: <code>true</code><br>デモ設定値: <code>true</code></td></tr></tbody></table></div>
+          </section>
+          <section class="panel" id="commands"><h2>プラグインコマンド <span class="count">6件</span></h2><article class="command-card" id="command-1"><h3><span class="number">01</span> 情報の追加</h3><p class="key">コマンドID <code>addInfo</code></p><p>資料を指定カテゴリに登録し、サイドメニューから開けるようにします。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">カテゴリ番号<small><code>category</code></small></th><td>情報を追加・削除するカテゴリ番号です。</td><td>型: <code>number</code><br>範囲: 0～5<br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">ID (ファイル名)<small><code>id</code></small></th><td>HTMLまたは画像コンテンツを識別するIDです。</td><td>—</td></tr>
+<tr><th scope="row">表示名<small><code>name</code></small></th><td>メニューに表示する情報項目の名前です。</td><td>—</td></tr>
+<tr><th scope="row">コンテンツ種別<small><code>contentType</code></small></th><td>HTMLは html/、画像は img/info/ から読み込みます。</td><td>型: <code>select</code><br>ヘッダー初期値: <code>html</code><br>選択肢: HTML (<code>html</code>)、画像 (PNG) (<code>image</code>)</td></tr>
+<tr><th scope="row">アイコン画像<small><code>iconImage</code></small></th><td>メニュー項目に表示するアイコン画像です。</td><td>型: <code>file</code><br>参照先: <code>img/icon/</code></td></tr></tbody></table></div></article>
+<article class="command-card" id="command-2"><h3><span class="number">02</span> 情報の削除</h3><p class="key">コマンドID <code>deleteInfo</code></p><p>指定したカテゴリから資料を1件削除します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">カテゴリ番号<small><code>category</code></small></th><td>削除対象のカテゴリ番号です。</td><td>型: <code>number</code></td></tr>
+<tr><th scope="row">ID<small><code>id</code></small></th><td>削除する情報項目のIDです。</td><td>—</td></tr></tbody></table></div></article>
+<article class="command-card" id="command-3"><h3><span class="number">03</span> カテゴリ内の全削除</h3><p class="key">コマンドID <code>clearCategory</code></p><p>指定カテゴリに登録された資料をすべて削除します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">カテゴリ番号<small><code>category</code></small></th><td>登録項目をすべて削除するカテゴリ番号です。</td><td>型: <code>number</code></td></tr></tbody></table></div></article>
+<article class="command-card" id="command-4"><h3><span class="number">04</span> カテゴリカラー変更</h3><p class="key">コマンドID <code>changeCategoryColor</code></p><p>カテゴリの背景色を変更します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">カテゴリ番号<small><code>category</code></small></th><td>色を変更するカテゴリ番号です。</td><td>型: <code>number</code></td></tr>
+<tr><th scope="row">色 (CSS形式)<small><code>color</code></small></th><td>カテゴリに適用するCSS色を指定します。</td><td>—</td></tr></tbody></table></div></article>
+<article class="command-card" id="command-5"><h3><span class="number">05</span> メニュー操作の許可/禁止</h3><p class="key">コマンドID <code>setMenuEnabled</code></p><p>サイドメニューの操作を許可または禁止します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">メニュー操作の有効状態<small><code>enabled</code></small></th><td>サイドメニューを操作できる状態にするか指定します。</td><td>型: <code>boolean</code><br>ヘッダー初期値: <code>true</code></td></tr></tbody></table></div></article>
+<article class="command-card" id="command-6"><h3><span class="number">06</span> ソート順の再読み込み</h3><p class="key">コマンドID <code>reloadSortOrder</code></p><p>表示順ファイルを再読込して資料の並びを更新します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">並び順ファイル名<small><code>fileName</code></small></th><td>dataフォルダ内で読み込む並び順ファイルの名前です。</td><td>ヘッダー初期値: <code>sort_order.txt</code></td></tr></tbody></table></div></article></section>
+          
+          
+          <div class="pager"><a href="TabUI.html">← TabUI</a><a href="../プラグイン一覧.html">一覧へ戻る</a><a href="SyncMapTransfer.html">SyncMapTransfer →</a></div>
+        </main>
+      </div>
+    </div>
+  <footer class="wrap">このデモの <code>js/plugins.js</code> とプラグインヘッダー・実装を基準に生成しています。</footer>
+</body>
+</html>

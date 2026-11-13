@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TimerEx | MZ Murder</title>
+  <link rel="stylesheet" href="../plugin_reference.css">
+</head>
+<body>
+  <header class="site-header"><div class="wrap">
+    <p class="eyebrow">MZ Murder · プラグインリファレンス</p>
+    <h1>TimerEx</h1>
+    <p>GM操作とFirebase同期に対応したスプライト式カウントダウンタイマーです。</p>
+  </div></header>
+  <div class="wrap page">
+      <div class="breadcrumbs"><a href="../MZ_Murder_制作マニュアル.html">制作マニュアル</a> <span>›</span> <a href="../プラグイン一覧.html">プラグイン一覧</a> <span>›</span> TimerEx</div>
+      <div class="page-layout">
+        <aside class="sidebar" aria-label="ページ内目次">
+          <strong>このページ</strong>
+          <a href="#overview">役割</a><a href="#parameters">プラグインパラメータ <em>3</em></a><a href="#commands">プラグインコマンド <em>3</em></a>
+          
+          
+          <div class="sidebar-commands"><a href="#command-1">タイマーセット</a><a href="#command-2">タイマー座標変更</a><a href="#command-3">タイマー停止・消去</a></div>
+        </aside>
+        <main>
+          <section class="panel" id="overview"><h2>役割</h2><p>GM操作とFirebase同期に対応したスプライト式カウントダウンタイマーです。</p><div class="callout">GMがタイマーを開始・移動・停止し、状態をFirebase経由で参加者へ同期します。</div>
+            <p class="source">実装ファイル：<a href="../../js/plugins/TimerEx.js"><code>js/plugins/TimerEx.js</code></a></p>
+            
+          </section>
+          <section class="panel" id="parameters"><h2>プラグインパラメータ <span class="count">3件</span></h2>
+            <p class="hint">「ヘッダー初期値」はプラグインに記載された値、「デモ設定値」はこの作品の <code>js/plugins.js</code> に保存された値です。0や空欄は、実装側で代替値に置き換わる場合があります。</p><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">タイマー状態同期パス名<small><code>syncPathState</code></small></th><td>Firebase上のタイマー状態キー名（例: timer_state）</td><td>ヘッダー初期値: <code>timer_state</code><br>デモ設定値: <code>timer_state</code></td></tr>
+<tr><th scope="row">終了時画像<small><code>expireImage</code></small></th><td>0秒時に✕の代わりに表示する画像です。未指定で✕を表示します。</td><td>型: <code>file</code><br>参照先: <code>img/pictures</code><br>ヘッダー初期値: <code>（空欄）</code><br>デモ設定値: <code>Button/Timer_Close</code></td></tr>
+<tr><th scope="row">終了時閉じるボタンを明滅<small><code>closeButtonBlink</code></small></th><td>0秒時に表示される閉じるボタンを白く明滅させます。</td><td>型: <code>boolean</code><br>ヘッダー初期値: <code>true</code><br>デモ設定値: <code>true</code><br>ON: 明滅する / OFF: 明滅しない</td></tr></tbody></table></div>
+          </section>
+          <section class="panel" id="commands"><h2>プラグインコマンド <span class="count">3件</span></h2><article class="command-card" id="command-1"><h3><span class="number">01</span> タイマーセット</h3><p class="key">コマンドID <code>setTimer</code></p><p>秒数、表示座標、終了時SE、自動消去フラグを指定して開始します。 タイマーの終了時に終了時スイッチをONにします(自動消去フラグが立っている場合は✕で閉じたあと)。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">秒数<small><code>seconds</code></small></th><td>カウントダウンする秒数です。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>600</code></td></tr>
+<tr><th scope="row">終了時スイッチ<small><code>switchId</code></small></th><td>0でスイッチ操作なし</td><td>型: <code>switch</code></td></tr>
+<tr><th scope="row">X座標<small><code>x</code></small></th><td>タイマーを表示するX座標です。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>1600</code></td></tr>
+<tr><th scope="row">Y座標<small><code>y</code></small></th><td>タイマーを表示するY座標です。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>50</code></td></tr>
+<tr><th scope="row">終了時SE名<small><code>seName</code></small></th><td>0:00になったときに再生するSEファイル名（空欄で無効化）</td><td>型: <code>file</code><br>参照先: <code>audio/se</code></td></tr>
+<tr><th scope="row">終了時SE音量<small><code>seVolume</code></small></th><td>終了時に鳴らすSEの音量です。空欄で90。</td><td>型: <code>number</code><br>範囲: 0～100<br>ヘッダー初期値: <code>90</code></td></tr>
+<tr><th scope="row">終了時SEピッチ<small><code>sePitch</code></small></th><td>終了時に鳴らすSEのピッチです。空欄で100。</td><td>型: <code>number</code><br>範囲: 50～150<br>ヘッダー初期値: <code>100</code></td></tr>
+<tr><th scope="row">終了時SEパン<small><code>sePan</code></small></th><td>終了時に鳴らすSEの定位です。空欄で0。</td><td>型: <code>number</code><br>範囲: -100～100<br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">終了時に自動消去<small><code>autoHide</code></small></th><td>0秒到達後にタイマー表示を自動で消去するか指定します。</td><td>型: <code>select</code><br>ヘッダー初期値: <code>false</code><br>選択肢: 自動で消去する (<code>true</code>)、消去しない（✕ 00:00で残す） (<code>false</code>)</td></tr></tbody></table></div></article>
+<article class="command-card" id="command-2"><h3><span class="number">02</span> タイマー座標変更</h3><p class="key">コマンドID <code>moveTimer</code></p><p>表示中のタイマーの座標を変更します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">X座標<small><code>x</code></small></th><td>変更後のタイマー表示X座標です。</td><td>型: <code>number</code></td></tr>
+<tr><th scope="row">Y座標<small><code>y</code></small></th><td>変更後のタイマー表示Y座標です。</td><td>型: <code>number</code></td></tr></tbody></table></div></article>
+<article class="command-card" id="command-3"><h3><span class="number">03</span> タイマー停止・消去</h3><p class="key">コマンドID <code>stopTimer</code></p><p>実行中のタイマーを停止し、画面から消去します。</p><h4>引数</h4><p class="empty">引数はありません。</p></article></section>
+          
+          
+          <div class="pager"><a href="SyncMapTransfer.html">← SyncMapTransfer</a><a href="../プラグイン一覧.html">一覧へ戻る</a><a href="NoClickMove.html">NoClickMove →</a></div>
+        </main>
+      </div>
+    </div>
+  <footer class="wrap">このデモの <code>js/plugins.js</code> とプラグインヘッダー・実装を基準に生成しています。</footer>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SwitchChoices | MZ Murder</title>
+  <link rel="stylesheet" href="../plugin_reference.css">
+</head>
+<body>
+  <header class="site-header"><div class="wrap">
+    <p class="eyebrow">MZ Murder · プラグインリファレンス</p>
+    <h1>SwitchChoices</h1>
+    <p>選択肢ごとに有効化スイッチを設定できる選択肢表示を追加します。</p>
+  </div></header>
+  <div class="wrap page">
+      <div class="breadcrumbs"><a href="../MZ_Murder_制作マニュアル.html">制作マニュアル</a> <span>›</span> <a href="../プラグイン一覧.html">プラグイン一覧</a> <span>›</span> SwitchChoices</div>
+      <div class="page-layout">
+        <aside class="sidebar" aria-label="ページ内目次">
+          <strong>このページ</strong>
+          <a href="#overview">役割</a><a href="#parameters">プラグインパラメータ <em>0</em></a><a href="#commands">プラグインコマンド <em>1</em></a>
+          <a href="#structs">構造体の内訳</a>
+          
+          <div class="sidebar-commands"><a href="#command-1">スイッチ条件付き選択肢を表示</a></div>
+        </aside>
+        <main>
+          <section class="panel" id="overview"><h2>役割</h2><p>選択肢ごとに有効化スイッチを設定できる選択肢表示を追加します。</p>
+            <p class="source">実装ファイル：<a href="../../js/plugins/SwitchChoices.js"><code>js/plugins/SwitchChoices.js</code></a></p>
+            
+          </section>
+          <section class="panel" id="parameters"><h2>プラグインパラメータ <span class="count">0件</span></h2>
+            <p class="hint">「ヘッダー初期値」はプラグインに記載された値、「デモ設定値」はこの作品の <code>js/plugins.js</code> に保存された値です。0や空欄は、実装側で代替値に置き換わる場合があります。</p><p class="empty">プラグインパラメータはありません。</p>
+          </section>
+          <section class="panel" id="commands"><h2>プラグインコマンド <span class="count">1件</span></h2><article class="command-card" id="command-1"><h3><span class="number">01</span> スイッチ条件付き選択肢を表示</h3><p class="key">コマンドID <code>showChoices</code></p><p>選択肢を表示し、結果をゲーム変数へ代入します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">選択肢<small><code>choices</code></small></th><td>表示する選択肢と、それぞれの有効化スイッチです。</td><td>型: <code>struct&lt;SwitchChoice&gt;[]</code><br>ヘッダー初期値: <code>[]</code></td></tr>
+<tr><th scope="row">一行目を見出しとして表示<small><code>firstLineIsLabel</code></small></th><td>ONにすると、先頭の登録項目を選択できない文字列として表示します。</td><td>型: <code>boolean</code><br>ヘッダー初期値: <code>false</code></td></tr>
+<tr><th scope="row">結果を代入するゲーム変数<small><code>resultVariableId</code></small></th><td>選択肢の番号（1から開始）、またはキャンセル時の0を代入します。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>1</code></td></tr>
+<tr><th scope="row">キャンセルを許可<small><code>cancelEnabled</code></small></th><td>ONにすると、キャンセル操作を行えます。</td><td>型: <code>boolean</code><br>ヘッダー初期値: <code>true</code></td></tr>
+<tr><th scope="row">キャンセル時にONにするスイッチ<small><code>cancelSwitchId</code></small></th><td>キャンセル時にONにするスイッチです。0で無効です。表示開始時にOFFになります。</td><td>型: <code>switch</code><br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">初期選択位置<small><code>defaultChoice</code></small></th><td>最初に選択する選択肢の番号です。0を指定すると未選択で開始します。見出しは数えません。非表示の項目を指定した場合は最初の表示項目になります。</td><td>型: <code>number</code><br>範囲: 0～指定なし<br>ヘッダー初期値: <code>1</code></td></tr>
+<tr><th scope="row">ウィンドウ位置<small><code>windowPosition</code></small></th><td>位置指定が有効な場合に使用する、選択肢ウィンドウの配置です。</td><td>型: <code>select</code><br>ヘッダー初期値: <code>0</code><br>選択肢: 中央 (<code>0</code>)、左上 (<code>1</code>)、中央上 (<code>2</code>)</td></tr>
+<tr><th scope="row">背景<small><code>background</code></small></th><td>選択肢ウィンドウの背景の種類です。</td><td>型: <code>select</code><br>ヘッダー初期値: <code>0</code><br>選択肢: ウィンドウ (<code>0</code>)、暗くする (<code>1</code>)、透明 (<code>2</code>)</td></tr>
+<tr><th scope="row">ウィンドウ位置指定を有効<small><code>positionEnabled</code></small></th><td>OFFにすると、選択肢ウィンドウをマウスカーソル付近へ表示します。</td><td>型: <code>boolean</code><br>ヘッダー初期値: <code>true</code></td></tr>
+<tr><th scope="row">選択肢の文字揃え<small><code>textAlignment</code></small></th><td>選択肢の文章をウィンドウ内で左詰めまたは中央寄せにします。</td><td>型: <code>select</code><br>ヘッダー初期値: <code>left</code><br>選択肢: 左詰め (<code>left</code>)、中央寄せ (<code>center</code>)</td></tr></tbody></table></div></article></section>
+          <section class="panel" id="structs"><h2>構造体の内訳</h2><article class="command-card"><h3>SwitchChoice の設定項目</h3><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">選択肢の文章<small><code>text</code></small></th><td>選択肢に表示する文章です。</td><td>型: <code>string</code></td></tr>
+<tr><th scope="row">有効化スイッチ<small><code>enabledSwitchId</code></small></th><td>このスイッチがONの時だけ表示されます。0で常に表示します。</td><td>型: <code>switch</code><br>ヘッダー初期値: <code>0</code></td></tr></tbody></table></div></article></section>
+          
+          <div class="pager"><a href="TextInput.html">← TextInput</a><a href="../プラグイン一覧.html">一覧へ戻る</a><a href="SetVariables.html">SetVariables →</a></div>
+        </main>
+      </div>
+    </div>
+  <footer class="wrap">このデモの <code>js/plugins.js</code> とプラグインヘッダー・実装を基準に生成しています。</footer>
+</body>
+</html>

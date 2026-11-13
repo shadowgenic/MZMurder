@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CulpritVote | MZ Murder</title>
+  <link rel="stylesheet" href="../plugin_reference.css">
+</head>
+<body>
+  <header class="site-header"><div class="wrap">
+    <p class="eyebrow">MZ Murder · プラグインリファレンス</p>
+    <h1>CulpritVote</h1>
+    <p>投票画面を生成して各PCの投票をFirebaseで同期し、「投票結果を取得」コマンドで集計結果を指定したゲーム変数に格納します。同票判定はスイッチにも出力できます。</p>
+  </div></header>
+  <div class="wrap page">
+      <div class="breadcrumbs"><a href="../MZ_Murder_制作マニュアル.html">制作マニュアル</a> <span>›</span> <a href="../プラグイン一覧.html">プラグイン一覧</a> <span>›</span> CulpritVote</div>
+      <div class="page-layout">
+        <aside class="sidebar" aria-label="ページ内目次">
+          <strong>このページ</strong>
+          <a href="#overview">役割</a><a href="#parameters">プラグインパラメータ <em>14</em></a><a href="#commands">プラグインコマンド <em>4</em></a>
+          
+          
+          <div class="sidebar-commands"><a href="#command-1">犯人投票を開始</a><a href="#command-2">指定PC配列を投票対象にして犯人投票を開始</a><a href="#command-3">投票結果を取得</a><a href="#command-4">特定PCの得票数を取得</a></div>
+        </aside>
+        <main>
+          <section class="panel" id="overview"><h2>役割</h2><p>投票画面を生成して各PCの投票をFirebaseで同期し、「投票結果を取得」コマンドで集計結果を指定したゲーム変数に格納します。同票判定はスイッチにも出力できます。</p><div class="callout">イベントから「犯人投票を開始」で投票画面を開きます。全員の投票後に「投票結果を取得」を実行すると、最多票PC番号、票数、同票のPC番号配列などを指定したゲーム変数に代入できます。</div>
+            <p class="source">実装ファイル：<a href="../../js/plugins/CulpritVote.js"><code>js/plugins/CulpritVote.js</code></a></p>
+            
+          </section>
+          <section class="panel" id="parameters"><h2>プラグインパラメータ <span class="count">14件</span></h2>
+            <p class="hint">「ヘッダー初期値」はプラグインに記載された値、「デモ設定値」はこの作品の <code>js/plugins.js</code> に保存された値です。0や空欄は、実装側で代替値に置き換わる場合があります。</p><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">投票画面をタブで開く<small><code>openInTab</code></small></th><td>ONなら投票画面を専用タブで開き、メインタブに戻って情報を確認できます。</td><td>型: <code>boolean</code><br>ヘッダー初期値: <code>false</code><br>デモ設定値: <code>true</code></td></tr>
+<tr><th scope="row">投票タブ名<small><code>tabName</code></small></th><td>投票画面をタブで開く場合の表示名です。</td><td>ヘッダー初期値: <code>犯人投票</code><br>デモ設定値: <code>犯人投票</code></td></tr>
+<tr><th scope="row">PC画像<small><code>pcImages</code></small></th><td>PC1から順番に表示する画像です。空欄の場合はアクターの顔グラフィックを使用します。</td><td>型: <code>file[]</code><br>参照先: <code>img/pictures</code><br>ヘッダー初期値: <code>[]</code><br>デモ設定値: <code>[]</code></td></tr>
+<tr><th scope="row">1ファイル1キャラ設定<small><code>isSingleFace</code></small></th><td>顔グラフィックを4x2分割せず、画像全体を1キャラクターとして表示します。</td><td>型: <code>boolean</code><br>ヘッダー初期値: <code>true</code><br>デモ設定値: <code>true</code></td></tr>
+<tr><th scope="row">選択カーソル画像<small><code>cursorImage</code></small></th><td>自分が投票したPCの右下に表示する画像です。</td><td>型: <code>file</code><br>参照先: <code>img/pictures</code><br>ヘッダー初期値: <code>（空欄）</code><br>デモ設定値: <code>Thunb</code></td></tr>
+<tr><th scope="row">選択カーソルXオフセット<small><code>cursorOffsetX</code></small></th><td>投票先を示すカーソル画像の横位置を調整します。</td><td>型: <code>number</code><br>範囲: -1920～指定なし<br>ヘッダー初期値: <code>0</code><br>デモ設定値: <code>-160</code></td></tr>
+<tr><th scope="row">選択カーソルYオフセット<small><code>cursorOffsetY</code></small></th><td>投票先を示すカーソル画像の縦位置を調整します。</td><td>型: <code>number</code><br>範囲: -1080～指定なし<br>ヘッダー初期値: <code>0</code><br>デモ設定値: <code>85</code></td></tr>
+<tr><th scope="row">画像表示幅<small><code>imageWidth</code></small></th><td>候補PC画像の表示幅を指定します。</td><td>型: <code>number</code><br>範囲: 1～指定なし<br>ヘッダー初期値: <code>256</code><br>デモ設定値: <code>256</code></td></tr>
+<tr><th scope="row">画像表示高さ<small><code>imageHeight</code></small></th><td>候補PC画像の表示高さを指定します。</td><td>型: <code>number</code><br>範囲: 1～指定なし<br>ヘッダー初期値: <code>256</code><br>デモ設定値: <code>256</code></td></tr>
+<tr><th scope="row">横方向の列数<small><code>columns</code></small></th><td>候補PC画像を横に並べる列数を指定します。</td><td>型: <code>number</code><br>範囲: 1～指定なし<br>ヘッダー初期値: <code>6</code><br>デモ設定値: <code>6</code></td></tr>
+<tr><th scope="row">最初の画像X<small><code>firstX</code></small></th><td>先頭の候補PC画像のX座標を指定します。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>100</code><br>デモ設定値: <code>100</code></td></tr>
+<tr><th scope="row">最初の画像Y<small><code>firstY</code></small></th><td>先頭の候補PC画像のY座標を指定します。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>180</code><br>デモ設定値: <code>180</code></td></tr>
+<tr><th scope="row">画像間の横余白<small><code>spacingX</code></small></th><td>候補PC画像同士の横方向の間隔を指定します。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>40</code><br>デモ設定値: <code>40</code></td></tr>
+<tr><th scope="row">画像間の縦余白<small><code>spacingY</code></small></th><td>候補PC画像同士の縦方向の間隔を指定します。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>80</code><br>デモ設定値: <code>80</code></td></tr></tbody></table></div>
+          </section>
+          <section class="panel" id="commands"><h2>プラグインコマンド <span class="count">4件</span></h2><article class="command-card" id="command-1"><h3><span class="number">01</span> 犯人投票を開始</h3><p class="key">コマンドID <code>open</code></p><p>全PCが投票するまで閉じない投票画面を開きます。ルーム作成者が前回の投票を消去します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">投票対象キャラクター数<small><code>characterCount</code></small></th><td>アクター1からこの数までを候補として扱います。0ならデータベース上の全アクターを候補にします。</td><td>型: <code>number</code><br>範囲: 0～指定なし<br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">投票画面の背景画像<small><code>backgroundImage</code></small></th><td>この投票画面の背景に表示する画像です。未指定なら黒背景を表示します。</td><td>型: <code>file</code><br>参照先: <code>img/pictures</code><br>ヘッダー初期値: <code>（空欄）</code></td></tr>
+<tr><th scope="row">GMを投票先に含める<small><code>includeGmAsTarget</code></small></th><td>ONならGMも投票候補に含めます。OFFなら候補から除外します。</td><td>型: <code>boolean</code><br>ヘッダー初期値: <code>false</code></td></tr>
+<tr><th scope="row">プレイ中のPCのみ対象とする<small><code>onlyActivePcsAsTargets</code></small></th><td>ONなら現在membersにいるPCだけを投票候補にします。OFFなら未参加PCを含めます。</td><td>型: <code>boolean</code><br>ヘッダー初期値: <code>false</code></td></tr>
+<tr><th scope="row">自分のPCへの投票を許可<small><code>allowSelfVote</code></small></th><td>ONなら自分のPCを投票先に選べます。OFFなら選べません。</td><td>型: <code>boolean</code><br>ヘッダー初期値: <code>true</code></td></tr>
+<tr><th scope="row">GMにも投票権を与える<small><code>allowGmVote</code></small></th><td>ONならGMも投票できます。OFFならGMを投票完了の対象から除外します。</td><td>型: <code>boolean</code><br>ヘッダー初期値: <code>false</code></td></tr>
+<tr><th scope="row">1.5票にする投票者PC番号<small><code>weightedVoterPcId</code></small></th><td>このPCが投じた票を1.5票として集計します。0で無効です。</td><td>型: <code>number</code><br>範囲: 0～指定なし<br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">1.5票にする投票者PC番号の変数<small><code>weightedVoterPcVariableId</code></small></th><td>この変数のPC番号が投じた票を1.5票として集計します。0で無効。固定指定と併用できます。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">全員投票後のコモンイベント<small><code>completionCommonEventId</code></small></th><td>全員の投票が揃い、投票画面が閉じた後に自動予約します。0で無効です。</td><td>型: <code>common_event</code><br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">全員投票後にONにするスイッチ<small><code>completionSwitchId</code></small></th><td>全員の投票が揃った時にONにするスイッチです。0で無効です。</td><td>型: <code>switch</code><br>ヘッダー初期値: <code>0</code></td></tr></tbody></table></div></article>
+<article class="command-card" id="command-2"><h3><span class="number">02</span> 指定PC配列を投票対象にして犯人投票を開始</h3><p class="key">コマンドID <code>openForPcsInVariable</code></p><p>指定変数のPC番号配列だけを投票先として表示し、全PCの投票を待ちます。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">投票対象PC番号配列の変数<small><code>targetPcsVariableId</code></small></th><td>例: [1, 3]。この配列に入っているPCだけを投票対象にします。[]なら全PCが対象です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">投票画面の背景画像<small><code>backgroundImage</code></small></th><td>この投票画面の背景に表示する画像です。未指定なら黒背景を表示します。</td><td>型: <code>file</code><br>参照先: <code>img/pictures</code><br>ヘッダー初期値: <code>（空欄）</code></td></tr>
+<tr><th scope="row">プレイ中のPCのみ対象とする<small><code>onlyActivePcsAsTargets</code></small></th><td>ONなら配列内のうち、現在membersにいるPCだけを投票候補にします。</td><td>型: <code>boolean</code><br>ヘッダー初期値: <code>false</code></td></tr>
+<tr><th scope="row">自分のPCへの投票を許可<small><code>allowSelfVote</code></small></th><td>ONなら自分のPCを投票先に選べます。OFFなら選べません。</td><td>型: <code>boolean</code><br>ヘッダー初期値: <code>true</code></td></tr>
+<tr><th scope="row">GMにも投票権を与える<small><code>allowGmVote</code></small></th><td>ONならGMも投票できます。OFFならGMを投票完了の対象から除外します。</td><td>型: <code>boolean</code><br>ヘッダー初期値: <code>false</code></td></tr>
+<tr><th scope="row">1.5票にする投票者PC番号<small><code>weightedVoterPcId</code></small></th><td>このPCが投じた票を1.5票として集計します。0で無効です。</td><td>型: <code>number</code><br>範囲: 0～指定なし<br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">1.5票にする投票者PC番号の変数<small><code>weightedVoterPcVariableId</code></small></th><td>この変数のPC番号が投じた票を1.5票として集計します。0で無効。固定指定と併用できます。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">全員投票後のコモンイベント<small><code>completionCommonEventId</code></small></th><td>全員の投票が揃い、投票画面が閉じた後に自動予約します。0で無効です。</td><td>型: <code>common_event</code><br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">全員投票後にONにするスイッチ<small><code>completionSwitchId</code></small></th><td>全員の投票が揃った時にONにするスイッチです。0で無効です。</td><td>型: <code>switch</code><br>ヘッダー初期値: <code>0</code></td></tr></tbody></table></div></article>
+<article class="command-card" id="command-3"><h3><span class="number">03</span> 投票結果を取得</h3><p class="key">コマンドID <code>getResults</code></p><p>Firebase上の投票を集計して、指定した変数・スイッチへ代入します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">最多票PC番号の変数<small><code>mostVotedPcVariableId</code></small></th><td>最も票を得たPC番号を代入します。同票の場合は最小のPC番号です。0で無効です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">最多票数の変数<small><code>highestVoteCountVariableId</code></small></th><td>最多票の票数を代入します。0で無効です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">最多票PC人数の変数<small><code>highestVotePcCountVariableId</code></small></th><td>最多票を得たPCの人数を代入します。0で無効です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">最多票PC番号配列の変数<small><code>highestVotedPcsVariableId</code></small></th><td>最多票を得たPC番号の配列を代入します。例: [2, 4]。0で無効です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">最多票同数スイッチ<small><code>hasTieSwitchId</code></small></th><td>最多票のPCが複数ならON、1人だけならOFFにします。0で無効です。</td><td>型: <code>switch</code><br>ヘッダー初期値: <code>0</code></td></tr></tbody></table></div></article>
+<article class="command-card" id="command-4"><h3><span class="number">04</span> 特定PCの得票数を取得</h3><p class="key">コマンドID <code>getTargetVoteCount</code></p><p>指定したPCの得票数を、指定変数に代入します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">得票数を調べるPC番号<small><code>targetPcNumber</code></small></th><td>得票数を取得するPC番号です。</td><td>型: <code>number</code><br>範囲: 1～指定なし<br>ヘッダー初期値: <code>1</code></td></tr>
+<tr><th scope="row">得票数の変数<small><code>targetVoteCountVariableId</code></small></th><td>指定PCの得票数を代入します。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>0</code></td></tr></tbody></table></div></article></section>
+          
+          
+          <div class="pager"><a href="SetVariables.html">← SetVariables</a><a href="../プラグイン一覧.html">一覧へ戻る</a><a href="ApngSupport.html">ApngSupport →</a></div>
+        </main>
+      </div>
+    </div>
+  <footer class="wrap">このデモの <code>js/plugins.js</code> とプラグインヘッダー・実装を基準に生成しています。</footer>
+</body>
+</html>

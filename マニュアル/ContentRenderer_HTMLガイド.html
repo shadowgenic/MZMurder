@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ContentRendererで使えるHTML | MZ Murder</title>
+  <link rel="stylesheet" href="plugin_reference.css">
+  <style>
+    .guide { max-width: 960px; padding-bottom: 2rem; }
+    .guide-nav { display: flex; flex-wrap: wrap; gap: .55rem; margin: 1rem 0 1.4rem; }
+    .guide-nav a { padding: .35rem .65rem; background: white; border: 1px solid var(--line); border-radius: 6px; text-decoration: none; }
+    .guide-nav a:hover { background: var(--pale); }
+    .guide pre { padding: 1rem; overflow-x: auto; background: #102c3b; color: #e8f5fb; border-radius: 8px; line-height: 1.55; }
+    .guide pre code { padding: 0; background: transparent; color: inherit; }
+    .guide .panel { scroll-margin-top: 1rem; }
+    .guide td:first-child { white-space: nowrap; }
+  </style>
+</head>
+<body>
+  <header class="site-header"><div class="wrap">
+    <p class="eyebrow">MZ Murder · 制作資料</p>
+    <h1>ContentRendererで使えるHTML</h1>
+    <p>ゲーム内の資料タブで表示する html の書き方</p>
+  </div></header>
+  <main class="wrap guide">
+    <div class="breadcrumbs"><a href="MZ_Murder_制作マニュアル.html">制作マニュアル</a><span>›</span><a href="plugins/ContentRenderer.html">ContentRenderer</a><span>›</span>HTMLガイド</div>
+    <nav class="guide-nav" aria-label="このページの目次">
+      <a href="#mechanism">表示の仕組み</a><a href="#tags">使えるタグ</a><a href="#style">装飾と見出し判定</a><a href="#image">画像</a><a href="#ruby">ルビと変数</a><a href="#unsupported">対応しない表現</a><a href="#example">記述例</a>
+    </nav>
+
+    <section class="panel" id="mechanism">
+      <h2>表示の仕組み</h2>
+      <p><code>SideMenu</code> の「情報の追加」でHTML資料としてID <code>HO-1</code> を登録すると、<code>ContentRenderer</code> は <code>html/HO-1.htm</code> を読み込みます。拡張子は <code>.htm</code> 固定です。画像資料として登録した場合は、このHTML処理を使わず <code>img/info/</code> の画像を表示します。</p>
+      <p>読み込んだHTMLはブラウザのページとして表示されません。本文から一部の要素を取り出し、ツクールのBitmapへ文字・画像を描きます。そのため、一般的なHTMLのレイアウトやCSSをそのまま再現することはできません。資料は下記の要素を単純な順番で並べて作ります。</p>
+    </section>
+
+    <section class="panel" id="tags">
+      <h2>使えるタグと挙動</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>タグ</th><th>ゲーム内での挙動</th><th>使い方</th></tr></thead>
+        <tbody>
+          <tr><td><code>&lt;div&gt;</code></td><td>本文の基本単位。要素内の文字を取り出して描画し、幅に合わせて自動改行します。空の要素は空行になります。</td><td>文章を1段落ずつ別の <code>div</code> に入れます。</td></tr>
+          <tr><td><code>&lt;h1&gt;</code></td><td>大見出し。大きな太字と専用の背景・文字色で描画します。現行の <code>h2</code> と同じ見た目です。</td><td>資料全体のタイトルに使います。</td></tr>
+          <tr><td><code>&lt;h2&gt;</code></td><td>大見出し。<code>h1</code> と同じ大見出しの表示です。</td><td>大きな章見出しに使います。</td></tr>
+          <tr><td><code>&lt;h3&gt;</code></td><td>中見出し。中見出し用の背景・文字色で描画します。</td><td>章の見出しに使います。</td></tr>
+          <tr><td><code>&lt;h4&gt;</code></td><td>小見出し。小見出し用の背景・文字色で描画します。</td><td>項目の見出しに使います。</td></tr>
+          <tr><td><code>&lt;br&gt;</code></td><td>1行分の空白を追加します。ブラウザのように同じ段落内で改行する処理ではありません。</td><td>段落間を空けたい場所に単独で置きます。</td></tr>
+          <tr><td><code>&lt;img src="..."&gt;</code></td><td>画像を独立したブロックとして中央に描画します。表示幅を超える画像は縮小し、小さい画像は拡大しません。</td><td>画像は本文用の <code>div</code> と分けて置きます。</td></tr>
+          <tr><td><code>&lt;b&gt;</code>、<code>&lt;strong&gt;</code></td><td>選択された本文・見出しの中で文字を太字にします。</td><td><code>div</code> 内の一部を強調できます。</td></tr>
+          <tr><td><code>&lt;font color="..."&gt;</code></td><td>選択された要素の中で文字色を変えます。<code>face</code> は反映されません。</td><td>既存の資料と同じ形式を使う場合に利用できます。</td></tr>
+          <tr><td><code>&lt;span&gt;</code> などの内側の要素</td><td>単独では描画対象になりません。<code>div</code> や見出しの中にあれば、文字と対応する色・太字の指定が処理されます。</td><td>文字の一部分を装飾するときに使います。</td></tr>
+          <tr><td><code>&lt;ruby&gt;</code>、<code>&lt;rt&gt;</code></td><td>親文字の上にルビを描きます。親文字と読みをまとめて配置します。</td><td><code>&lt;ruby&gt;霧雨&lt;rt&gt;きりさめ&lt;/rt&gt;&lt;/ruby&gt;</code></td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout">描画対象はHTML本文内の <code>div</code>・<code>img</code>・<code>h1</code>・<code>h2</code>・<code>h3</code>・<code>h4</code>・<code>br</code> です。描画対象を入れ子にすると親と子の両方が処理され、文字が重複することがあります。各段落や見出しは独立した要素にしてください。</div>
+    </section>
+
+    <section class="panel" id="style">
+      <h2>装飾と見出し判定</h2>
+      <p>文字の色には <code>&lt;font color="#cc3333"&gt;</code>、または要素内の <code>style="color: #cc3333"</code> が使えます。太字は <code>&lt;b&gt;</code>・<code>&lt;strong&gt;</code> と、<code>style="font-weight: bold"</code> に対応します。CSSファイルや <code>&lt;style&gt;</code> 内の指定はこの描画処理には適用されません。</p>
+      <p><code>div</code> でも、要素または子要素の <code>font-size: 1.6em</code> 以上は大見出し、<code>1.4em</code> 以上は中見出し、<code>1.0em</code> より大きければ小見出しとして扱われます。30文字未満で <code>&lt;b&gt;</code> を含む <code>div</code> も小見出しになります。これは<strong>見出し種類の判定</strong>であり、指定した <code>em</code> 値で文字を正確に拡大する機能ではありません。</p>
+      <p>見出しの背景と既定の文字色、本文の既定色はプラグインパラメータと「HTML配色の変更」コマンドで設定します。色を内側のタグで指定した文字はその色が優先されます。<code>margin</code>・<code>padding</code>・<code>text-align</code>・<code>font-family</code>・<code>width</code> などの一般的なCSS配置指定は反映されません。</p>
+    </section>
+
+    <section class="panel" id="image">
+      <h2>画像の配置</h2>
+      <p>HTML内の <code>&lt;img src="manual_fig1.png"&gt;</code> は、<code>img/html/manual_fig1.png</code> を読み込みます。実装は <code>src</code> の最後のファイル名から拡張子を除いて画像名を取り、常に <code>img/html/</code> から読み込みます。<code>src</code> に書いた相対パスや絶対パスで読み込み先は変わりません。</p>
+      <p>ツクールの画像読み込み処理を使うため、画像ファイルはPNGで用意します。HTML側の <code>width</code>・<code>height</code>・<code>align</code> は反映されません。幅が表示領域より大きい画像だけ、縦横比を保って縮小します。</p>
+      <div class="callout"><code>div</code> の中に <code>img</code> があると、その <code>div</code> の文字処理は飛ばされ、画像だけが別に描画されます。画像の前後に文章を置く場合は、文章の <code>div</code> と <code>img</code> を別々に並べてください。</div>
+    </section>
+
+    <section class="panel" id="ruby">
+      <h2>ルビとゲーム内の値</h2>
+      <ul>
+        <li><strong>HTMLのルビ：</strong><code>&lt;ruby&gt;霧雨&lt;rt&gt;きりさめ&lt;/rt&gt;&lt;/ruby&gt;</code>。</li>
+        <li><strong>本文中の簡易記法：</strong><code>【霧雨/きりさめ】</code>。</li>
+        <li><strong>共通の読み：</strong><code>data/ruby_dict.csv</code> に <code>霧雨,きりさめ</code> のように1行ずつ登録します。長い語が先に照合されます。読み込みに失敗した場合は自動ルビが付きません。</li>
+        <li><strong>ゲーム変数・アクター名：</strong>本文の <code>\V[1]</code> を変数1の値、<code>\N[1]</code> をアクター1の名前に置き換えます。全角の円記号 <code>￥</code>・<code>¥</code> も使えます。</li>
+      </ul>
+      <p>資料はタブごとに描画結果をキャッシュします。表示中に変数やアクター名を変更しても、その場で文字は更新されません。値の変更を反映したいときは資料タブを閉じてから開き直し、ゲーム内で表示を確認してください。</p>
+    </section>
+
+    <section class="panel" id="unsupported">
+      <h2>対応しない表現と作成時の注意</h2>
+      <ul>
+        <li><code>&lt;h5&gt;</code>・<code>&lt;h6&gt;</code>・<code>&lt;p&gt;</code>・<code>&lt;ul&gt;</code>・<code>&lt;li&gt;</code>・<code>&lt;table&gt;</code> は、それ自体を独立した表示ブロックとして扱いません。ブラウザと同じ段落・箇条書き・表にはなりません。</li>
+        <li><code>&lt;a href="..."&gt;</code> の文字は本文内にあれば表示できますが、リンクとしてクリックはできません。フォーム、動画、JavaScriptによる操作も資料タブには組み込まれません。</li>
+        <li>画像やHTMLファイルの名前は、大文字・小文字まで一致させます。Web公開時は特に注意してください。</li>
+        <li>文字は幅に合わせて自動改行されます。見出しの色、改行位置、ルビの重なり、画像の配置は実際のゲーム画面で確認してください。</li>
+      </ul>
+    </section>
+
+    <section class="panel" id="example">
+      <h2>資料ファイルの記述例</h2>
+      <p>次を <code>html/sample.htm</code> として保存し、<code>SideMenu</code> でHTML資料ID <code>sample</code> を登録します。画像は <code>img/html/</code> に配置します。</p>
+      <pre><code>&lt;!doctype html&gt;
+&lt;html lang="ja"&gt;
+&lt;head&gt;&lt;meta charset="utf-8"&gt;&lt;title&gt;資料&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;霧雨荘の記録&lt;/h1&gt;
+  &lt;div&gt;事件は&lt;ruby&gt;書斎&lt;rt&gt;しょさい&lt;/rt&gt;&lt;/ruby&gt;で起きた。&lt;/div&gt;
+  &lt;h3&gt;発見時刻&lt;/h3&gt;
+  &lt;div&gt;&lt;b&gt;\V[1]時&lt;/b&gt;に発見された。&lt;/div&gt;
+  &lt;img src="map.png"&gt;
+  &lt;div&gt;&lt;font color="#b62d2d"&gt;重要：&lt;/font&gt;扉を確認する。&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+    </section>
+  </main>
+  <footer class="wrap">実装基準：<a href="../js/plugins/ContentRenderer.js">js/plugins/ContentRenderer.js</a> ／ <a href="plugins/ContentRenderer.html">プラグインパラメータ・コマンド</a></footer>
+</body>
+</html>

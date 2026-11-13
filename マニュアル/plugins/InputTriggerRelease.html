@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>InputTriggerRelease | MZ Murder</title>
+  <link rel="stylesheet" href="../plugin_reference.css">
+</head>
+<body>
+  <header class="site-header"><div class="wrap">
+    <p class="eyebrow">MZ Murder · プラグインリファレンス</p>
+    <h1>InputTriggerRelease</h1>
+    <p>マウス・長押しタッチの押下・解放を正規化し、スイッチと座標変数へ確実に通知します。</p>
+  </div></header>
+  <div class="wrap page">
+      <div class="breadcrumbs"><a href="../MZ_Murder_制作マニュアル.html">制作マニュアル</a> <span>›</span> <a href="../プラグイン一覧.html">プラグイン一覧</a> <span>›</span> InputTriggerRelease</div>
+      <div class="page-layout">
+        <aside class="sidebar" aria-label="ページ内目次">
+          <strong>このページ</strong>
+          <a href="#overview">役割</a><a href="#parameters">プラグインパラメータ <em>11</em></a><a href="#commands">プラグインコマンド <em>1</em></a>
+          
+          
+          <div class="sidebar-commands"><a href="#command-1">入力状態と座標を代入</a></div>
+        </aside>
+        <main>
+          <section class="panel" id="overview"><h2>役割</h2><p>マウス・長押しタッチの押下・解放を正規化し、スイッチと座標変数へ確実に通知します。</p>
+            <p class="source">実装ファイル：<a href="../../js/plugins/InputTriggerRelease.js"><code>js/plugins/InputTriggerRelease.js</code></a></p>
+            
+          </section>
+          <section class="panel" id="parameters"><h2>プラグインパラメータ <span class="count">11件</span></h2>
+            <p class="hint">「ヘッダー初期値」はプラグインに記載された値、「デモ設定値」はこの作品の <code>js/plugins.js</code> に保存された値です。0や空欄は、実装側で代替値に置き換わる場合があります。</p><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">--- 自動更新スイッチ ---<small><code>--- 自動更新スイッチ ---</code></small></th><td>設定画面の項目をまとめる見出しです。値は使用しません。</td><td>デモ設定値: <code>（空欄）</code></td></tr>
+<tr><th scope="row">左：押した瞬間<small><code>LeftTriggeredSwitch</code></small></th><td>左クリックを押した瞬間にONにするスイッチ番号です。0で自動更新を無効にします。</td><td>型: <code>switch</code><br>ヘッダー初期値: <code>0</code><br>デモ設定値: <code>0</code></td></tr>
+<tr><th scope="row">左：離した瞬間<small><code>LeftReleasedSwitch</code></small></th><td>左クリックを離した瞬間にONにするスイッチ番号です。0で自動更新を無効にします。</td><td>型: <code>switch</code><br>ヘッダー初期値: <code>0</code><br>デモ設定値: <code>0</code></td></tr>
+<tr><th scope="row">右：押した瞬間<small><code>RightTriggeredSwitch</code></small></th><td>右クリックを押した瞬間にONにするスイッチ番号です。0で自動更新を無効にします。</td><td>型: <code>switch</code><br>ヘッダー初期値: <code>0</code><br>デモ設定値: <code>0</code></td></tr>
+<tr><th scope="row">右：離した瞬間<small><code>RightReleasedSwitch</code></small></th><td>右クリックを離した瞬間にONにするスイッチ番号です。0で自動更新を無効にします。</td><td>型: <code>switch</code><br>ヘッダー初期値: <code>0</code><br>デモ設定値: <code>0</code></td></tr>
+<tr><th scope="row">--- 長押し判定 ---<small><code>--- 長押し判定 ---</code></small></th><td>設定画面の項目をまとめる見出しです。値は使用しません。</td><td>デモ設定値: <code>（空欄）</code></td></tr>
+<tr><th scope="row">長押し判定秒数<small><code>LongPressSeconds</code></small></th><td>この秒数以上押し続けると、右クリックとして扱います。</td><td>型: <code>number</code><br>範囲: 0～指定なし<br>ヘッダー初期値: <code>2</code><br>デモ設定値: <code>2.00</code></td></tr>
+<tr><th scope="row">長押し中の移動許容距離<small><code>LongPressMoveTolerance</code></small></th><td>開始位置からこの距離より大きく動くと、長押しではなくドラッグとして扱います（px）。</td><td>型: <code>number</code><br>範囲: 0～指定なし<br>ヘッダー初期値: <code>8</code><br>デモ設定値: <code>4</code></td></tr>
+<tr><th scope="row">--- 座標取得変数 ---<small><code>--- 座標取得変数 ---</code></small></th><td>設定画面の項目をまとめる見出しです。値は使用しません。</td><td>デモ設定値: <code>（空欄）</code></td></tr>
+<tr><th scope="row">X座標 格納変数<small><code>TargetXVariable</code></small></th><td>入力が発生したときのマウスX座標を書き込む変数番号です。0で無効にします。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>0</code><br>デモ設定値: <code>0</code></td></tr>
+<tr><th scope="row">Y座標 格納変数<small><code>TargetYVariable</code></small></th><td>入力が発生したときのマウスY座標を書き込む変数番号です。0で無効にします。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>0</code><br>デモ設定値: <code>0</code></td></tr></tbody></table></div>
+          </section>
+          <section class="panel" id="commands"><h2>プラグインコマンド <span class="count">1件</span></h2><article class="command-card" id="command-1"><h3><span class="number">01</span> 入力状態と座標を代入</h3><p class="key">コマンドID <code>assignSwitches</code></p><p>指定したスイッチに入力状態を、変数にマウス座標を代入します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">左：押した瞬間<small><code>leftTrigId</code></small></th><td>左クリックを押した瞬間の状態を書き込むスイッチ番号です。</td><td>型: <code>switch</code><br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">左：離した瞬間<small><code>leftRelId</code></small></th><td>左クリックを離した瞬間の状態を書き込むスイッチ番号です。</td><td>型: <code>switch</code><br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">右：押した瞬間<small><code>rightTrigId</code></small></th><td>右クリックを押した瞬間の状態を書き込むスイッチ番号です。</td><td>型: <code>switch</code><br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">右：離した瞬間<small><code>rightRelId</code></small></th><td>右クリックを離した瞬間の状態を書き込むスイッチ番号です。</td><td>型: <code>switch</code><br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">X座標 格納変数<small><code>varXId</code></small></th><td>入力時のマウスX座標を書き込む変数番号です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">Y座標 格納変数<small><code>varYId</code></small></th><td>入力時のマウスY座標を書き込む変数番号です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>0</code></td></tr></tbody></table></div></article></section>
+          
+          
+          <div class="pager"><a href="GMSceneManager.html">← GMSceneManager</a><a href="../プラグイン一覧.html">一覧へ戻る</a><a href="ContentRenderer.html">ContentRenderer →</a></div>
+        </main>
+      </div>
+    </div>
+  <footer class="wrap">このデモの <code>js/plugins.js</code> とプラグインヘッダー・実装を基準に生成しています。</footer>
+</body>
+</html>

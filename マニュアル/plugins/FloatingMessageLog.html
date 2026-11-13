@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FloatingMessageLog | MZ Murder</title>
+  <link rel="stylesheet" href="../plugin_reference.css">
+</head>
+<body>
+  <header class="site-header"><div class="wrap">
+    <p class="eyebrow">MZ Murder · プラグインリファレンス</p>
+    <h1>FloatingMessageLog</h1>
+    <p>メッセージの重ね表示、ルビ対応、履歴ログタブを追加します。</p>
+  </div></header>
+  <div class="wrap page">
+      <div class="breadcrumbs"><a href="../MZ_Murder_制作マニュアル.html">制作マニュアル</a> <span>›</span> <a href="../プラグイン一覧.html">プラグイン一覧</a> <span>›</span> FloatingMessageLog</div>
+      <div class="page-layout">
+        <aside class="sidebar" aria-label="ページ内目次">
+          <strong>このページ</strong>
+          <a href="#overview">役割</a><a href="#parameters">プラグインパラメータ <em>28</em></a><a href="#commands">プラグインコマンド <em>7</em></a>
+          
+          
+          <div class="sidebar-commands"><a href="#command-1">setAutoClear</a><a href="#command-2">ログ画面を表示</a><a href="#command-3">ログ履歴を消去</a><a href="#command-4">文章スタックのクリア</a><a href="#command-5">自動送り文章表示</a><a href="#command-6">文章同期モードを変更</a><a href="#command-7">読み進め許可を変更</a></div>
+        </aside>
+        <main>
+          <section class="panel" id="overview"><h2>役割</h2><p>メッセージの重ね表示、ルビ対応、履歴ログタブを追加します。</p><div class="callout">ツクールの文章表示を重ねて表示し、ログと文章同期を扱います。</div>
+            <p class="source">実装ファイル：<a href="../../js/plugins/FloatingMessageLog.js"><code>js/plugins/FloatingMessageLog.js</code></a></p>
+            
+          </section>
+          <section class="panel" id="parameters"><h2>プラグインパラメータ <span class="count">28件</span></h2>
+            <p class="hint">「ヘッダー初期値」はプラグインに記載された値、「デモ設定値」はこの作品の <code>js/plugins.js</code> に保存された値です。0や空欄は、実装側で代替値に置き換わる場合があります。</p><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">--- ログ表示設定 ---<small><code>--- ログ表示設定 ---</code></small></th><td>設定画面の項目をまとめる見出しです。値は使用しません。</td><td>デモ設定値: <code>（空欄）</code></td></tr>
+<tr><th scope="row">ログ保持最大数<small><code>logLimit</code></small></th><td>保存するメッセージ履歴の最大件数です。超過分は古い順に削除します。</td><td>ヘッダー初期値: <code>1000</code><br>デモ設定値: <code>1000</code></td></tr>
+<tr><th scope="row">1ファイル1キャラ設定<small><code>isSingleFace</code></small></th><td>顔画像を4x2分割せず、1画像全体を1キャラクターとして表示するか指定します。</td><td>型: <code>boolean</code><br>ヘッダー初期値: <code>true</code><br>デモ設定値: <code>true</code></td></tr>
+<tr><th scope="row">イベント終了時に自動消去<small><code>autoClear</code></small></th><td>イベント処理終了時に画面上のメッセージ履歴を自動消去するか指定します。</td><td>型: <code>boolean</code><br>ヘッダー初期値: <code>true</code><br>デモ設定値: <code>true</code></td></tr>
+<tr><th scope="row">--- 文章同期設定 ---<small><code>--- 文章同期設定 ---</code></small></th><td>設定画面の項目をまとめる見出しです。値は使用しません。</td><td>デモ設定値: <code>（空欄）</code></td></tr>
+<tr><th scope="row">モード初期値<small><code>messageSyncMode</code></small></th><td>非同期は各PCのみ、半同期は表示のみ共有、全同期は表示と読み進めを共有します。</td><td>型: <code>select</code><br>ヘッダー初期値: <code>async</code><br>デモ設定値: <code>async</code><br>選択肢: 非同期 (<code>async</code>)、半同期 (<code>semiSync</code>)、全同期 (<code>fullSync</code>)</td></tr>
+<tr><th scope="row">GMの読み進めを許可<small><code>allowGmAdvance</code></small></th><td>全同期の文章をGMが読み進められるようにします。</td><td>型: <code>boolean</code><br>ヘッダー初期値: <code>true</code><br>デモ設定値: <code>true</code></td></tr>
+<tr><th scope="row">イベント実行者の読み進めを許可<small><code>allowEventRunnerAdvance</code></small></th><td>全同期の文章をイベント実行者が読み進められるようにします。</td><td>型: <code>boolean</code><br>ヘッダー初期値: <code>true</code><br>デモ設定値: <code>true</code></td></tr>
+<tr><th scope="row">同一顔グラフィックPCの読み進めを許可<small><code>allowSameFaceAdvance</code></small></th><td>文章と同じ顔グラフィックのPCが全同期の文章を読み進められるようにします。</td><td>型: <code>boolean</code><br>ヘッダー初期値: <code>false</code><br>デモ設定値: <code>false</code></td></tr>
+<tr><th scope="row">全員の読み進めを許可<small><code>allowEveryoneAdvance</code></small></th><td>全員が全同期の文章を読み進められるようにします。</td><td>型: <code>boolean</code><br>ヘッダー初期値: <code>false</code><br>デモ設定値: <code>false</code></td></tr>
+<tr><th scope="row">--- レイアウト設定 ---<small><code>--- レイアウト設定 ---</code></small></th><td>設定画面の項目をまとめる見出しです。値は使用しません。</td><td>デモ設定値: <code>（空欄）</code></td></tr>
+<tr><th scope="row">文字サイズ倍率<small><code>fontSizeRate</code></small></th><td>メッセージ本文の標準文字サイズに掛ける倍率です。</td><td>ヘッダー初期値: <code>1.3</code><br>デモ設定値: <code>1.3</code></td></tr>
+<tr><th scope="row">ルビ文字サイズ倍率<small><code>rubyFontSizeRate</code></small></th><td>ルビ文字サイズを本文サイズに掛ける倍率です。</td><td>型: <code>number</code><br>範囲: 0.1～指定なし<br>ヘッダー初期値: <code>0.35</code><br>デモ設定値: <code>0.35</code></td></tr>
+<tr><th scope="row">文字の縁取り幅<small><code>outlineWidth</code></small></th><td>文字の縁取りの太さをピクセル単位で指定します。0で縁取りなしになります。</td><td>型: <code>number</code><br>範囲: 0～指定なし<br>ヘッダー初期値: <code>5</code><br>デモ設定値: <code>5</code></td></tr>
+<tr><th scope="row">テキストの行間<small><code>lineSpacing</code></small></th><td>メッセージ行同士の追加間隔をピクセル単位で指定します。負の値で行間を詰められます。</td><td>型: <code>number</code><br>範囲: -9999～指定なし<br>ヘッダー初期値: <code>20</code><br>デモ設定値: <code>20</code></td></tr>
+<tr><th scope="row">顔グラ表示倍率<small><code>iconScale</code></small></th><td>メッセージに表示する顔グラフィックの倍率です。</td><td>ヘッダー初期値: <code>1.0</code><br>デモ設定値: <code>1.0</code></td></tr>
+<tr><th scope="row">画面左オフセット<small><code>offsetX</code></small></th><td>メッセージスタックの左端位置をピクセル単位で指定します。</td><td>ヘッダー初期値: <code>400</code><br>デモ設定値: <code>400</code></td></tr>
+<tr><th scope="row">画面上オフセット<small><code>offsetY</code></small></th><td>メッセージスタックの上端位置をピクセル単位で指定します。</td><td>ヘッダー初期値: <code>120</code><br>デモ設定値: <code>85</code></td></tr>
+<tr><th scope="row">画面下余白<small><code>bottomMargin</code></small></th><td>メッセージスタックと画面下端の余白をピクセル単位で指定します。</td><td>型: <code>number</code><br>範囲: 0～指定なし<br>ヘッダー初期値: <code>60</code><br>デモ設定値: <code>40</code></td></tr>
+<tr><th scope="row">--- アイコンUI設定 ---<small><code>--- アイコンUI設定 ---</code></small></th><td>設定画面の項目をまとめる見出しです。値は使用しません。</td><td>デモ設定値: <code>（空欄）</code></td></tr>
+<tr><th scope="row">ログ呼び出しアイコン<small><code>LogIconFile</code></small></th><td>ログ画面を開くために表示するアイコン画像です。</td><td>型: <code>file</code><br>参照先: <code>img/icon/</code><br>ヘッダー初期値: <code>log</code><br>デモ設定値: <code>log</code></td></tr>
+<tr><th scope="row">アイコン表示位置X<small><code>IconX</code></small></th><td>ログアイコンのX座標をピクセル単位で指定します。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>1640</code><br>デモ設定値: <code>1640</code></td></tr>
+<tr><th scope="row">アイコン表示位置Y<small><code>IconY</code></small></th><td>ログアイコンのY座標をピクセル単位で指定します。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>12</code><br>デモ設定値: <code>12</code></td></tr>
+<tr><th scope="row">スキップ時待機フレーム<small><code>skipWaitFrame</code></small></th><td>Shiftキーまたはホイール操作時の最低待機フレーム数（デフォルト: 3）</td><td>型: <code>number</code><br>ヘッダー初期値: <code>3</code><br>デモ設定値: <code>3</code></td></tr>
+<tr><th scope="row">▼インジケータX座標<small><code>indicatorX</code></small></th><td>クリック待ち▼を表示する固定X座標。空欄または0なら自動中央。基準：1920（中央は960）</td><td>型: <code>number</code><br>ヘッダー初期値: <code>960</code><br>デモ設定値: <code>960</code></td></tr>
+<tr><th scope="row">▼インジケータY値 / オフセット<small><code>indicatorY</code></small></th><td>タイプが「固定座標」なら画面のY座標。「相対オフセット」なら文章最終行からの隙間(px)になります。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>40</code><br>デモ設定値: <code>25</code></td></tr>
+<tr><th scope="row">▼インジケータYの指定タイプ<small><code>indicatorYType</code></small></th><td>Y値を「絶対的な固定座標」として扱うか、「文章の最終行からの相対位置」として扱うかを選択します。</td><td>型: <code>select</code><br>ヘッダー初期値: <code>relative</code><br>デモ設定値: <code>relative</code><br>選択肢: 文章の最終行からの相対オフセット (<code>relative</code>)、画面上の固定座標 (<code>absolute</code>)</td></tr>
+<tr><th scope="row">▼インジケータ最大不透明度<small><code>indicatorOpacity</code></small></th><td>点滅時の最大不透明度を指定します（0〜255）。255で完全にくっきり表示されます。</td><td>型: <code>number</code><br>範囲: 0～255<br>ヘッダー初期値: <code>155</code><br>デモ設定値: <code>155</code></td></tr></tbody></table></div>
+          </section>
+          <section class="panel" id="commands"><h2>プラグインコマンド <span class="count">7件</span></h2><article class="command-card" id="command-1"><h3><span class="number">01</span> setAutoClear</h3><p class="key">コマンドID <code>setAutoClear</code></p><p>イベント終了時に画面上の文章を自動消去する設定を切り替えます。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">自動消去の有効状態<small><code>enabled</code></small></th><td>メッセージログをイベント終了時に自動消去するか指定します。</td><td>型: <code>boolean</code><br>ヘッダー初期値: <code>true</code></td></tr></tbody></table></div></article>
+<article class="command-card" id="command-2"><h3><span class="number">02</span> ログ画面を表示</h3><p class="key">コマンドID <code>showLog</code></p><p>保存した文章履歴のログ画面を開きます。</p><h4>引数</h4><p class="empty">引数はありません。</p></article>
+<article class="command-card" id="command-3"><h3><span class="number">03</span> ログ履歴を消去</h3><p class="key">コマンドID <code>clearLog</code></p><p>保存した文章履歴を消去します。</p><h4>引数</h4><p class="empty">引数はありません。</p></article>
+<article class="command-card" id="command-4"><h3><span class="number">04</span> 文章スタックのクリア</h3><p class="key">コマンドID <code>clearMessageStack</code></p><p>画面上に積み重ねて表示されている文章を消去します。ログ履歴は消去しません。</p><h4>引数</h4><p class="empty">引数はありません。</p></article>
+<article class="command-card" id="command-5"><h3><span class="number">05</span> 自動送り文章表示</h3><p class="key">コマンドID <code>showAutoAdvanceMessage</code></p><p>指定時間後に自動で読み進める文章を表示します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">文章<small><code>text</code></small></th><td>表示する文章です。\\V[n]などの制御文字も使用できます。</td><td>型: <code>multiline_string</code></td></tr>
+<tr><th scope="row">顔画像<small><code>faceName</code></small></th><td>表示する顔画像ファイル名です。空欄で顔画像なし。</td><td>型: <code>file</code><br>参照先: <code>img/faces</code></td></tr>
+<tr><th scope="row">顔画像番号<small><code>faceIndex</code></small></th><td>顔画像ファイル内で使用する顔の番号です。</td><td>型: <code>number</code><br>範囲: 0～7<br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">背景<small><code>background</code></small></th><td>文章表示時の背景の種類です。</td><td>型: <code>select</code><br>ヘッダー初期値: <code>0</code><br>選択肢: ウィンドウ (<code>0</code>)、暗くする (<code>1</code>)、透明 (<code>2</code>)</td></tr>
+<tr><th scope="row">表示位置<small><code>positionType</code></small></th><td>文章を表示する画面上の位置です。</td><td>型: <code>select</code><br>ヘッダー初期値: <code>2</code><br>選択肢: 上 (<code>0</code>)、中 (<code>1</code>)、下 (<code>2</code>)</td></tr>
+<tr><th scope="row">名前<small><code>speakerName</code></small></th><td>表示する話者名です。空欄で名前なし。</td><td>型: <code>string</code></td></tr>
+<tr><th scope="row">自動送りまでの秒数<small><code>duration</code></small></th><td>表示から自動送りまでの秒数です。</td><td>型: <code>number</code><br>範囲: 0～指定なし<br>ヘッダー初期値: <code>3</code></td></tr>
+<tr><th scope="row">手動で読み進め可能<small><code>allowManualAdvance</code></small></th><td>ONなら自動送りを待たずに手動でも読み進められます。</td><td>型: <code>boolean</code><br>ヘッダー初期値: <code>true</code><br>ON: 手動・自動の両方 / OFF: 完全自動のみ</td></tr></tbody></table></div></article>
+<article class="command-card" id="command-6"><h3><span class="number">06</span> 文章同期モードを変更</h3><p class="key">コマンドID <code>setMessageSyncMode</code></p><p>この端末で実行する文章の同期方式を変更します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">モード<small><code>mode</code></small></th><td>非同期・半同期・全同期から文章の同期方式を選びます。</td><td>型: <code>select</code><br>ヘッダー初期値: <code>async</code><br>選択肢: 非同期 (<code>async</code>)、半同期 (<code>semiSync</code>)、全同期 (<code>fullSync</code>)</td></tr></tbody></table></div></article>
+<article class="command-card" id="command-7"><h3><span class="number">07</span> 読み進め許可を変更</h3><p class="key">コマンドID <code>setAdvancePermission</code></p><p>全同期の文章を誰が読み進められるか変更します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">許可するPC<small><code>target</code></small></th><td>読み進め権限を変更する対象です。</td><td>型: <code>select</code><br>選択肢: GM (<code>gm</code>)、イベント実行者 (<code>eventRunner</code>)、同一顔グラフィックPC (<code>sameFace</code>)、全員 (<code>everyone</code>)</td></tr>
+<tr><th scope="row">有効<small><code>enabled</code></small></th><td>対象への読み進め権限を有効にするか指定します。</td><td>型: <code>boolean</code><br>ヘッダー初期値: <code>true</code></td></tr></tbody></table></div></article></section>
+          
+          
+          <div class="pager"><a href="FixTimerOpacity.html">← FixTimerOpacity</a><a href="../プラグイン一覧.html">一覧へ戻る</a><a href="GMSceneManager.html">GMSceneManager →</a></div>
+        </main>
+      </div>
+    </div>
+  <footer class="wrap">このデモの <code>js/plugins.js</code> とプラグインヘッダー・実装を基準に生成しています。</footer>
+</body>
+</html>

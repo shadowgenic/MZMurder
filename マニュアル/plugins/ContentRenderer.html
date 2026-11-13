@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ContentRenderer | MZ Murder</title>
+  <link rel="stylesheet" href="../plugin_reference.css">
+</head>
+<body>
+  <header class="site-header"><div class="wrap">
+    <p class="eyebrow">MZ Murder · プラグインリファレンス</p>
+    <h1>ContentRenderer</h1>
+    <p>HTMLと画像の情報ファイルをMadamisのコンテンツタブへ描画します。</p>
+  </div></header>
+  <div class="wrap page">
+      <div class="breadcrumbs"><a href="../MZ_Murder_制作マニュアル.html">制作マニュアル</a> <span>›</span> <a href="../プラグイン一覧.html">プラグイン一覧</a> <span>›</span> ContentRenderer</div>
+      <div class="page-layout">
+        <aside class="sidebar" aria-label="ページ内目次">
+          <strong>このページ</strong>
+          <a href="#overview">役割</a><a href="#parameters">プラグインパラメータ <em>15</em></a><a href="#commands">プラグインコマンド <em>1</em></a>
+          
+          
+          <div class="sidebar-commands"><a href="#command-1">HTML配色の変更</a></div>
+        </aside>
+        <main>
+          <section class="panel" id="overview"><h2>役割</h2><p>HTMLと画像の情報ファイルをMadamisのコンテンツタブへ描画します。</p><div class="callout">SideMenuなどが開いた資料タブへHTMLや画像を描画します。ゲーム内表示は一般的なブラウザの全HTML/CSS機能には対応しません。</div>
+            <p class="source">実装ファイル：<a href="../../js/plugins/ContentRenderer.js"><code>js/plugins/ContentRenderer.js</code></a></p>
+            <p><a href="../ContentRenderer_HTMLガイド.html">使えるHTMLタグとゲーム内での挙動</a></p>
+          </section>
+          <section class="panel" id="parameters"><h2>プラグインパラメータ <span class="count">15件</span></h2>
+            <p class="hint">「ヘッダー初期値」はプラグインに記載された値、「デモ設定値」はこの作品の <code>js/plugins.js</code> に保存された値です。0や空欄は、実装側で代替値に置き換わる場合があります。</p><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">表示幅<small><code>HtmlWidth</code></small></th><td>HTMLコンテンツを表示する領域の幅をピクセル単位で指定します。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>800</code><br>デモ設定値: <code>800</code></td></tr>
+<tr><th scope="row">HTML表示高さ<small><code>HtmlHeight</code></small></th><td>HTMLコンテンツを表示する領域の高さをピクセル単位で指定します。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>900</code><br>デモ設定値: <code>900</code></td></tr>
+<tr><th scope="row">表示位置Y<small><code>HtmlY</code></small></th><td>HTMLコンテンツ領域の上端Y座標をピクセル単位で指定します。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>90</code><br>デモ設定値: <code>90</code></td></tr>
+<tr><th scope="row">タブ余白の背景色<small><code>TabBackgroundColor</code></small></th><td>HTML・画像タブの本文外側に表示する背景色です。</td><td>型: <code>color</code><br>ヘッダー初期値: <code>#000000</code><br>デモ設定値: <code>#000000</code></td></tr>
+<tr><th scope="row">タブ余白の不透明度<small><code>TabBackgroundOpacity</code></small></th><td>HTML・画像タブの本文外側に表示する背景の不透明度です。0で透明、255で不透明です。</td><td>型: <code>number</code><br>範囲: 0～255<br>ヘッダー初期値: <code>153</code><br>デモ設定値: <code>153</code></td></tr>
+<tr><th scope="row">画像表示高さ<small><code>ImageHeight</code></small></th><td>コンテンツ内画像の表示高さをピクセル単位で指定します。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>900</code><br>デモ設定値: <code>900</code></td></tr>
+<tr><th scope="row">初期フォントサイズ<small><code>DefaultFontSize</code></small></th><td>HTMLコンテンツの初期文字サイズをピクセル単位で指定します。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>16</code><br>デモ設定値: <code>18</code></td></tr>
+<tr><th scope="row">全体背景色<small><code>BgColor</code></small></th><td>コンテンツ全体の背景色をCSS色形式で指定します。</td><td>ヘッダー初期値: <code>#fdfdfd</code><br>デモ設定値: <code>#fdfdfd</code></td></tr>
+<tr><th scope="row">基本文字色<small><code>DefaultTextColor</code></small></th><td>通常の本文に使う文字色をCSS色形式で指定します。</td><td>ヘッダー初期値: <code>#333333</code><br>デモ設定値: <code>#333333</code></td></tr>
+<tr><th scope="row">大見出し背景色<small><code>BigTitleBgColor</code></small></th><td>大見出しの背景色をCSS色形式で指定します。</td><td>ヘッダー初期値: <code>#222266</code><br>デモ設定値: <code>#222266</code></td></tr>
+<tr><th scope="row">大見出し文字色<small><code>BigTitleTextColor</code></small></th><td>大見出しの文字色をCSS色形式で指定します。</td><td>ヘッダー初期値: <code>#ffffff</code><br>デモ設定値: <code>#ffffff</code></td></tr>
+<tr><th scope="row">小見出し背景色<small><code>SubTitleBgColor</code></small></th><td>中・小見出しの背景色をCSS色形式で指定します。</td><td>ヘッダー初期値: <code>#ccebff</code><br>デモ設定値: <code>#ccebff</code></td></tr>
+<tr><th scope="row">小見出し文字色<small><code>SubTitleTextColor</code></small></th><td>中・小見出しの文字色をCSS色形式で指定します。</td><td>ヘッダー初期値: <code>#003856</code><br>デモ設定値: <code>#003856</code></td></tr>
+<tr><th scope="row">文字拡大ボタン画像<small><code>ZoomUpImage</code></small></th><td>コンテンツの文字を拡大するボタン画像です。</td><td>型: <code>file</code><br>参照先: <code>img/icon/</code><br>ヘッダー初期値: <code>Button_zoomup</code><br>デモ設定値: <code>Button_zoomup</code></td></tr>
+<tr><th scope="row">文字縮小ボタン画像<small><code>ZoomDownImage</code></small></th><td>コンテンツの文字を縮小するボタン画像です。</td><td>型: <code>file</code><br>参照先: <code>img/icon/</code><br>ヘッダー初期値: <code>Button_zoomdown</code><br>デモ設定値: <code>Button_zoomdown</code></td></tr></tbody></table></div>
+          </section>
+          <section class="panel" id="commands"><h2>プラグインコマンド <span class="count">1件</span></h2><article class="command-card" id="command-1"><h3><span class="number">01</span> HTML配色の変更</h3><p class="key">コマンドID <code>changeColor</code></p><p>HTML資料の表示色をゲーム中に変更します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">変更対象<small><code>type</code></small></th><td>変更するコンテンツ配色の種類です。</td><td>型: <code>select</code><br>選択肢: 全体背景色 (<code>bg</code>)、基本文字色 (<code>text</code>)、大見出し背景色 (<code>bigBg</code>)、大見出し文字色 (<code>bigText</code>)、中見出し背景色 (<code>subBg</code>)、中見出し文字色 (<code>subText</code>)、小見出し背景色 (<code>smallBg</code>)、小見出し文字色 (<code>smallText</code>)</td></tr>
+<tr><th scope="row">色コード (#ffffff等)<small><code>color</code></small></th><td>選択した配色に適用するCSS色コードです。</td><td>—</td></tr></tbody></table></div></article></section>
+          
+          
+          <div class="pager"><a href="InputTriggerRelease.html">← InputTriggerRelease</a><a href="../プラグイン一覧.html">一覧へ戻る</a><a href="TabUI.html">TabUI →</a></div>
+        </main>
+      </div>
+    </div>
+  <footer class="wrap">このデモの <code>js/plugins.js</code> とプラグインヘッダー・実装を基準に生成しています。</footer>
+</body>
+</html>

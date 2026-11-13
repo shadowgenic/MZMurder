@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FirebaseSync | MZ Murder</title>
+  <link rel="stylesheet" href="../plugin_reference.css">
+</head>
+<body>
+  <header class="site-header"><div class="wrap">
+    <p class="eyebrow">MZ Murder · プラグインリファレンス</p>
+    <h1>FirebaseSync</h1>
+    <p>Firebase Realtime Databaseでルーム、参加者、スイッチ、変数を同期します。</p>
+  </div></header>
+  <div class="wrap page">
+      <div class="breadcrumbs"><a href="../MZ_Murder_制作マニュアル.html">制作マニュアル</a> <span>›</span> <a href="../プラグイン一覧.html">プラグイン一覧</a> <span>›</span> FirebaseSync</div>
+      <div class="page-layout">
+        <aside class="sidebar" aria-label="ページ内目次">
+          <strong>このページ</strong>
+          <a href="#overview">役割</a><a href="#parameters">プラグインパラメータ <em>21</em></a><a href="#commands">プラグインコマンド <em>2</em></a>
+          
+          
+          <div class="sidebar-commands"><a href="#command-1">PCデータの復元</a><a href="#command-2">メンバー数取得</a></div>
+        </aside>
+        <main>
+          <section class="panel" id="overview"><h2>役割</h2><p>Firebase Realtime Databaseでルーム、参加者、スイッチ、変数を同期します。</p><div class="callout">最初に接続先と匿名認証を設定します。maxMembersは入室上限だけに使用します。共有範囲に端末ごとのPC番号、UID、ルームIDを含めないでください。</div>
+            <p class="source">実装ファイル：<a href="../../js/plugins/FirebaseSync.js"><code>js/plugins/FirebaseSync.js</code></a></p>
+            
+          </section>
+          <section class="panel" id="parameters"><h2>プラグインパラメータ <span class="count">21件</span></h2>
+            <p class="hint">「ヘッダー初期値」はプラグインに記載された値、「デモ設定値」はこの作品の <code>js/plugins.js</code> に保存された値です。0や空欄は、実装側で代替値に置き換わる場合があります。</p><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">Firebase APIキー<small><code>apiKey</code></small></th><td>FirebaseウェブアプリのAPIキーです。Firebaseコンソールのウェブアプリ設定から取得します。</td><td>ヘッダー初期値: <code>*******************</code><br>デモ設定値: <code>AIzaSyCSfBK3s0WtLws-Iob9F3QDogBmD2Zo_aY</code></td></tr>
+<tr><th scope="row">Firebase認証ドメイン<small><code>authDomain</code></small></th><td>Firebase Authenticationで使用するドメインです。</td><td>ヘッダー初期値: <code>**********.firebaseapp.com</code><br>デモ設定値: <code>shadowgenicmurdermystery.firebaseapp.com</code></td></tr>
+<tr><th scope="row">Realtime Database URL<small><code>databaseURL</code></small></th><td>接続するFirebase Realtime DatabaseのURLです。</td><td>ヘッダー初期値: <code>https://**********.firebaseio.com</code><br>デモ設定値: <code>https://shadowgenicmurdermystery-default-rtdb.firebaseio.com</code></td></tr>
+<tr><th scope="row">同期スイッチ開始番号<small><code>syncSwitchStart</code></small></th><td>全プレイヤーで共有するスイッチ番号の範囲の開始値です。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>1</code><br>デモ設定値: <code>1</code></td></tr>
+<tr><th scope="row">同期スイッチ終了番号<small><code>syncSwitchEnd</code></small></th><td>全プレイヤーで共有するスイッチ番号の範囲の終了値です。 syncSwitchStartからsyncSwitchEndまでのスイッチは全員が同じ値になります。 誰かが書き込みを行うと他のPLにも反映されます。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>100</code><br>デモ設定値: <code>100</code></td></tr>
+<tr><th scope="row">同期変数開始番号<small><code>syncVariableStart</code></small></th><td>全プレイヤーで共有する変数番号の範囲の開始値です。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>1</code><br>デモ設定値: <code>1</code></td></tr>
+<tr><th scope="row">同期変数終了番号<small><code>syncVariableEnd</code></small></th><td>全プレイヤーで共有する変数番号の範囲の終了値です。 syncVariableStartからsyncVariableEndまでの変数は全員が同じ値になります。 誰かが書き込みを行うと他のPLにも反映されます。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>100</code><br>デモ設定値: <code>100</code></td></tr>
+<tr><th scope="row">ルームID変数<small><code>roomIdVariable</code></small></th><td>接続中のルームIDを格納する変数です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>118</code><br>デモ設定値: <code>118</code></td></tr>
+<tr><th scope="row">スイッチ書き込みロック<small><code>lockSwitchesId</code></small></th><td>同期中のスイッチ書き込み制御に使う番号です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>122</code><br>デモ設定値: <code>122</code></td></tr>
+<tr><th scope="row">変数書き込みロック<small><code>lockVariablesId</code></small></th><td>同期中の変数書き込み制御に使う番号です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>123</code><br>デモ設定値: <code>123</code></td></tr>
+<tr><th scope="row">最大入室人数<small><code>maxMembers</code></small></th><td>1ルームに同時入室できる人数の上限です。GMも数えます。キャラクター選択の表示枠数・開始条件には使用しません。</td><td>型: <code>number</code><br>範囲: 1～指定なし<br>ヘッダー初期値: <code>7</code><br>デモ設定値: <code>7</code></td></tr>
+<tr><th scope="row">ルーム作成の名称<small><code>NewGameName</code></small></th><td>タイトル画面の「ルームを作成する」にあたる表示名です。</td><td>ヘッダー初期値: <code>ルームを作成する</code><br>デモ設定値: <code>ルームを作成する</code></td></tr>
+<tr><th scope="row">ルーム参加の名称<small><code>JoinRoomName</code></small></th><td>タイトル画面の「ルームに参加する」にあたる表示名です。</td><td>ヘッダー初期値: <code>ルームに参加する</code><br>デモ設定値: <code>ルームに参加する</code></td></tr>
+<tr><th scope="row">オプションの名称<small><code>OptionsName</code></small></th><td>タイトル画面の「オプション」にあたる表示名です。</td><td>ヘッダー初期値: <code>オプション</code><br>デモ設定値: <code>オプション</code></td></tr>
+<tr><th scope="row">コマンドウィンドウY座標<small><code>CommandWindowY</code></small></th><td>タイトルコマンドの縦位置です。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>700</code><br>デモ設定値: <code>700</code></td></tr>
+<tr><th scope="row">コマンドウィンドウ幅<small><code>CommandWindowWidth</code></small></th><td>タイトルコマンドの横幅（数値が大きいほど横長になります）</td><td>型: <code>number</code><br>ヘッダー初期値: <code>300</code><br>デモ設定値: <code>300</code></td></tr>
+<tr><th scope="row">ルーム作成者判定スイッチ<small><code>creatorSwitchId</code></small></th><td>自分がルームを作成した場合にON(true)、参加した場合にOFF(false)になるスイッチIDです。</td><td>型: <code>switch</code><br>ヘッダー初期値: <code>101</code><br>デモ設定値: <code>101</code></td></tr>
+<tr><th scope="row">GM専用スイッチ<small><code>gmOnlySwitchId</code></small></th><td>現在のGMのときだけONになるスイッチIDです。0で無効ですがそのままではSyncMapTransferなどの動作に支障が出ます。GMレス作品の場合でも便宜上GMを置いてください。</td><td>型: <code>switch</code><br>ヘッダー初期値: <code>101</code><br>デモ設定値: <code>101</code></td></tr>
+<tr><th scope="row">GMPC番号<small><code>defaultGmPcId</code></small></th><td>GMとして使用されるPC番号です。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>7</code><br>デモ設定値: <code>6</code></td></tr>
+<tr><th scope="row">PCのIDを格納する変数<small><code>pcIdVar</code></small></th><td>PCが確定したらここに書き込んでください。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>101</code><br>デモ設定値: <code>101</code></td></tr>
+<tr><th scope="row">ユーザーUID格納変数<small><code>userUidVar</code></small></th><td>自分のFirebase UID(文字列)を格納する変数の番号です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>102</code><br>デモ設定値: <code>102</code></td></tr></tbody></table></div>
+          </section>
+          <section class="panel" id="commands"><h2>プラグインコマンド <span class="count">2件</span></h2><article class="command-card" id="command-1"><h3><span class="number">01</span> PCデータの復元</h3><p class="key">コマンドID <code>RestorePcData</code></p><p>PC番号変数(pcIdVar)に基づき、Firebaseから個別の変数を復元します。</p><h4>引数</h4><p class="empty">引数はありません。</p></article>
+<article class="command-card" id="command-2"><h3><span class="number">02</span> メンバー数取得</h3><p class="key">コマンドID <code>GetMemberCount</code></p><p>現在のルームのメンバー数を指定した変数に格納します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">代入先変数ID<small><code>variableId</code></small></th><td>現在のルーム参加人数を書き込む変数です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>1</code></td></tr></tbody></table></div></article></section>
+          
+          
+          <div class="pager"><a href="ErasePictures.html">← ErasePictures</a><a href="../プラグイン一覧.html">一覧へ戻る</a><a href="FixScreenSize.html">FixScreenSize →</a></div>
+        </main>
+      </div>
+    </div>
+  <footer class="wrap">このデモの <code>js/plugins.js</code> とプラグインヘッダー・実装を基準に生成しています。</footer>
+</body>
+</html>

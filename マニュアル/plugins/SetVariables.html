@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SetVariables | MZ Murder</title>
+  <link rel="stylesheet" href="../plugin_reference.css">
+</head>
+<body>
+  <header class="site-header"><div class="wrap">
+    <p class="eyebrow">MZ Murder · プラグインリファレンス</p>
+    <h1>SetVariables</h1>
+    <p>指定したゲーム変数に文字列や配列を代入します。</p>
+  </div></header>
+  <div class="wrap page">
+      <div class="breadcrumbs"><a href="../MZ_Murder_制作マニュアル.html">制作マニュアル</a> <span>›</span> <a href="../プラグイン一覧.html">プラグイン一覧</a> <span>›</span> SetVariables</div>
+      <div class="page-layout">
+        <aside class="sidebar" aria-label="ページ内目次">
+          <strong>このページ</strong>
+          <a href="#overview">役割</a><a href="#parameters">プラグインパラメータ <em>0</em></a><a href="#commands">プラグインコマンド <em>17</em></a>
+          
+          
+          <div class="sidebar-commands"><a href="#command-1">文字列を変数に代入</a><a href="#command-2">配列を変数に代入</a><a href="#command-3">変数群のコピー</a><a href="#command-4">変数から配列を作成する</a><a href="#command-5">変動アドレスに書き込み</a><a href="#command-6">変動アドレスに加減算</a><a href="#command-7">変動アドレスから代入</a><a href="#command-8">変動アドレスのスイッチに代入</a><a href="#command-9">変動アドレスのスイッチから代入</a><a href="#command-10">配列中の存在確認</a><a href="#command-11">数値と文字列の変換</a><a href="#command-12">文字列として結合</a><a href="#command-13">文字列を変数に追記</a><a href="#command-14">変数で指定した変数に値を代入</a><a href="#command-15">変数で指定した変数に文字列を追記</a><a href="#command-16">値を変数の範囲に代入</a><a href="#command-17">文字列を変数の範囲に追記</a></div>
+        </aside>
+        <main>
+          <section class="panel" id="overview"><h2>役割</h2><p>指定したゲーム変数に文字列や配列を代入します。</p>
+            <p class="source">実装ファイル：<a href="../../js/plugins/SetVariables.js"><code>js/plugins/SetVariables.js</code></a></p>
+            
+          </section>
+          <section class="panel" id="parameters"><h2>プラグインパラメータ <span class="count">0件</span></h2>
+            <p class="hint">「ヘッダー初期値」はプラグインに記載された値、「デモ設定値」はこの作品の <code>js/plugins.js</code> に保存された値です。0や空欄は、実装側で代替値に置き換わる場合があります。</p><p class="empty">プラグインパラメータはありません。</p>
+          </section>
+          <section class="panel" id="commands"><h2>プラグインコマンド <span class="count">17件</span></h2><article class="command-card" id="command-1"><h3><span class="number">01</span> 文字列を変数に代入</h3><p class="key">コマンドID <code>setString</code></p><p>指定したゲーム変数に文字列を代入します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">代入先ゲーム変数<small><code>variableId</code></small></th><td>文字列を代入するゲーム変数です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>1</code></td></tr>
+<tr><th scope="row">代入する文字列<small><code>text</code></small></th><td>ゲーム変数に代入する文字列です。</td><td>型: <code>string</code><br>ヘッダー初期値: <code>（空欄）</code></td></tr></tbody></table></div></article>
+<article class="command-card" id="command-2"><h3><span class="number">02</span> 配列を変数に代入</h3><p class="key">コマンドID <code>setArray</code></p><p>指定したゲーム変数に任意のJSON値を含む配列を代入します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">代入先ゲーム変数<small><code>variableId</code></small></th><td>配列を代入するゲーム変数です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>1</code></td></tr>
+<tr><th scope="row">配列（JSON形式）<small><code>values</code></small></th><td>例: [&quot;文字列&quot;, 123, true, {&quot;key&quot;:&quot;value&quot;}]</td><td>型: <code>string</code><br>ヘッダー初期値: <code>[]</code></td></tr></tbody></table></div></article>
+<article class="command-card" id="command-3"><h3><span class="number">03</span> 変数群のコピー</h3><p class="key">コマンドID <code>copyVariableRange</code></p><p>コピー元の連番のゲーム変数を、コピー先の開始番号から順に代入します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">コピー元始まり<small><code>sourceStartVariableId</code></small></th><td>コピーする範囲の開始ゲーム変数です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>1</code></td></tr>
+<tr><th scope="row">コピー元終わり<small><code>sourceEndVariableId</code></small></th><td>コピーする範囲の終了ゲーム変数です。始まりと終わりを含みます。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>1</code></td></tr>
+<tr><th scope="row">コピー先始まり<small><code>destinationStartVariableId</code></small></th><td>コピー先の先頭ゲーム変数です。コピー元と同じ個数の変数へ代入します。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>1</code></td></tr></tbody></table></div></article>
+<article class="command-card" id="command-4"><h3><span class="number">04</span> 変数から配列を作成する</h3><p class="key">コマンドID <code>createArrayFromVariables</code></p><p>指定した連番のゲーム変数の値を要素にした配列を、指定先のゲーム変数へ代入します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">代入先の変数<small><code>destinationVariableId</code></small></th><td>作成した配列を代入するゲーム変数です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>1</code></td></tr>
+<tr><th scope="row">要素となる変数の始まり<small><code>elementStartVariableId</code></small></th><td>配列の最初の要素にするゲーム変数です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>1</code></td></tr>
+<tr><th scope="row">要素となる変数の終わり<small><code>elementEndVariableId</code></small></th><td>配列の最後の要素にするゲーム変数です。始まりと終わりを含みます。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>1</code></td></tr></tbody></table></div></article>
+<article class="command-card" id="command-5"><h3><span class="number">05</span> 変動アドレスに書き込み</h3><p class="key">コマンドID <code>writeToDynamicAddress</code></p><p>書き込み先指定変数の値にオフセットを加えた番号の変数へ、指定変数または直接指定した値を代入します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">書き込み先指定変数<small><code>addressVariableId</code></small></th><td>値にオフセットを加えて書き込み先の変数番号を求めるゲーム変数です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>1</code></td></tr>
+<tr><th scope="row">オフセット<small><code>offset</code></small></th><td>書き込み先指定変数の値に加える整数です。負の値も指定できます。</td><td>型: <code>number</code><br>範囲: -9999～9999<br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">書き込み内容変数<small><code>valueVariableId</code></small></th><td>このゲーム変数に入っている値を代入します。0の場合は直接書き込み内容を使用します。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>1</code></td></tr>
+<tr><th scope="row">直接書き込み内容<small><code>directValue</code></small></th><td>書き込み内容変数が0の場合に代入する値です。123は数値、文字列はそのまま、JSON配列も指定できます。</td><td>型: <code>string</code><br>ヘッダー初期値: <code>（空欄）</code></td></tr></tbody></table></div></article>
+<article class="command-card" id="command-6"><h3><span class="number">06</span> 変動アドレスに加減算</h3><p class="key">コマンドID <code>addToDynamicAddress</code></p><p>書き込み先指定変数の値にオフセットを加えた番号の変数へ、指定した数値を加減算します。負の値を指定すると減算します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">書き込み先指定変数<small><code>addressVariableId</code></small></th><td>値にオフセットを加えて書き込み先の変数番号を求めるゲーム変数です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">オフセット<small><code>offset</code></small></th><td>書き込み先指定変数の値に加える整数です。負の値も指定できます。</td><td>型: <code>number</code><br>範囲: -9999～9999<br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">加減算する値の変数<small><code>valueVariableId</code></small></th><td>このゲーム変数に入っている数値を加減算します。0の場合は直接指定した値を使用します。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">直接指定する加減算値<small><code>directValue</code></small></th><td>加減算する値の変数が0の場合に使う数値です。負の値を指定すると減算します。</td><td>型: <code>number</code><br>範囲: -999999999～999999999<br>ヘッダー初期値: <code>0</code></td></tr></tbody></table></div></article>
+<article class="command-card" id="command-7"><h3><span class="number">07</span> 変動アドレスから代入</h3><p class="key">コマンドID <code>copyFromDynamicAddress</code></p><p>読み込み元指定変数の値にオフセットを加えた番号の変数の値を、指定したゲーム変数へ代入します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">代入先ゲーム変数<small><code>destinationVariableId</code></small></th><td>読み込んだ値を代入するゲーム変数です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>1</code></td></tr>
+<tr><th scope="row">読み込み元指定変数<small><code>addressVariableId</code></small></th><td>値にオフセットを加えて読み込み元の変数番号を求めるゲーム変数です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>1</code></td></tr>
+<tr><th scope="row">オフセット<small><code>offset</code></small></th><td>読み込み元指定変数の値に加える整数です。負の値も指定できます。</td><td>型: <code>number</code><br>範囲: -9999～9999<br>ヘッダー初期値: <code>0</code></td></tr></tbody></table></div></article>
+<article class="command-card" id="command-8"><h3><span class="number">08</span> 変動アドレスのスイッチに代入</h3><p class="key">コマンドID <code>writeSwitchToDynamicAddress</code></p><p>スイッチ番号指定変数の値にオフセットを加えた番号のスイッチへ、指定スイッチまたは直接指定した値を代入します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">代入先スイッチ番号指定変数<small><code>addressVariableId</code></small></th><td>値にオフセットを加えて代入先のスイッチ番号を求めるゲーム変数です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>1</code></td></tr>
+<tr><th scope="row">オフセット<small><code>offset</code></small></th><td>代入先スイッチ番号指定変数の値に加える整数です。負の値も指定できます。</td><td>型: <code>number</code><br>範囲: -9999～9999<br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">代入内容スイッチ<small><code>valueSwitchId</code></small></th><td>このスイッチのON/OFFを代入します。0の場合は直接指定するON/OFFを使用します。</td><td>型: <code>switch</code><br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">直接指定するON/OFF<small><code>directValue</code></small></th><td>代入内容スイッチが0の場合に代入するON/OFFです。</td><td>型: <code>boolean</code><br>ヘッダー初期値: <code>false</code><br>ON: ON / OFF: OFF</td></tr></tbody></table></div></article>
+<article class="command-card" id="command-9"><h3><span class="number">09</span> 変動アドレスのスイッチから代入</h3><p class="key">コマンドID <code>copySwitchFromDynamicAddress</code></p><p>スイッチ番号指定変数の値にオフセットを加えた番号のスイッチのON/OFFを、指定したスイッチへ代入します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">代入先スイッチ<small><code>destinationSwitchId</code></small></th><td>読み込んだON/OFFを代入するスイッチです。</td><td>型: <code>switch</code><br>ヘッダー初期値: <code>1</code></td></tr>
+<tr><th scope="row">読み込み元スイッチ番号指定変数<small><code>addressVariableId</code></small></th><td>値にオフセットを加えて読み込み元のスイッチ番号を求めるゲーム変数です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>1</code></td></tr>
+<tr><th scope="row">オフセット<small><code>offset</code></small></th><td>読み込み元スイッチ番号指定変数の値に加える整数です。負の値も指定できます。</td><td>型: <code>number</code><br>範囲: -9999～9999<br>ヘッダー初期値: <code>0</code></td></tr></tbody></table></div></article>
+<article class="command-card" id="command-10"><h3><span class="number">10</span> 配列中の存在確認</h3><p class="key">コマンドID <code>arrayContains</code></p><p>指定した配列を格納したゲーム変数に、指定した値が含まれるかを確認してスイッチへ代入します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">代入先スイッチ<small><code>destinationSwitchId</code></small></th><td>配列に値が含まれるかどうかを代入するスイッチです。</td><td>型: <code>switch</code><br>ヘッダー初期値: <code>1</code></td></tr>
+<tr><th scope="row">チェックする配列の変数番号<small><code>arrayVariableId</code></small></th><td>チェック対象の配列を格納したゲーム変数です。配列以外の場合はOFFになります。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>1</code></td></tr>
+<tr><th scope="row">要素の変数番号<small><code>elementVariableId</code></small></th><td>配列に含まれるかを確認する値を格納したゲーム変数です。0の場合は直接入力した値を使用します。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">値<small><code>directValue</code></small></th><td>要素の変数番号が0の場合に確認する値です。数値・真偽値・JSON配列・JSONオブジェクト、または文字列を指定します。</td><td>型: <code>string</code><br>ヘッダー初期値: <code>（空欄）</code></td></tr></tbody></table></div></article>
+<article class="command-card" id="command-11"><h3><span class="number">11</span> 数値と文字列の変換</h3><p class="key">コマンドID <code>convertVariableType</code></p><p>指定したゲーム変数の現在値を数値または文字列へ変換します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">変数の番号<small><code>variableId</code></small></th><td>値の型を変換するゲーム変数です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>1</code></td></tr>
+<tr><th scope="row">変換後の型<small><code>targetType</code></small></th><td>文字列または数値を選択します。</td><td>型: <code>select</code><br>ヘッダー初期値: <code>string</code><br>選択肢: 文字列 (<code>string</code>)、数値 (<code>number</code>)</td></tr>
+<tr><th scope="row">数値文字列の桁数<small><code>digitCount</code></small></th><td>文字列へ変換する時の桁数です。0は通常の文字列化、1以上は先頭を0で埋めます。</td><td>型: <code>number</code><br>範囲: 0～指定なし<br>ヘッダー初期値: <code>0</code></td></tr></tbody></table></div></article>
+<article class="command-card" id="command-12"><h3><span class="number">12</span> 文字列として結合</h3><p class="key">コマンドID <code>concatenateAsString</code></p><p>前後と間の文字列を加え、2つのゲーム変数の値を文字列として結合します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">代入先の変数<small><code>destinationVariableId</code></small></th><td>結合結果を代入するゲーム変数です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>1</code></td></tr>
+<tr><th scope="row">前に追加する文字列<small><code>prefix</code></small></th><td>変数1の前に追加する文字列です。</td><td>型: <code>string</code><br>ヘッダー初期値: <code>（空欄）</code></td></tr>
+<tr><th scope="row">変数1<small><code>firstVariableId</code></small></th><td>結合する1つ目のゲーム変数です。0の場合は空文字列として扱います。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>1</code></td></tr>
+<tr><th scope="row">間に追加する文字列<small><code>separator</code></small></th><td>変数1と変数2の間に追加する文字列です。</td><td>型: <code>string</code><br>ヘッダー初期値: <code>（空欄）</code></td></tr>
+<tr><th scope="row">変数2<small><code>secondVariableId</code></small></th><td>結合する2つ目のゲーム変数です。0の場合は空文字列として扱います。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>1</code></td></tr>
+<tr><th scope="row">後に追加する文字列<small><code>suffix</code></small></th><td>変数2の後に追加する文字列です。</td><td>型: <code>string</code><br>ヘッダー初期値: <code>（空欄）</code></td></tr></tbody></table></div></article>
+<article class="command-card" id="command-13"><h3><span class="number">13</span> 文字列を変数に追記</h3><p class="key">コマンドID <code>appendString</code></p><p>指定したゲーム変数の既存文字列の後ろに文字列を追加します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">代入先ゲーム変数<small><code>variableId</code></small></th><td>文字列を追記するゲーム変数です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>1</code></td></tr>
+<tr><th scope="row">追記する文字列<small><code>text</code></small></th><td>ゲーム変数の既存文字列の後ろに追加する文字列です。</td><td>型: <code>string</code><br>ヘッダー初期値: <code>（空欄）</code></td></tr></tbody></table></div></article>
+<article class="command-card" id="command-14"><h3><span class="number">14</span> 変数で指定した変数に値を代入</h3><p class="key">コマンドID <code>setStringByVariable</code></p><p>指定したゲーム変数に入っている番号のゲーム変数へ値を代入します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">代入先番号を格納した変数<small><code>destinationVariableId</code></small></th><td>代入先ゲーム変数の番号を格納したゲーム変数です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>1</code></td></tr>
+<tr><th scope="row">代入する値<small><code>text</code></small></th><td>数値・真偽値・JSON配列・JSONオブジェクト、または文字列を指定します。</td><td>型: <code>string</code><br>ヘッダー初期値: <code>（空欄）</code></td></tr></tbody></table></div></article>
+<article class="command-card" id="command-15"><h3><span class="number">15</span> 変数で指定した変数に文字列を追記</h3><p class="key">コマンドID <code>appendStringByVariable</code></p><p>指定したゲーム変数に入っている番号のゲーム変数へ文字列を追記します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">代入先番号を格納した変数<small><code>destinationVariableId</code></small></th><td>追記先ゲーム変数の番号を格納したゲーム変数です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>1</code></td></tr>
+<tr><th scope="row">追記する文字列<small><code>text</code></small></th><td>ゲーム変数の既存文字列の後ろに追加する文字列です。</td><td>型: <code>string</code><br>ヘッダー初期値: <code>（空欄）</code></td></tr></tbody></table></div></article>
+<article class="command-card" id="command-16"><h3><span class="number">16</span> 値を変数の範囲に代入</h3><p class="key">コマンドID <code>setStringRange</code></p><p>指定した範囲のゲーム変数に同じ値を代入します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">開始ゲーム変数<small><code>startVariableId</code></small></th><td>文字列を代入する範囲の開始ゲーム変数です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>1</code></td></tr>
+<tr><th scope="row">終了ゲーム変数<small><code>endVariableId</code></small></th><td>文字列を代入する範囲の終了ゲーム変数です。開始番号と終了番号を含みます。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>1</code></td></tr>
+<tr><th scope="row">代入する値<small><code>text</code></small></th><td>数値・真偽値・JSON配列・JSONオブジェクト、または文字列を指定します。</td><td>型: <code>string</code><br>ヘッダー初期値: <code>（空欄）</code></td></tr></tbody></table></div></article>
+<article class="command-card" id="command-17"><h3><span class="number">17</span> 文字列を変数の範囲に追記</h3><p class="key">コマンドID <code>appendStringRange</code></p><p>指定した範囲のゲーム変数の既存文字列の後ろに同じ文字列を追加します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">開始ゲーム変数<small><code>startVariableId</code></small></th><td>文字列を追記する範囲の開始ゲーム変数です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>1</code></td></tr>
+<tr><th scope="row">終了ゲーム変数<small><code>endVariableId</code></small></th><td>文字列を追記する範囲の終了ゲーム変数です。開始番号と終了番号を含みます。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>1</code></td></tr>
+<tr><th scope="row">追記する文字列<small><code>text</code></small></th><td>範囲内のゲーム変数の既存文字列の後ろに追加する文字列です。</td><td>型: <code>string</code><br>ヘッダー初期値: <code>（空欄）</code></td></tr></tbody></table></div></article></section>
+          
+          
+          <div class="pager"><a href="SwitchChoices.html">← SwitchChoices</a><a href="../プラグイン一覧.html">一覧へ戻る</a><a href="CulpritVote.html">CulpritVote →</a></div>
+        </main>
+      </div>
+    </div>
+  <footer class="wrap">このデモの <code>js/plugins.js</code> とプラグインヘッダー・実装を基準に生成しています。</footer>
+</body>
+</html>

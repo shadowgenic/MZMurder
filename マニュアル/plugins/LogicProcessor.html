@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LogicProcessor | MZ Murder</title>
+  <link rel="stylesheet" href="../plugin_reference.css">
+</head>
+<body>
+  <header class="site-header"><div class="wrap">
+    <p class="eyebrow">MZ Murder · プラグインリファレンス</p>
+    <h1>LogicProcessor</h1>
+    <p>スイッチや変数の論理処理を行います。</p>
+  </div></header>
+  <div class="wrap page">
+      <div class="breadcrumbs"><a href="../MZ_Murder_制作マニュアル.html">制作マニュアル</a> <span>›</span> <a href="../プラグイン一覧.html">プラグイン一覧</a> <span>›</span> LogicProcessor</div>
+      <div class="page-layout">
+        <aside class="sidebar" aria-label="ページ内目次">
+          <strong>このページ</strong>
+          <a href="#overview">役割</a><a href="#parameters">プラグインパラメータ <em>0</em></a><a href="#commands">プラグインコマンド <em>8</em></a>
+          
+          
+          <div class="sidebar-commands"><a href="#command-1">スイッチのAND処理</a><a href="#command-2">スイッチのOR処理</a><a href="#command-3">指定スイッチをトグル</a><a href="#command-4">スイッチの数を数える</a><a href="#command-5">変数の数を数える</a><a href="#command-6">変数の平均値を代入</a><a href="#command-7">変数の最大値を代入</a><a href="#command-8">変数の最小値を代入</a></div>
+        </aside>
+        <main>
+          <section class="panel" id="overview"><h2>役割</h2><p>スイッチや変数の論理処理を行います。</p>
+            <p class="source">実装ファイル：<a href="../../js/plugins/LogicProcessor.js"><code>js/plugins/LogicProcessor.js</code></a></p>
+            
+          </section>
+          <section class="panel" id="parameters"><h2>プラグインパラメータ <span class="count">0件</span></h2>
+            <p class="hint">「ヘッダー初期値」はプラグインに記載された値、「デモ設定値」はこの作品の <code>js/plugins.js</code> に保存された値です。0や空欄は、実装側で代替値に置き換わる場合があります。</p><p class="empty">プラグインパラメータはありません。</p>
+          </section>
+          <section class="panel" id="commands"><h2>プラグインコマンド <span class="count">8件</span></h2><article class="command-card" id="command-1"><h3><span class="number">01</span> スイッチのAND処理</h3><p class="key">コマンドID <code>andSwitches</code></p><p>指定したすべてのスイッチがONのときだけ、代入先スイッチをONにします。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">代入先スイッチ<small><code>targetSwitchId</code></small></th><td>ANDの評価結果を代入するスイッチです。</td><td>型: <code>switch</code><br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">判定するスイッチ<small><code>sourceSwitchIds</code></small></th><td>すべてがONなら代入先をONにします。範囲指定と併用できます。</td><td>型: <code>switch[]</code><br>ヘッダー初期値: <code>[]</code></td></tr>
+<tr><th scope="row">範囲開始スイッチ<small><code>rangeStartSwitchId</code></small></th><td>判定対象に含めるスイッチ範囲の開始番号です。終了スイッチも指定した場合だけ有効です。</td><td>型: <code>switch</code><br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">範囲終了スイッチ<small><code>rangeEndSwitchId</code></small></th><td>判定対象に含めるスイッチ範囲の終了番号です。開始・終了の両端を含みます。</td><td>型: <code>switch</code><br>ヘッダー初期値: <code>0</code></td></tr></tbody></table></div></article>
+<article class="command-card" id="command-2"><h3><span class="number">02</span> スイッチのOR処理</h3><p class="key">コマンドID <code>orSwitches</code></p><p>指定したスイッチのいずれかがONなら、代入先スイッチをONにします。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">代入先スイッチ<small><code>targetSwitchId</code></small></th><td>ORの評価結果を代入するスイッチです。</td><td>型: <code>switch</code><br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">判定するスイッチ<small><code>sourceSwitchIds</code></small></th><td>いずれかがONなら代入先をONにします。範囲指定と併用できます。</td><td>型: <code>switch[]</code><br>ヘッダー初期値: <code>[]</code></td></tr>
+<tr><th scope="row">範囲開始スイッチ<small><code>rangeStartSwitchId</code></small></th><td>判定対象に含めるスイッチ範囲の開始番号です。終了スイッチも指定した場合だけ有効です。</td><td>型: <code>switch</code><br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">範囲終了スイッチ<small><code>rangeEndSwitchId</code></small></th><td>判定対象に含めるスイッチ範囲の終了番号です。開始・終了の両端を含みます。</td><td>型: <code>switch</code><br>ヘッダー初期値: <code>0</code></td></tr></tbody></table></div></article>
+<article class="command-card" id="command-3"><h3><span class="number">03</span> 指定スイッチをトグル</h3><p class="key">コマンドID <code>toggleSwitch</code></p><p>指定したスイッチをONならOFFに、OFFならONに切り替えます。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">切り替えるスイッチ<small><code>switchId</code></small></th><td>現在のON/OFFを反転するスイッチです。</td><td>型: <code>switch</code><br>ヘッダー初期値: <code>0</code></td></tr></tbody></table></div></article>
+<article class="command-card" id="command-4"><h3><span class="number">04</span> スイッチの数を数える</h3><p class="key">コマンドID <code>countSwitches</code></p><p>指定したスイッチのうち、選んだ状態の数をゲーム変数へ代入します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">代入先ゲーム変数<small><code>targetVariableId</code></small></th><td>ONまたはOFFの数を代入するゲーム変数です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">数えるスイッチ<small><code>sourceSwitchIds</code></small></th><td>数える対象のスイッチです。範囲指定と併用できます。</td><td>型: <code>switch[]</code><br>ヘッダー初期値: <code>[]</code></td></tr>
+<tr><th scope="row">範囲開始スイッチ<small><code>rangeStartSwitchId</code></small></th><td>数える対象に含めるスイッチ範囲の開始番号です。終了スイッチも指定した場合だけ有効です。</td><td>型: <code>switch</code><br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">範囲終了スイッチ<small><code>rangeEndSwitchId</code></small></th><td>数える対象に含めるスイッチ範囲の終了番号です。開始・終了の両端を含みます。</td><td>型: <code>switch</code><br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">数える状態<small><code>targetState</code></small></th><td>ONまたはOFFのどちらを数えるか選びます。</td><td>型: <code>select</code><br>ヘッダー初期値: <code>true</code><br>選択肢: ON (<code>true</code>)、OFF (<code>false</code>)</td></tr></tbody></table></div></article>
+<article class="command-card" id="command-5"><h3><span class="number">05</span> 変数の数を数える</h3><p class="key">コマンドID <code>countVariablesInRange</code></p><p>指定した範囲条件に当てはまるゲーム変数の数を、ゲーム変数へ代入します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">代入先ゲーム変数<small><code>targetVariableId</code></small></th><td>条件に当てはまる数を代入するゲーム変数です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">数えるゲーム変数<small><code>sourceVariableIds</code></small></th><td>条件を判定するゲーム変数です。範囲指定と併用できます。</td><td>型: <code>variable[]</code><br>ヘッダー初期値: <code>[]</code></td></tr>
+<tr><th scope="row">対象範囲開始ゲーム変数<small><code>rangeStartVariableId</code></small></th><td>数える対象に含めるゲーム変数範囲の開始番号です。終了変数も指定した場合だけ有効です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">対象範囲終了ゲーム変数<small><code>rangeEndVariableId</code></small></th><td>数える対象に含めるゲーム変数範囲の終了番号です。開始・終了の両端を含みます。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">下限の条件<small><code>lowerBoundCondition</code></small></th><td>下限を使う場合の比較方法です。</td><td>型: <code>select</code><br>ヘッダー初期値: <code>none</code><br>選択肢: 下限を指定しない (<code>none</code>)、基準値以上 (<code>greaterOrEqual</code>)、基準値より大きい (<code>greaterThan</code>)</td></tr>
+<tr><th scope="row">下限の基準値<small><code>lowerBoundValue</code></small></th><td>下限基準変数が0の場合に使用する下限の値です。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">下限基準変数<small><code>lowerBoundVariableId</code></small></th><td>この変数の現在値を下限に使います。0なら下限の基準値を使用します。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">上限の条件<small><code>upperBoundCondition</code></small></th><td>上限を使う場合の比較方法です。</td><td>型: <code>select</code><br>ヘッダー初期値: <code>none</code><br>選択肢: 上限を指定しない (<code>none</code>)、基準値以下 (<code>lessOrEqual</code>)、基準値より小さい (<code>lessThan</code>)</td></tr>
+<tr><th scope="row">上限の基準値<small><code>upperBoundValue</code></small></th><td>上限基準変数が0の場合に使用する上限の値です。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">上限基準変数<small><code>upperBoundVariableId</code></small></th><td>この変数の現在値を上限に使います。0なら上限の基準値を使用します。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>0</code></td></tr></tbody></table></div></article>
+<article class="command-card" id="command-6"><h3><span class="number">06</span> 変数の平均値を代入</h3><p class="key">コマンドID <code>averageVariables</code></p><p>指定したゲーム変数の数値だけを平均し、結果を代入先ゲーム変数へ保存します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">代入先ゲーム変数<small><code>targetVariableId</code></small></th><td>平均値を代入するゲーム変数です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">平均するゲーム変数<small><code>sourceVariableIds</code></small></th><td>平均の対象にするゲーム変数です。範囲指定と併用できます。</td><td>型: <code>variable[]</code><br>ヘッダー初期値: <code>[]</code></td></tr>
+<tr><th scope="row">範囲開始ゲーム変数<small><code>rangeStartVariableId</code></small></th><td>平均対象に含めるゲーム変数範囲の開始番号です。終了変数も指定した場合だけ有効です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">範囲終了ゲーム変数<small><code>rangeEndVariableId</code></small></th><td>平均対象に含めるゲーム変数範囲の終了番号です。開始・終了の両端を含みます。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">小数の処理方法<small><code>roundingMode</code></small></th><td>平均値が整数でないときの処理方法です。</td><td>型: <code>select</code><br>ヘッダー初期値: <code>round</code><br>選択肢: 切り捨て (<code>truncate</code>)、四捨五入 (<code>round</code>)</td></tr></tbody></table></div></article>
+<article class="command-card" id="command-7"><h3><span class="number">07</span> 変数の最大値を代入</h3><p class="key">コマンドID <code>maximumVariables</code></p><p>指定したゲーム変数の数値から最大値を求め、代入先ゲーム変数へ保存します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">代入先ゲーム変数<small><code>targetVariableId</code></small></th><td>最大値を代入するゲーム変数です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">比較するゲーム変数<small><code>sourceVariableIds</code></small></th><td>最大値を求めるゲーム変数です。範囲指定と併用できます。</td><td>型: <code>variable[]</code><br>ヘッダー初期値: <code>[]</code></td></tr>
+<tr><th scope="row">範囲開始ゲーム変数<small><code>rangeStartVariableId</code></small></th><td>比較対象に含めるゲーム変数範囲の開始番号です。終了変数も指定した場合だけ有効です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">範囲終了ゲーム変数<small><code>rangeEndVariableId</code></small></th><td>比較対象に含めるゲーム変数範囲の終了番号です。開始・終了の両端を含みます。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>0</code></td></tr></tbody></table></div></article>
+<article class="command-card" id="command-8"><h3><span class="number">08</span> 変数の最小値を代入</h3><p class="key">コマンドID <code>minimumVariables</code></p><p>指定したゲーム変数の数値から最小値を求め、代入先ゲーム変数へ保存します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">代入先ゲーム変数<small><code>targetVariableId</code></small></th><td>最小値を代入するゲーム変数です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">比較するゲーム変数<small><code>sourceVariableIds</code></small></th><td>最小値を求めるゲーム変数です。範囲指定と併用できます。</td><td>型: <code>variable[]</code><br>ヘッダー初期値: <code>[]</code></td></tr>
+<tr><th scope="row">範囲開始ゲーム変数<small><code>rangeStartVariableId</code></small></th><td>比較対象に含めるゲーム変数範囲の開始番号です。終了変数も指定した場合だけ有効です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">範囲終了ゲーム変数<small><code>rangeEndVariableId</code></small></th><td>比較対象に含めるゲーム変数範囲の終了番号です。開始・終了の両端を含みます。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>0</code></td></tr></tbody></table></div></article></section>
+          
+          
+          <div class="pager"><a href="EnhancedPicture.html">← EnhancedPicture</a><a href="../プラグイン一覧.html">一覧へ戻る</a></div>
+        </main>
+      </div>
+    </div>
+  <footer class="wrap">このデモの <code>js/plugins.js</code> とプラグインヘッダー・実装を基準に生成しています。</footer>
+</body>
+</html>

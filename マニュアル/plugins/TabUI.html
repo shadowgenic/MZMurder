@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TabUI | MZ Murder</title>
+  <link rel="stylesheet" href="../plugin_reference.css">
+</head>
+<body>
+  <header class="site-header"><div class="wrap">
+    <p class="eyebrow">MZ Murder · プラグインリファレンス</p>
+    <h1>TabUI</h1>
+    <p>Madamis画面共通のタブバー、タブ切替、閉じる操作を管理します。</p>
+  </div></header>
+  <div class="wrap page">
+      <div class="breadcrumbs"><a href="../MZ_Murder_制作マニュアル.html">制作マニュアル</a> <span>›</span> <a href="../プラグイン一覧.html">プラグイン一覧</a> <span>›</span> TabUI</div>
+      <div class="page-layout">
+        <aside class="sidebar" aria-label="ページ内目次">
+          <strong>このページ</strong>
+          <a href="#overview">役割</a><a href="#parameters">プラグインパラメータ <em>5</em></a><a href="#commands">プラグインコマンド <em>4</em></a>
+          
+          
+          <div class="sidebar-commands"><a href="#command-1">メインタブをアクティブにする</a><a href="#command-2">メイン以外の全タブを閉じる</a><a href="#command-3">メインタブ固定の有効/無効</a><a href="#command-4">メインタブ名変更</a></div>
+        </aside>
+        <main>
+          <section class="panel" id="overview"><h2>役割</h2><p>Madamis画面共通のタブバー、タブ切替、閉じる操作を管理します。</p><div class="callout">資料タブとメインタブの切り替え・閉じる処理を管理します。</div>
+            <p class="source">実装ファイル：<a href="../../js/plugins/TabUI.js"><code>js/plugins/TabUI.js</code></a></p>
+            
+          </section>
+          <section class="panel" id="parameters"><h2>プラグインパラメータ <span class="count">5件</span></h2>
+            <p class="hint">「ヘッダー初期値」はプラグインに記載された値、「デモ設定値」はこの作品の <code>js/plugins.js</code> に保存された値です。0や空欄は、実装側で代替値に置き換わる場合があります。</p><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">メインタブの名称<small><code>MainTabName</code></small></th><td>マップ画面上部に常時表示するメインタブの名前です。</td><td>ヘッダー初期値: <code>メイン（盤面）</code><br>デモ設定値: <code>メイン（盤面）</code></td></tr>
+<tr><th scope="row">閉じるアイコン画像<small><code>CloseIconImage</code></small></th><td>コンテンツタブを閉じるボタンに表示するアイコンです。</td><td>型: <code>file</code><br>参照先: <code>img/icon/</code><br>ヘッダー初期値: <code>close</code><br>デモ設定値: <code>close</code></td></tr>
+<tr><th scope="row">タブを閉じる時のSE<small><code>CloseSeName</code></small></th><td>タブを閉じたときに再生する効果音ファイルです。</td><td>型: <code>file</code><br>参照先: <code>audio/se/</code><br>ヘッダー初期値: <code>Cancel1</code><br>デモ設定値: <code>Cancel1</code></td></tr>
+<tr><th scope="row">閉じるSEの音量<small><code>CloseSeVolume</code></small></th><td>タブを閉じたときの効果音の音量です。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>90</code><br>デモ設定値: <code>90</code></td></tr>
+<tr><th scope="row">閉じるSEのピッチ<small><code>CloseSePitch</code></small></th><td>タブを閉じたときの効果音のピッチです。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>100</code><br>デモ設定値: <code>100</code></td></tr></tbody></table></div>
+          </section>
+          <section class="panel" id="commands"><h2>プラグインコマンド <span class="count">4件</span></h2><article class="command-card" id="command-1"><h3><span class="number">01</span> メインタブをアクティブにする</h3><p class="key">コマンドID <code>activateMainTab</code></p><p>盤面を表示するメインタブに切り替えます。</p><h4>引数</h4><p class="empty">引数はありません。</p></article>
+<article class="command-card" id="command-2"><h3><span class="number">02</span> メイン以外の全タブを閉じる</h3><p class="key">コマンドID <code>closeAllTabs</code></p><p>メインタブ以外の資料タブをすべて閉じます。</p><h4>引数</h4><p class="empty">引数はありません。</p></article>
+<article class="command-card" id="command-3"><h3><span class="number">03</span> メインタブ固定の有効/無効</h3><p class="key">コマンドID <code>setTabFixed</code></p><p>メインタブの固定状態を変更します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">メインタブ固定<small><code>fixed</code></small></th><td>メインタブを固定して閉じられない状態にするか指定します。</td><td>型: <code>boolean</code><br>ヘッダー初期値: <code>false</code></td></tr></tbody></table></div></article>
+<article class="command-card" id="command-4"><h3><span class="number">04</span> メインタブ名変更</h3><p class="key">コマンドID <code>changeMainTabName</code></p><p>メインタブの表示名を変更します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">新しいメインタブ名<small><code>newName</code></small></th><td>メインタブに表示する新しい名前です。</td><td>型: <code>string</code><br>ヘッダー初期値: <code>メイン(盤面)</code></td></tr></tbody></table></div></article></section>
+          
+          
+          <div class="pager"><a href="ContentRenderer.html">← ContentRenderer</a><a href="../プラグイン一覧.html">一覧へ戻る</a><a href="SideMenu.html">SideMenu →</a></div>
+        </main>
+      </div>
+    </div>
+  <footer class="wrap">このデモの <code>js/plugins.js</code> とプラグインヘッダー・実装を基準に生成しています。</footer>
+</body>
+</html>

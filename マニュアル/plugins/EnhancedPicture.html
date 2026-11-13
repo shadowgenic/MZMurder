@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EnhancedPicture | MZ Murder</title>
+  <link rel="stylesheet" href="../plugin_reference.css">
+</head>
+<body>
+  <header class="site-header"><div class="wrap">
+    <p class="eyebrow">MZ Murder · プラグインリファレンス</p>
+    <h1>EnhancedPicture</h1>
+    <p>ピクチャのフローティング化と座標取得を追加します。</p>
+  </div></header>
+  <div class="wrap page">
+      <div class="breadcrumbs"><a href="../MZ_Murder_制作マニュアル.html">制作マニュアル</a> <span>›</span> <a href="../プラグイン一覧.html">プラグイン一覧</a> <span>›</span> EnhancedPicture</div>
+      <div class="page-layout">
+        <aside class="sidebar" aria-label="ページ内目次">
+          <strong>このページ</strong>
+          <a href="#overview">役割</a><a href="#parameters">プラグインパラメータ <em>0</em></a><a href="#commands">プラグインコマンド <em>12</em></a>
+          
+          
+          <div class="sidebar-commands"><a href="#command-1">ピクチャをフローティングにする</a><a href="#command-2">ピクチャ座標を変数に代入</a><a href="#command-3">ピクチャを移動（入力で完了）</a><a href="#command-4">ピクチャをトークンにする</a><a href="#command-5">トークンを使う</a><a href="#command-6">未使用トークンの個数を数える</a><a href="#command-7">変数で指定したPCの未使用トークンの数を数える</a><a href="#command-8">全員のトークンを数える</a><a href="#command-9">PCのトークンを1個使う</a><a href="#command-10">変数で指定したPCのトークンを1個使う</a><a href="#command-11">全てのトークンを保存する</a><a href="#command-12">全てのトークンを復元する</a></div>
+        </aside>
+        <main>
+          <section class="panel" id="overview"><h2>役割</h2><p>ピクチャのフローティング化と座標取得を追加します。</p><div class="callout">フローティングとはドラッグ・アンド・ドロップで移動可能なピクチャのことです。ピクチャを表示した後にトークン化やフローティング化を行います。トークンの残数確認・消費もここで扱います。</div>
+            <p class="source">実装ファイル：<a href="../../js/plugins/EnhancedPicture.js"><code>js/plugins/EnhancedPicture.js</code></a></p>
+            
+          </section>
+          <section class="panel" id="parameters"><h2>プラグインパラメータ <span class="count">0件</span></h2>
+            <p class="hint">「ヘッダー初期値」はプラグインに記載された値、「デモ設定値」はこの作品の <code>js/plugins.js</code> に保存された値です。0や空欄は、実装側で代替値に置き換わる場合があります。</p><p class="empty">プラグインパラメータはありません。</p>
+          </section>
+          <section class="panel" id="commands"><h2>プラグインコマンド <span class="count">12件</span></h2><article class="command-card" id="command-1"><h3><span class="number">01</span> ピクチャをフローティングにする</h3><p class="key">コマンドID <code>makeFloating</code></p><p>ピクチャをドラッグアンドドロップで移動できるフローティングピクチャにします。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">ピクチャ番号<small><code>pictureId</code></small></th><td>フローティングにするピクチャ番号です。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>1</code></td></tr>
+<tr><th scope="row">不透明度0のピクセルを当たり判定にしない<small><code>transparentPixelsNoHit</code></small></th><td>ONにすると、画像の不透明度が0のピクセルをクリックやマウス操作の対象外にします。</td><td>型: <code>boolean</code><br>ヘッダー初期値: <code>false</code></td></tr>
+<tr><th scope="row">キャプション<small><code>caption</code></small></th><td>ピクチャにマウスを重ねた時に表示する説明文です。\V[n]や\N[n]などの制御文字を使用できます。</td><td>型: <code>string</code></td></tr>
+<tr><th scope="row">文字サイズ<small><code>fontSize</code></small></th><td>キャプションの文字サイズを指定します。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>26</code></td></tr>
+<tr><th scope="row">一行の最大文字数<small><code>maxLineChars</code></small></th><td>キャプションを折り返す1行あたりの最大文字数です。</td><td>型: <code>number</code><br>範囲: 1～指定なし<br>ヘッダー初期値: <code>20</code></td></tr></tbody></table></div></article>
+<article class="command-card" id="command-2"><h3><span class="number">02</span> ピクチャ座標を変数に代入</h3><p class="key">コマンドID <code>getPicturePosition</code></p><p>指定したピクチャの現在座標をゲーム変数に代入します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">ピクチャ番号<small><code>pictureId</code></small></th><td>座標を取得するピクチャ番号です。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>1</code></td></tr>
+<tr><th scope="row">X座標の代入先変数<small><code>xVariableId</code></small></th><td>ピクチャのX座標を代入するゲーム変数です。0で無効です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>1</code></td></tr>
+<tr><th scope="row">Y座標の代入先変数<small><code>yVariableId</code></small></th><td>ピクチャのY座標を代入するゲーム変数です。0で無効です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>2</code></td></tr></tbody></table></div></article>
+<article class="command-card" id="command-3"><h3><span class="number">03</span> ピクチャを移動（入力で完了）</h3><p class="key">コマンドID <code>movePictureWithSkip</code></p><p>ピクチャを移動し、ウェイト中に有効な入力があれば移動先まで即座に完了します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">ピクチャ番号<small><code>pictureId</code></small></th><td>移動させるピクチャ番号です。</td><td>型: <code>number</code><br>範囲: 1～指定なし<br>ヘッダー初期値: <code>1</code></td></tr>
+<tr><th scope="row">原点<small><code>origin</code></small></th><td>移動先座標の基準を左上または中央から選びます。</td><td>型: <code>select</code><br>ヘッダー初期値: <code>0</code><br>選択肢: 左上 (<code>0</code>)、中央 (<code>1</code>)</td></tr>
+<tr><th scope="row">座標の指定方法<small><code>coordinateType</code></small></th><td>移動先座標を直接指定するか、変数から読むか選びます。</td><td>型: <code>select</code><br>ヘッダー初期値: <code>direct</code><br>選択肢: 直接指定 (<code>direct</code>)、変数で指定 (<code>variable</code>)</td></tr>
+<tr><th scope="row">X座標<small><code>x</code></small></th><td>直接指定する場合の移動先X座標です。</td><td>型: <code>number</code><br>範囲: -9999～指定なし<br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">Y座標<small><code>y</code></small></th><td>直接指定する場合の移動先Y座標です。</td><td>型: <code>number</code><br>範囲: -9999～指定なし<br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">X座標の変数<small><code>xVariableId</code></small></th><td>変数で指定する場合の移動先X座標を格納した変数です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>1</code></td></tr>
+<tr><th scope="row">Y座標の変数<small><code>yVariableId</code></small></th><td>変数で指定する場合の移動先Y座標を格納した変数です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>2</code></td></tr>
+<tr><th scope="row">拡大率X<small><code>scaleX</code></small></th><td>100で等倍です。</td><td>型: <code>number</code><br>範囲: -2000～指定なし<br>ヘッダー初期値: <code>100</code></td></tr>
+<tr><th scope="row">拡大率Y<small><code>scaleY</code></small></th><td>100で等倍です。</td><td>型: <code>number</code><br>範囲: -2000～指定なし<br>ヘッダー初期値: <code>100</code></td></tr>
+<tr><th scope="row">不透明度<small><code>opacity</code></small></th><td>移動後のピクチャ不透明度です。0で透明、255で不透明です。</td><td>型: <code>number</code><br>範囲: 0～255<br>ヘッダー初期値: <code>255</code></td></tr>
+<tr><th scope="row">合成方法<small><code>blendMode</code></small></th><td>ピクチャの合成方法です。</td><td>型: <code>select</code><br>ヘッダー初期値: <code>0</code><br>選択肢: 通常 (<code>0</code>)、加算 (<code>1</code>)、乗算 (<code>2</code>)、スクリーン (<code>3</code>)</td></tr>
+<tr><th scope="row">移動時間<small><code>duration</code></small></th><td>フレーム数です（60で約1秒）。</td><td>型: <code>number</code><br>範囲: 1～指定なし<br>ヘッダー初期値: <code>60</code></td></tr>
+<tr><th scope="row">完了までウェイト<small><code>wait</code></small></th><td>ONなら移動が終わるまでイベントを待機させます。</td><td>型: <code>boolean</code><br>ヘッダー初期値: <code>true</code><br>ON: ON / OFF: OFF</td></tr>
+<tr><th scope="row">スキップ許可スイッチ<small><code>skipSwitchId</code></small></th><td>0なら常にスキップ可能です。1以上なら、指定スイッチがONのときだけスキップできます。</td><td>型: <code>switch</code><br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">OK入力を有効<small><code>enableOk</code></small></th><td>ONのとき、Enterまたは左クリックで移動を完了します。</td><td>型: <code>boolean</code><br>ヘッダー初期値: <code>true</code><br>ON: ON / OFF: OFF</td></tr>
+<tr><th scope="row">Cancel入力を有効<small><code>enableCancel</code></small></th><td>ONのとき、Escまたは右クリックで移動を完了します。</td><td>型: <code>boolean</code><br>ヘッダー初期値: <code>false</code><br>ON: ON / OFF: OFF</td></tr>
+<tr><th scope="row">イージング<small><code>easingType</code></small></th><td>ピクチャの移動速度の変化方法です。</td><td>型: <code>select</code><br>ヘッダー初期値: <code>0</code><br>選択肢: 一定速度 (<code>0</code>)、ゆっくり始まる (<code>1</code>)、ゆっくり終わる (<code>2</code>)、ゆっくり始まり終わる (<code>3</code>)</td></tr></tbody></table></div></article>
+<article class="command-card" id="command-4"><h3><span class="number">04</span> ピクチャをトークンにする</h3><p class="key">コマンドID <code>makeToken</code></p><p>ピクチャを使用可能なトークンにします。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">ピクチャ番号<small><code>pictureId</code></small></th><td>トークンにするピクチャ番号です。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>1</code></td></tr>
+<tr><th scope="row">使用後の画像<small><code>usedImage</code></small></th><td>トークンを使用した後に表示する画像です。</td><td>型: <code>file</code><br>参照先: <code>img/pictures</code></td></tr>
+<tr><th scope="row">使用前のキャプション<small><code>unusedCaption</code></small></th><td>未使用時にトークンへマウスを重ねた時の説明です。空欄なら表示しません。</td><td>型: <code>string</code><br>ヘッダー初期値: <code>（空欄）</code></td></tr>
+<tr><th scope="row">使用後のキャプション<small><code>usedCaption</code></small></th><td>使用後にトークンへマウスを重ねた時の説明です。空欄なら表示しません。</td><td>型: <code>string</code><br>ヘッダー初期値: <code>（空欄）</code></td></tr>
+<tr><th scope="row">右クリックメニューの使用可否<small><code>rightClickEnabled</code></small></th><td>ONにすると、所有PCが右クリックメニューからトークンを使用できます。</td><td>型: <code>boolean</code><br>ヘッダー初期値: <code>true</code><br>ON: 使用可 / OFF: 使用不可</td></tr>
+<tr><th scope="row">所有PCの番号<small><code>ownerPcId</code></small></th><td>このトークンを使用できるPC番号です。0を指定すると全PCが使用できます。</td><td>型: <code>number</code><br>範囲: 0～指定なし<br>ヘッダー初期値: <code>0</code></td></tr>
+<tr><th scope="row">移動可否<small><code>movable</code></small></th><td>ONにすると、トークンをドラッグアンドドロップで移動できます。</td><td>型: <code>boolean</code><br>ヘッダー初期値: <code>true</code><br>ON: 移動可 / OFF: 移動不可</td></tr></tbody></table></div></article>
+<article class="command-card" id="command-5"><h3><span class="number">05</span> トークンを使う</h3><p class="key">コマンドID <code>useToken</code></p><p>指定した未使用トークンを使用し、使用後の画像へ変更します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">ピクチャ番号<small><code>pictureId</code></small></th><td>使用するトークンのピクチャ番号です。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>1</code></td></tr></tbody></table></div></article>
+<article class="command-card" id="command-6"><h3><span class="number">06</span> 未使用トークンの個数を数える</h3><p class="key">コマンドID <code>countUnusedTokens</code></p><p>指定したPCが所有する未使用トークンの個数を変数へ代入します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">代入先の変数<small><code>variableId</code></small></th><td>未使用トークン数を代入するゲーム変数です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>1</code></td></tr>
+<tr><th scope="row">PCのID<small><code>ownerPcId</code></small></th><td>数える対象となるトークンの所有PC番号です。</td><td>型: <code>number</code><br>範囲: 0～指定なし<br>ヘッダー初期値: <code>0</code></td></tr></tbody></table></div></article>
+<article class="command-card" id="command-7"><h3><span class="number">07</span> 変数で指定したPCの未使用トークンの数を数える</h3><p class="key">コマンドID <code>countUnusedTokensByVariable</code></p><p>指定変数に入っているPC IDが所有する未使用トークン数を変数へ代入します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">代入先の変数<small><code>variableId</code></small></th><td>未使用トークン数を代入するゲーム変数です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>1</code></td></tr>
+<tr><th scope="row">PCのIDを格納した変数<small><code>ownerPcVariableId</code></small></th><td>数える対象となるトークンの所有PC番号が入っているゲーム変数です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>1</code></td></tr></tbody></table></div></article>
+<article class="command-card" id="command-8"><h3><span class="number">08</span> 全員のトークンを数える</h3><p class="key">コマンドID <code>countAllUnusedTokens</code></p><p>指定範囲の各PCが所有する未使用トークン数を、連番の変数へ代入します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">1人目の代入先の変数<small><code>firstVariableId</code></small></th><td>初めのIDに対応する未使用トークン数を代入するゲーム変数です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>1</code></td></tr>
+<tr><th scope="row">初めのID<small><code>firstOwnerPcId</code></small></th><td>数えるPC ID範囲の先頭です。</td><td>型: <code>number</code><br>範囲: 0～指定なし<br>ヘッダー初期値: <code>1</code></td></tr>
+<tr><th scope="row">終わりのID<small><code>lastOwnerPcId</code></small></th><td>数えるPC ID範囲の末尾です。</td><td>型: <code>number</code><br>範囲: 0～指定なし<br>ヘッダー初期値: <code>1</code></td></tr></tbody></table></div></article>
+<article class="command-card" id="command-9"><h3><span class="number">09</span> PCのトークンを1個使う</h3><p class="key">コマンドID <code>useOneToken</code></p><p>指定したPCが所有する未使用トークンから、優先順序に従って1個を使用します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">PCのID<small><code>ownerPcId</code></small></th><td>使用するトークンの所有PC番号です。</td><td>型: <code>number</code><br>範囲: 0～指定なし<br>ヘッダー初期値: <code>1</code></td></tr>
+<tr><th scope="row">優先順序<small><code>priority</code></small></th><td>使用するトークンの選択順序です。</td><td>型: <code>select</code><br>ヘッダー初期値: <code>idDescending</code><br>選択肢: IDの大きい方から (<code>idDescending</code>)、IDの小さい方から (<code>idAscending</code>)、座標のX軸左から (<code>xAscending</code>)、座標のX軸右から (<code>xDescending</code>)、座標のY軸上から (<code>yAscending</code>)、座標のY軸下から (<code>yDescending</code>)</td></tr></tbody></table></div></article>
+<article class="command-card" id="command-10"><h3><span class="number">10</span> 変数で指定したPCのトークンを1個使う</h3><p class="key">コマンドID <code>useOneTokenByVariable</code></p><p>指定変数に入っているPC IDの未使用トークンから、優先順序に従って1個を使用します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">PCのIDを格納した変数<small><code>ownerPcVariableId</code></small></th><td>使用するトークンの所有PC番号が入っているゲーム変数です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>1</code></td></tr>
+<tr><th scope="row">優先順序<small><code>priority</code></small></th><td>使用するトークンの選択順序です。</td><td>型: <code>select</code><br>ヘッダー初期値: <code>idDescending</code><br>選択肢: IDの大きい方から (<code>idDescending</code>)、IDの小さい方から (<code>idAscending</code>)、座標のX軸左から (<code>xAscending</code>)、座標のX軸右から (<code>xDescending</code>)、座標のY軸上から (<code>yAscending</code>)、座標のY軸下から (<code>yDescending</code>)</td></tr></tbody></table></div></article>
+<article class="command-card" id="command-11"><h3><span class="number">11</span> 全てのトークンを保存する</h3><p class="key">コマンドID <code>saveAllTokens</code></p><p>現在の全トークンの画像、使用状態、座標、設定を保存します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">保存ID<small><code>saveId</code></small></th><td>保存データを識別するIDです。</td><td>型: <code>string</code></td></tr></tbody></table></div></article>
+<article class="command-card" id="command-12"><h3><span class="number">12</span> 全てのトークンを復元する</h3><p class="key">コマンドID <code>restoreAllTokens</code></p><p>指定した保存IDの全トークン状態を復元します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">保存ID<small><code>saveId</code></small></th><td>復元する保存データのIDです。</td><td>型: <code>string</code></td></tr></tbody></table></div></article></section>
+          
+          
+          <div class="pager"><a href="ApngSupport.html">← ApngSupport</a><a href="../プラグイン一覧.html">一覧へ戻る</a><a href="LogicProcessor.html">LogicProcessor →</a></div>
+        </main>
+      </div>
+    </div>
+  <footer class="wrap">このデモの <code>js/plugins.js</code> とプラグインヘッダー・実装を基準に生成しています。</footer>
+</body>
+</html>

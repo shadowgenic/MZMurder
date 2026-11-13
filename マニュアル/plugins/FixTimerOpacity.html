@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FixTimerOpacity | MZ Murder</title>
+  <link rel="stylesheet" href="../plugin_reference.css">
+</head>
+<body>
+  <header class="site-header"><div class="wrap">
+    <p class="eyebrow">MZ Murder · プラグインリファレンス</p>
+    <h1>FixTimerOpacity</h1>
+    <p>画面タイマーの初期透明度と実行中の透明度を制御します。</p>
+  </div></header>
+  <div class="wrap page">
+      <div class="breadcrumbs"><a href="../MZ_Murder_制作マニュアル.html">制作マニュアル</a> <span>›</span> <a href="../プラグイン一覧.html">プラグイン一覧</a> <span>›</span> FixTimerOpacity</div>
+      <div class="page-layout">
+        <aside class="sidebar" aria-label="ページ内目次">
+          <strong>このページ</strong>
+          <a href="#overview">役割</a><a href="#parameters">プラグインパラメータ <em>1</em></a><a href="#commands">プラグインコマンド <em>1</em></a>
+          
+          
+          <div class="sidebar-commands"><a href="#command-1">タイマー透明度変更</a></div>
+        </aside>
+        <main>
+          <section class="panel" id="overview"><h2>役割</h2><p>画面タイマーの初期透明度と実行中の透明度を制御します。</p>
+            <p class="source">実装ファイル：<a href="../../js/plugins/FixTimerOpacity.js"><code>js/plugins/FixTimerOpacity.js</code></a></p>
+            
+          </section>
+          <section class="panel" id="parameters"><h2>プラグインパラメータ <span class="count">1件</span></h2>
+            <p class="hint">「ヘッダー初期値」はプラグインに記載された値、「デモ設定値」はこの作品の <code>js/plugins.js</code> に保存された値です。0や空欄は、実装側で代替値に置き換わる場合があります。</p><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">デフォルト透明度<small><code>defaultOpacity</code></small></th><td>起動時のタイマーの透明度を指定します（0〜255）。0で完全透明。</td><td>型: <code>number</code><br>範囲: 0～255<br>ヘッダー初期値: <code>0</code><br>デモ設定値: <code>0</code></td></tr></tbody></table></div>
+          </section>
+          <section class="panel" id="commands"><h2>プラグインコマンド <span class="count">1件</span></h2><article class="command-card" id="command-1"><h3><span class="number">01</span> タイマー透明度変更</h3><p class="key">コマンドID <code>setOpacity</code></p><p>タイマーの透明度を即座に変更します。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">透明度<small><code>opacity</code></small></th><td>変更後の透明度（0〜255）</td><td>型: <code>number</code><br>範囲: 0～255<br>ヘッダー初期値: <code>255</code></td></tr></tbody></table></div></article></section>
+          
+          
+          <div class="pager"><a href="FixScreenSize.html">← FixScreenSize</a><a href="../プラグイン一覧.html">一覧へ戻る</a><a href="FloatingMessageLog.html">FloatingMessageLog →</a></div>
+        </main>
+      </div>
+    </div>
+  <footer class="wrap">このデモの <code>js/plugins.js</code> とプラグインヘッダー・実装を基準に生成しています。</footer>
+</body>
+</html>

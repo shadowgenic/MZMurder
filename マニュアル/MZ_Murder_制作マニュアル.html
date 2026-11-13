@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MZ Murder 制作マニュアル</title>
+  <style>
+    :root { color-scheme: light; --ink:#202c39; --muted:#526477; --line:#d8e1e9; --blue:#17618e; --pale:#edf6fb; --paper:#fff; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:#f3f6f8; color:var(--ink); font:16px/1.8 system-ui,"Yu Gothic","Meiryo",sans-serif; }
+    header { background:#123950; color:white; padding:2.5rem max(1.25rem,calc((100vw - 1100px)/2)); }
+    header h1 { margin:0 0 .4rem; font-size:clamp(2rem,5vw,3rem); line-height:1.25; }
+    header p { margin:.3rem 0; color:#deedf5; }
+    .layout { max-width:1160px; margin:auto; padding:1.4rem; display:grid; grid-template-columns:220px minmax(0,1fr); gap:1.5rem; align-items:start; }
+    nav { position:sticky; top:1rem; background:var(--paper); border:1px solid var(--line); border-radius:12px; padding:1rem; }
+    nav strong { display:block; margin-bottom:.5rem; }
+    nav a { display:block; padding:.25rem .35rem; color:var(--blue); text-decoration:none; border-radius:5px; }
+    nav a:hover, nav a:focus { background:var(--pale); text-decoration:underline; }
+    main { min-width:0; }
+    section { background:var(--paper); border:1px solid var(--line); border-radius:12px; padding:1.4rem 1.7rem; margin-bottom:1.3rem; }
+    h2 { margin:0 0 .8rem; font-size:1.55rem; line-height:1.45; border-bottom:2px solid var(--line); padding-bottom:.4rem; }
+    h3 { margin:1.6rem 0 .5rem; font-size:1.14rem; color:#114e70; }
+    h4 { margin:1.15rem 0 .4rem; }
+    p, ol, ul { margin:.55rem 0 1rem; }
+    li { padding-left:.12rem; margin:.3rem 0; }
+    a { color:var(--blue); }
+    code { background:#edf1f4; padding:.1em .3em; border-radius:4px; font-family:Consolas,"Yu Gothic",monospace; overflow-wrap:anywhere; }
+    pre { background:#162d3c; color:#f1f7fa; padding:1rem; border-radius:8px; overflow:auto; line-height:1.5; }
+    pre code { color:inherit; background:none; padding:0; }
+    .table-wrap { overflow-x:auto; }
+    table { border-collapse:collapse; width:100%; font-size:.94rem; }
+    th, td { border:1px solid var(--line); padding:.55rem .7rem; text-align:left; vertical-align:top; }
+    th { background:#eaf2f7; white-space:nowrap; }
+    .note, .caution { padding:.8rem 1rem; border-left:4px solid #3282ab; background:var(--pale); border-radius:4px; margin:1rem 0; }
+    .caution { border-color:#bd6b33; background:#fff5ec; }
+    .tips-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:.9rem; }
+    .tip { border:1px solid var(--line); border-radius:9px; background:#f8fbfd; padding:.8rem 1rem; }
+    .tip h3 { margin:0 0 .35rem; }
+    .tip p { margin:.25rem 0 .5rem; }
+    .steps { counter-reset:item; list-style:none; padding:0; }
+    .steps > li { counter-increment:item; position:relative; padding:0 0 .4rem 2.2rem; }
+    .steps > li::before { content:counter(item); position:absolute; left:0; top:.13rem; width:1.55rem; height:1.55rem; border-radius:50%; background:#17618e; color:white; text-align:center; line-height:1.55rem; font-weight:bold; font-size:.85rem; }
+    .small { color:var(--muted); font-size:.92rem; }
+    footer { max-width:1160px; margin:auto; padding:0 1.4rem 2rem; color:var(--muted); }
+    @media (max-width:850px) { .layout { display:block; } nav { position:static; margin-bottom:1.3rem; } nav a { display:inline-block; margin-right:.3rem; } section { padding:1.1rem; } .tips-grid { grid-template-columns:1fr; } }
+    @media print { body { background:white; font-size:11pt; } header { background:white; color:black; padding:0 0 1rem; } header p { color:black; } .layout { display:block; padding:0; } nav { display:none; } section { border:0; padding:0; break-inside:avoid; } h2 { break-after:avoid; } a { color:inherit; } }
+  </style>
+</head>
+<body>
+<header>
+  <img src="title_A.png" width=100%>
+  <h1>MZ Murder 制作マニュアル</h1>
+  <p>RPGツクールMZで、マルチプレイのマーダーミステリーを作ろう！</p>
+</header>
+<div class="layout">
+  <nav aria-label="目次">
+    <strong>目次</strong>
+    <a href="#overview">仕組みと準備物</a>
+    <a href="#firebase">1. Firebaseの登録</a>
+    <a href="#project">2. 新規プロジェクト</a>
+    <a href="#plugins">3. プラグインの導入</a>
+    <a href="#actors">4. アクターの作成</a>
+    <a href="#sync">5. FirebaseSyncの設定</a>
+    <a href="#selection-event">6. 選択イベント</a>
+    <a href="#selection-ui">7. 選択画面の調整</a>
+    <a href="#scenes">8. シーンと移動</a>
+    <a href="#board">9. 盤面と資料</a>
+    <a href="#deployment">10. 配布用データの作成</a>
+    <a href="#tips">制作Tips</a>
+    <a href="#test">動作確認</a>
+    <a href="#reference">プラグイン一覧</a>
+    <a href="プラグイン一覧.html">各プラグインの詳細</a>
+  </nav>
+  <main>
+    <section id="overview">
+      <h2>仕組みと準備物</h2>
+      <p>MZ MurderはRPGツクールMZを基盤にした、オンラインのマーダーミステリー向けプラグイン群です。1マップを1シーンとして構成し、スイッチ・変数、カード、タイマーなどを同期します。HOや資料はメニューに登録し、タブとして描画します。ゲーム内部の画面解像度は1920×1080です。</p>
+      <ul>
+        <li>用意するもの：RPGツクールMZ、インターネット接続、Googleアカウント。</li>
+       </ul>
+      <div class="note">本書におけるデモとは「霧雨荘の殺人」のことです。各プラグインのパラメータ・コマンド・引数は <a href="プラグイン一覧.html">プラグイン一覧</a> から確認できます。</div>
+    </section>
+
+    <section id="firebase">
+      <h2>1. Firebaseに登録する
+      </h2>
+      <p>聞いたことがない方は戸惑うかもしれませんが、手順通り実行すれば問題ありません。<a href="https://console.firebase.google.com/">Firebaseコンソール</a>で、この作品専用のFirebaseプロジェクトを作ります。 <strong>Authenticationの匿名認証</strong> と <strong>Realtime Database</strong> を使用します。Cloud Firestoreは使用しません。</p>
+      <h3>1-1. プロジェクトとWebアプリを作る</h3>
+      <ol class="steps">
+        <li>GoogleアカウントでFirebaseコンソールにログインし、「プロジェクトを作成」を選びます。</li>
+        <li>プロジェクト名を入力し、画面の案内に沿って作成します。Google Analyticsの利用はこのプラグインの接続に必須ではありません。</li>
+        <li>プロジェクト概要のWebアイコンからWebアプリを登録します。表示名は制作者が識別しやすい名前にします。Firebase Hostingの設定は通常不要です。</li>
+        <li>表示された設定オブジェクトを控えます。必要な値は <code>apiKey</code> と <code>authDomain</code> です。後でRealtime Databaseを作成してから <code>databaseURL</code> も取得します。アプリ登録後も「プロジェクトの設定」→「全般」→「マイアプリ」→「構成」で確認できます。</li>
+      </ol>
+      <p class="small">参考：<a href="https://firebase.google.com/docs/web/setup">Firebase公式：Webアプリを追加する</a>、<a href="https://firebase.google.com/docs/web/learn-more#config-object">Firebase公式：設定オブジェクト</a></p>
+      <h3>1-2. 匿名認証を有効にする</h3>
+      <ol class="steps">
+        <li>コンソールの「Authentication」を開き、必要なら「始める」を押します。</li>
+        <li>「Sign-in method（ログイン方法）」で「匿名」を選び、有効にして保存します。</li>
+        <li>ゲーム起動時、<code>FirebaseSync.js</code> が匿名ログインを行います。プレイヤーがメールアドレスを入力する画面は不要です。</li>
+      </ol>
+      <p class="small">参考：<a href="https://firebase.google.com/docs/auth/web/anonymous-auth">Firebase公式：匿名認証</a></p>
+      <h3>1-3. Realtime Databaseを作る</h3>
+      <ol class="steps">
+        <li>「Realtime Database」を開き、「データベースを作成」を選びます。Firestoreではありません。</li>
+        <li>利用するロケーションを選びます。作成後のデータベースURLは、選んだロケーションにより <code>firebaseio.com</code> または <code>firebasedatabase.app</code> で終わります。推測して入力せず、コンソールに表示されたURLをコピーします。</li>
+        <li>初期ルールを選択して作成し、続けて「ルール」タブを設定します。テストモードのまま公開しないでください。</li>
+      </ol>
+      <p class="small">参考：<a href="https://firebase.google.com/docs/database/web/start">Firebase公式：Realtime Databaseの導入</a></p>
+      <h3>1-4. 動作確認用のルールを設定する</h3>
+      <p>このプラグインは <code>active_rooms</code> の全体を参照して空室を掃除し、各ルームのデータを読み書きします。以下は<strong>制作者が管理するテスト環境用</strong>の最小例です。「ルール」タブに貼り付けて公開します。</p>
+      <pre><code>{
+  "rules": {
+    "active_rooms": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    }
+  }
+}</code></pre>
+      <div class="caution">このルールでは匿名ログインできる利用者が悪意を持ってアクセスすると他のルームも読み書きできます。悪用できる範囲は狭く、個人情報などが漏洩するわけでもないのですが、ルーム単位の権限管理を行うとより安全です。設定値の <code>apiKey</code> はパスワードではありませんが、サービスアカウントの秘密鍵はゲームに含めないでください。</div>
+      <p class="small">参考：<a href="https://firebase.google.com/docs/database/security/rules-conditions">Firebase公式：認証情報を使うルール</a>、<a href="https://firebase.google.com/docs/projects/learn-more#config-files-objects">Firebase公式：設定値の扱い</a></p>
+      <h3>1-5. 接続情報を控える</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>Firebaseの値</th><th>取得場所</th><th>プラグイン側</th></tr></thead>
+        <tbody>
+          <tr><td><code>apiKey</code></td><td>Webアプリの構成</td><td><code>FirebaseSync → apiKey</code></td></tr>
+          <tr><td><code>authDomain</code></td><td>Webアプリの構成</td><td><code>FirebaseSync → authDomain</code></td></tr>
+          <tr><td><code>databaseURL</code></td><td>Realtime Databaseのデータ画面、または作成後のWebアプリ構成</td><td><code>FirebaseSync → databaseURL</code></td></tr>
+        </tbody>
+      </table></div>
+      <p>このデモに入っているFirebase接続値はデモ用です。新しい作品では自分のプロジェクトの値へ差し替えます。</p>
+    </section>
+
+    <section id="project">
+      <h2>2. RPGツクールMZの新規プロジェクトを作る</h2>
+      <ol class="steps">
+        <li>RPGツクールMZで「新規プロジェクト」を作成します。</li>
+        <li>新規プロジェクトの <code>js/plugins/</code> に、末尾の「配布対象プラグイン一覧」にある32個のJavaScriptファイルをコピーします。</li>
+        <li>使用する画像を <code>img/pictures/</code>、<code>img/icon/</code>、<code>img/info/</code> に、資料HTMLを <code>html/</code> に配置します。必要な音声もコピーします。ルビ辞書や資料の表示順を使う場合は <code>data/ruby_dict.csv</code> と <code>data/sort_order.txt</code> も配置します。ファイル名とフォルダ階層は各プラグインの設定値に合わせます。</li>
+        <li>「データベース」→「システム2」などの画面設定で、画面幅・高さを1920×1080にします。開始位置も作品用に設定します。アクターは手順4で作成します。</li>
+      </ol>
+      <div class="note">プラグインの有効化とパラメータ設定は、エディタのプラグイン管理画面で行ってください。末尾の一覧は名前順です。読み込み順はデモの <a href="../js/plugins.js"><code>js/plugins.js</code></a> を参考にしてください。</div>
+    </section>
+
+    <section id="plugins">
+      <h2>3. 配布対象のプラグインを読み込む</h2>
+      <p>「ツール」→「プラグイン管理」で、コピーしたプラグインを追加し、すべてONにします。読み込み順はデモの <a href="../js/plugins.js"><code>js/plugins.js</code></a> を参考に設定してください。末尾の一覧は探しやすいよう名前順に掲載しています。</p>
+      <p>主要なプラグインは <code>FirebaseSync</code>、<code>CharacterSelection</code>、<code>SyncMapTransfer</code>、<code>CardPicture</code>、<code>EnhancedPicture</code>、<code>TabUI</code>、<code>ContentRenderer</code>、<code>SideMenu</code> です。配布対象の全32個の役割は末尾の一覧を参照してください。</p>
+      <h3>ウィンドウを閉じるときの確認</h3>
+      <ol class="steps">
+        <li><code>ConfirmWindowClose.js</code> を追加し、プラグイン管理でONにします。デモでは <code>DisableFunction</code> の直後に読み込みます。</li>
+        <li>必要なら <code>confirmMessage</code> に確認文を設定します。初期値は「ゲームを終了しますか？」です。</li>
+        <li>PC版のテストプレイでウィンドウの閉じるボタンを押し、「キャンセル」でゲームが続き、「OK」で終了することを確認します。</li>
+      </ol>
+      <p>ブラウザ版でページを閉じるときは <code>DisableFunction</code> がブラウザ標準の確認を表示します。<a href="plugins/ConfirmWindowClose.html">ConfirmWindowCloseの設定項目</a>も参照してください。</p>
+      <div class="caution">プラグイン名を変更すると、イベント内のプラグインコマンドや <code>PluginManager.parameters(...)</code> の参照先と一致しなくなります。コピー時はファイル名を維持してください。</div>
+    </section>
+
+    <section id="actors">
+      <h2>4. RPGツクールMZでアクターを作成する</h2>
+      <p>「データベース」→「アクター」で、作品に必要なPC、GM、NPCのキャラクターを作成します。アクターIDはキャラクター選択と投票で使われる番号なので、配役を決めてから設定してください。</p>
+      <ol class="steps">
+        <li>プレイヤーが選択するPCとGM用キャラクターを、アクターID <code>1</code> から <code>CharacterSelection.totalPlayers</code> まで連続して登録します。GMも選択画面の人数に含まれます。名前・二つ名・職業・顔グラフィックなど、表示に使う情報を設定します。</li>
+        <li>GM扱いにするアクターを決め、そのIDを <code>FirebaseSync.defaultGmPcId</code> に設定します。デモは <code>totalPlayers=6</code>、GMのアクターIDは <code>6</code> です。</li>
+        <li>NPCを投票の対象に含める場合は、そのNPCもアクターとして登録します。選択可能なPCと区別するため、NPCのアクターIDは <code>totalPlayers</code> より後に配置します。投票画面はアクターの名前と顔グラフィックを表示できます。</li>
+      </ol>
+    </section>
+
+    <section id="sync">
+      <h2>5. FirebaseSyncを設定する</h2>
+      <p>プラグイン管理で <code>FirebaseSync</code> のパラメータを開き、手順1で控えた接続情報と、作品で使用するスイッチ・変数の番号を設定します。</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>パラメータ</th><th>役割</th><th>設定値・デモ例</th></tr></thead>
+        <tbody>
+          <tr><td><code>apiKey / authDomain / databaseURL</code></td><td>手順1で取得したFirebase WebアプリとRealtime Databaseの接続情報</td><td>自分のFirebaseプロジェクトの値</td></tr>
+          <tr><td><code>syncSwitchStart / syncSwitchEnd</code></td><td>全員で共有するスイッチ番号の範囲</td><td>1～100</td></tr>
+          <tr><td><code>syncVariableStart / syncVariableEnd</code></td><td>全員で共有する変数番号の範囲</td><td>1～100</td></tr>
+          <tr><td><code>roomIdVariable</code></td><td>ルームIDを格納する変数</td><td>118</td></tr>
+          <tr><td><code>pcIdVar</code></td><td>PCのIDを格納する変数</td><td>101</td></tr>
+          <tr><td><code>userUidVar</code></td><td>この端末の匿名認証UIDを格納する変数</td><td>102</td></tr>
+          <tr><td><code>creatorSwitchId</code></td><td>ルーム作成者かどうかの判定に使用するスイッチ番号</td><td>101</td></tr>
+          <tr><td><code>gmOnlySwitchId</code></td><td>GMかどうかの判定に使用するスイッチ番号</td><td>101</td></tr>
+          <tr><td><code>defaultGmPcId</code></td><td>GMとして扱うPC(アクター)番号</td><td>6</td></tr>
+          <tr><td><code>maxMembers</code></td><td>ルームへの最大入室人数。GMを含むプレイ人数以上にすること。</td><td>6</td></tr>
+          <tr><td><code>lockSwitchesId</code></td><td>同期処理の書き込み制御に使うスイッチ番号</td><td>0</td></tr>
+          <tr><td><code>lockVariablesId</code></td><td>同期処理の書き込み制御に使う変数番号</td><td>0</td></tr>
+        </tbody>
+      </table></div>
+      <p><code>creatorSwitchId</code>、<code>gmOnlySwitchId</code>、<code>lockVariablesId</code>には共有範囲外のスイッチを、<code>pcIdVar</code>、<code>userUidVar</code>、<code>roomIdVariable</code>、<code>lockVariablesId</code>には共有範囲外の変数を指定します。基本的にイベント等で上書きしないようにしてください。</p>
+    </section>
+
+    <section id="selection-event">
+      <h2>6. 初期マップにキャラクター選択イベントを置く</h2>
+      <p>開始位置を初期マップに設定し、自動実行イベントを1つ置きます。デモの <code>Map001</code> は次の流れです。</p>
+      <ol class="steps">
+        <li><code>SyncMapTransfer → 一斉移動の予約</code> で、選択完了後のマップを指定します。このコマンドはGM権限のある端末だけが実行します。</li>
+        <li><code>CharacterSelection → キャラクター選択処理の実行</code> を呼び出します。</li>
+        <li>キャラクター選択プラグインの <code>completionCommonEventId</code> に、完了後のコモンイベントを設定します。デモはコモンイベント1です。</li>
+        <li>完了用コモンイベントに <code>SyncMapTransfer → 完了報告</code> を置きます。デモでは、その前に <code>現在のPC参加者数を固定する</code> も呼んでいます。</li>
+      </ol>
+      <div class="caution"><code>CharacterSelection.open</code> は呼び出し元イベントを待機させません。選択完了後に実行する処理を同じイベントの直後へ並べず、完了用コモンイベントかスイッチ条件の別イベントに置いてください。移動予約を先に確定させるため、完了報告までに十分な時間を取ります。</div>
+      <p>選択画面へ入った参加者はPCを選び、開始ボタンを押します。<code>members</code> の中でPC番号が登録された人の完了報告が揃うと、観戦者も予約済みのマップへ移動します。</p>
+    </section>
+
+    <section id="selection-ui">
+      <h2>7. キャラクター選択画面をカスタマイズする</h2>
+      <p><code>CharacterSelection</code> のプラグインパラメータで調整します。画像ファイルは <code>img/pictures/</code> に置き、拡張子を除いた名前で選択します。</p>
+      <p>選択したPC番号は <code>FirebaseSync.pcIdVar</code> に保存されます。GM用PC番号は <code>FirebaseSync.defaultGmPcId</code> で指定し、アクターIDと選択画面の表示範囲に合わせます。</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>項目</th><th>調整内容</th></tr></thead>
+        <tbody>
+          <tr><td><code>startUnselected</code></td><td>ONなら部屋の作成者を含む全員がキャラクター未選択で開始します。OFFなら作成者のGMキャラクターを初期選択します。デモ設定はOFFです。</td></tr>
+          <tr><td><code>totalPlayers</code>、<code>allowGmChange</code>、<code>allowEarlyStartSwitchId</code>、<code>autoStartWhenReady</code></td><td>選択画面に表示するキャラクター数、GM変更、人数不足時の開始、自動開始を設定します。<code>totalPlayers</code> は <code>FirebaseSync.maxMembers</code> とは別です。<code>allowEarlyStartSwitchId</code> は名前に「Id」がありますが、実装上は真偽値です。</td></tr>
+          <tr><td><code>backgroundImage</code>、<code>pcImages</code>、<code>isSingleFace</code></td><td>背景、PCごとの画像、顔グラフィックの1ファイル1キャラ扱いを設定します。PC画像を省略するとアクターの顔グラフィックを使います。</td></tr>
+          <tr><td><code>imageWidth / imageHeight</code>、<code>columns</code>、<code>firstX / firstY</code>、<code>spacingX / spacingY</code></td><td>画像の寸法、列数、先頭位置、画像間隔を1920×1080の画面座標で指定します。</td></tr>
+          <tr><td><code>textLine1～3</code>、<code>nameOffsetX / Y</code>、<code>nameAlign</code></td><td>名前・二つ名・職業の表示行と位置を指定します。</td></tr>
+          <tr><td><code>cursorImage</code>、<code>cursorOffsetX / Y</code>、<code>nextButtonImage</code>、<code>nextButtonX / Y / Width / Height</code></td><td>選択マークと開始ボタンの画像・位置・大きさを指定します。</td></tr>
+          <tr><td><code>roomIdX / roomIdY</code>、<code>completionCommonEventId</code></td><td>ルームIDの表示位置と、選択完了後のイベントを指定します。</td></tr>
+        </tbody>
+      </table></div>
+      <p>このデモではPC画像を省略し、各アクターの顔グラフィックを使っています。自分のPCの選択マークには <code>Thunb</code>、開始ボタンには <code>Button/Game_Start</code> を指定しています。</p>
+    </section>
+
+    <section id="scenes">
+      <h2>8. 各シーンをマップとしてシナリオを作る</h2>
+      <p>導入、ハンドアウト確認、読み合わせ、調査・議論、投票、エンディングなどを別マップに分けます。各マップの自動実行や並列イベントに、文章、演出、資料配布、タイマー、分岐を配置します。デモでは <code>Map004</code> がカードとトークンの盤面、<code>Map005</code> と <code>Map008</code> が投票処理の例です。</p>
+      <h3>一斉移動の基本形</h3>
+      <ol class="steps">
+        <li>GM側のイベントで <code>SyncMapTransfer → 一斉移動の予約</code> を実行し、次のマップを指定します。</li>
+        <li>各PCの処理が終わった時点で <code>SyncMapTransfer → 完了報告</code> を実行します。PC未選択の観戦者は完了報告の対象外です。</li>
+        <li><code>members</code> にいるPC登録者の報告が揃うと、観戦者を含む全員を予約先へ移します。固定人数で待つ場合は、GM側で <code>現在のPC参加者数を固定する</code> を使います。</li>
+      </ol>
+      <p>独自の分岐がある場合も、次のマップを決めてから完了報告を行います。単独のイベントコマンド「場所移動」で全員を移動させる構成にはしません。再参加時の補助には <code>保存されたマップへ移動（自分のみ）</code> があります。</p>
+      <h3>シーンで使う主なプラグイン</h3>
+      <ul>
+        <li><code>FloatingMessageLog</code>：ツクールの「文章の表示」を重ねて表示し、ログと文章同期を扱います。</li>
+        <li><code>TimerEx</code>：秒数、終了時スイッチ、SE、表示位置を指定する同期タイマーです。</li>
+        <li><code>SideMenu</code> + <code>TabUI</code> + <code>ContentRenderer</code>：資料の登録、タブ表示、HTML・画像描画を行います。例えば <code>html/HO-1.htm</code> はID <code>HO-1</code> として「情報の追加」で登録します。</li>
+        <li><code>CulpritVote</code>：投票画面を生成して各PCの投票を同期します。全員の投票後に「投票結果を取得」を実行し、最多票PC番号や票数などを指定したゲーム変数へ格納します。同票判定はスイッチにも出力できます。対象PCを配列変数から指定するコマンドもあります。</li>
+      </ul>
+      <div class="note">ゲーム内のHTML表示は一般的なブラウザのHTML/CSS全機能を再現しません。見出し・本文・ルビ・画像など、<code>ContentRenderer</code> が対応する範囲で資料を作り、実機で表示を確認してください。使えるタグと挙動は <a href="ContentRenderer_HTMLガイド.html">ContentRendererのHTMLガイド</a> にまとめています。本マニュアル自体は通常のブラウザで開く一般的なHTMLです。</div>
+    </section>
+
+    <section id="board">
+      <h2>9. 盤面マップにカードとトークンを置く</h2>
+      <h3>カードの配置</h3>
+      <ol class="steps">
+        <li>カードの裏面・表面画像を <code>img/pictures/</code> に置きます。</li>
+        <li>盤面マップのイベントでツクールの「ピクチャの表示」を実行します。表示する画像が裏面です。カードごとに固有のピクチャ番号を使います。</li>
+        <li>続けて <code>CardPicture → ピクチャのカード化</code> を実行し、同じピクチャ番号、表面画像、初期表示、ドラッグ可否、表裏のキャプションなどを設定します。</li>
+        <li>もしゲーム中に変更する必要があれば <code>CardPicture → カードの表示状態を変更</code> で非表示・公開・個人閲覧を切り替え、<code>CardPicture → カードの属性を変更</code> で操作可能なPC、閲覧時スイッチ、公開制限などを設定します。</li>
+      </ol>
+      <p>カードの位置や表裏・公開状態はFirebase上のルームデータと同期されます。右クリックメニュー、ホバー時のキャプション、ドラッグ移動などを盤面上で確認してください。</p>
+      <p>カードを自分だけ見るした時、全体公開した時、閲覧した時などにスイッチをONにしたり、特定のカードでのみ使用できるコマンドも <code>CardPicture</code> のパラメータで設定できます。</p>
+      <h3>トークンの配置</h3>
+      <ol class="steps">
+        <li>未使用トークン画像と使用後画像を <code>img/pictures/</code> に置きます。</li>
+        <li>「ピクチャの表示」で未使用画像を表示し、<code>EnhancedPicture → ピクチャをトークンにする</code> で同じピクチャ番号、使用後画像、所有PC番号、操作可否を指定します。</li>
+        <li>調査イベントでは <code>EnhancedPicture → 未使用トークンの個数を数える</code> と <code>EnhancedPicture → PCのトークンを1個使う</code>、または変数でPCを指定する同名系のコマンドを使って残数と消費を制御します。</li>
+      </ol>
+      <p>デモの盤面は <code>Map004</code> のイベント1でカードとトークンを生成し、イベント12で調査時のトークン消費を行います。カード・トークンは画像を表示しただけでは機能が付かないため、対応するプラグインコマンドを続けて設定してください。</p>
+    </section>
+
+    <section id="deployment">
+      <h2>10. デプロイメントと配布</h2>
+      <p>制作と複数端末での動作確認を終えたら、RPGツクールMZの「ファイル」→「デプロイメント」から配布先に合わせて書き出します。<code>html/</code> や <code>img/info/</code> など、プラグインが実行時に読み込むファイルが出力先にも揃っているか確認してください。「未使用ファイルを除外する」を使う場合は、これらのファイルが欠けていないか特に確認します。</p>
+      <h3>Windows・Webブラウザ向け</h3>
+      <ul>
+        <li><strong>Windows：</strong>デプロイメントの対象に「Windows」を選び、書き出されたゲームフォルダを配布します。配布前に出力先の <code>Game.exe</code> を起動して確認します。</li>
+        <li><strong>Webブラウザ：</strong>対象に「ウェブブラウザ」を選び、出力された <code>index.html</code> と各フォルダをWebサーバへ配置します。公開先のURLから起動し、Firebaseへの接続と資料・画像の読み込みを確認します。</li>
+      </ul>
+      <h3>Mac向け：Web用の書き出しを新しいNW.jsに組み込む</h3>
+      <p>Mac向け配布では、ツクールMZのMac用デプロイメントに付属する古い実行環境を使わず、Web用に書き出したゲームを新しいNW.jsで実行します。NW.jsが提供するMac用アプリの <code>Contents/Resources/app.nw</code> にゲーム一式を配置する方法です。</p>
+      <ol class="steps">
+        <li>デプロイメントで「ウェブブラウザ」を選び、ゲームを書き出します。</li>
+        <li><a href="https://nwjs.io/">NW.js公式サイト</a>から配布時点の最新の安定版Mac用ZIPをダウンロードします。使用するMacに合わせてApple Silicon用（arm64）またはIntel用（x64）を選び、ダウンロードします。</li>
+        <li>ダウンロードした <code>nwjs.app</code> を展開しないで7ZipやWinRARなどソフトで開き、<code>Contents/Resources/app.nw/</code> フォルダ内に<strong>Web用出力の中身</strong>をその直下にコピーし、<code>app.nw/index.html</code> になるようにします。出力フォルダ自体を入れて階層を一段増やさないでください。</li>
+        <li><code>app.nw/package.json</code> がない場合は、制作プロジェクトの <code>package.json</code> をコピーします。<code>main</code> が <code>index.html</code> を指していることを確認します。</li>
+        <li>Macで <code>nwjs.app</code> を起動し、ルーム作成・参加、資料表示、終了確認まで確認してからアプリを配布します。</li>
+      </ol>
+      <h3>Macでセキュリティ警告が出た場合</h3>
+      <p>署名・公証をしていないアプリは、ダウンロード後の初回起動時にmacOSのGatekeeperから開発元を確認できないなどの警告が出て、通常のダブルクリックでは開けない場合があります。利用者には、信頼できる配布元から入手したアプリに限り、次の方法で<strong>そのアプリだけ</strong>実行を許可してもらいます。</p>
+      <ol class="steps">
+        <li>配布された <code>nwjs.app</code> を一度開こうとして、警告が表示されたら閉じます。</li>
+        <li>Macの「システム設定」→「プライバシーとセキュリティ」を開き、下部の「このまま開く」をクリックします。</li>
+        <li>認証を求められたらMacのパスワードなどで承認し、再表示される確認画面で「開く」を選びます。以後はそのアプリを通常どおり開けます。</li>
+      </ol>
+      <p>「このまま開く」は、アプリを開こうとした後に表示される項目です。「アプリが破損している」「コンピュータが破損する」といった警告の場合は、実行許可で済ませず、配布ファイルの状態を調べてください。手順と警告の違いは <a href="https://support.apple.com/ja-jp/102445">Appleの「Macでアプリを安全に開く」</a> を参照してください。</p>
+      <h3>署名できる環境がある場合</h3>
+      <p>Apple Developer ProgramのDeveloper ID証明書を使える場合は、<code>app.nw</code> を組み込んだ<strong>完成後のMacアプリ</strong>に署名し、Appleの公証を受けてから配布します。公証済みアプリなら、未署名版のように利用者へ個別の実行許可を案内する必要を減らせます。署名後にゲームファイルを差し替えると署名が無効になるため、更新時は署名と公証をやり直してください。<a href="https://developer.apple.com/jp/developer-id/">AppleのDeveloper IDと公証</a></p>
+      <p class="note">NW.jsの公式手順では、Mac用アプリの <code>Contents/Resources/app.nw</code> はゲームファイルを入れるフォルダとして使えます。<a href="https://docs.nwjs.io/For%20Users/Package%20and%20Distribute/">NW.jsのパッケージ・配布手順</a></p>
+    </section>
+
+    <section id="tips">
+      <h2>制作Tips</h2>
+      <div class="tips-grid">
+        <article class="tip">
+          <h3>キャラクター選択や投票はプラグインコマンドが必須？</h3>
+          <p>いいえ。好きなようにイベントで作っても大丈夫です。プラグインコマンドは用意された画面と処理を使う方法です。独自に作る場合は、PC番号の設定や参加者間の同期、投票結果の保存など、作品に必要な処理もイベント側で用意してください。</p>
+        </article>
+        <article class="tip">
+          <h3>画像サイズをそろえる</h3>
+          <p>カードの画像は拡大したときの表示サイズに合わせて作り、縮小して盤面に配置しましょう。また、表と裏は同じサイズで作らないと裏返した時に位置がずれることになります。</p>
+        </article>
+        <article class="tip">
+          <h3>顔グラフィックはRPGツクール形式でないとダメ？</h3>
+          <p>いいえ。1枚の絵でも使えます。アクターの顔画像を1キャラクター1ファイルで用意する場合は、<code>CharacterSelection</code> と <code>CulpritVote</code> の <code>isSingleFace</code> をONにしてください。画像全体を切り出さずに表示します。OFFなら通常の4×2分割で読み込みます。</p>
+          <p><a href="plugins/CharacterSelection.html">CharacterSelection</a> ／ <a href="plugins/CulpritVote.html">CulpritVote</a></p>
+        </article>
+        <article class="tip">
+          <h3>NPCを投票対象に含める</h3>
+          <p><code>CulpritVote</code> の「投票対象キャラクター数」にNPCのアクターIDまで含めるか、「指定PC配列を投票対象にして犯人投票を開始」でNPCのIDを配列に指定します。「プレイ中のPCのみ対象とする」をONにすると、PCとして参加していないNPCは候補から除外されるためOFFにしてください。</p>
+          <p><a href="plugins/CulpritVote.html">CulpritVoteの設定項目</a></p>
+        </article>
+        <article class="tip">
+          <h3>画像をアニメーションさせる</h3>
+          <p>APNGなら <code>img/pictures/</code> に置き、通常の「ピクチャの表示」で指定します。フレームごとの待機時間、周回数、終了後の表示を決めたい場合は、連番画像を <code>SequenceController</code> で再生します。Web公開時は <code>maxFrames</code> に枚数を指定すると終端が明確になります。</p>
+          <p><a href="plugins/ApngSupport.html">ApngSupport</a> ／ <a href="plugins/SequenceController.html">SequenceController</a></p>
+        </article>
+        <article class="tip">
+          <h3>画像をドラッグして動かす</h3>
+          <p>表示済みのピクチャに <code>EnhancedPicture → ピクチャをフローティングにする</code> を使いましょう。フローティングはカードではありませんがドラッグ・アンド・ドロップで移動できる画像です。移動後の位置は「ピクチャ座標を変数に代入」で取得できます。</p>
+          <p><a href="plugins/EnhancedPicture.html">EnhancedPicture</a></p>
+        </article>
+        <article class="tip">
+          <h3>ハンドアウトや資料をタブで配る</h3>
+          <p>HTMLの場合は <code>html/</code>、一枚絵の場合は <code>img/info/</code> に置き、<code>SideMenu → 情報の追加</code> で登録します。表示は <code>TabUI</code> と <code>ContentRenderer</code> が担当します。資料HTMLはゲーム内で実際に開いて表示を確認してください。</p>
+          <p><a href="plugins/SideMenu.html">SideMenu</a> ／ <a href="plugins/ContentRenderer.html">ContentRenderer</a> ／ <a href="ContentRenderer_HTMLガイド.html">使えるHTMLタグ</a></p>
+        </article>
+        <article class="tip">
+          <h3>タイマーを使う</h3>
+          <p><code>TimerEx → タイマーセット</code> で秒数と終了時スイッチを指定します。終了時スイッチをイベントページの条件に使えば、時間切れの演出や次の処理を開始できます。延長可能なタイアーは終了時に自動消去をfalseにしましょう。</p>
+          <p><a href="plugins/TimerEx.html">TimerEx</a></p>
+        </article>
+        <article class="tip">
+          <h3>GMレス作品を作る</h3>
+          <p>いずれかのキャラクターを <code>FirebaseSync.defaultGmPcId</code> でGM扱いにします。<code>CharacterSelection.startUnselected</code> は <code>false</code> に設定します。</p>
+          <p><a href="plugins/CharacterSelection.html">CharacterSelection</a> ／ <a href="plugins/FirebaseSync.html">FirebaseSync</a></p>
+        </article>
+        <article class="tip">
+          <h3>同時処理に注意！</h3>
+          <p>カードを操作した時のイベントを複数人が同時に発生させる場合、同じスイッチなどを使わないように気をつけて！</p>
+          <p><a href="plugins/CharacterSelection.html">CharacterSelection</a> ／ <a href="plugins/FirebaseSync.html">FirebaseSync</a></p>
+        </article>
+      </div>
+    </section>
+
+    <section id="test">
+      <h2>動作確認</h2>
+      <p>タイトル画面で「ルームを作成する」を選ぶと4桁のルームIDが決まります。「ルームに参加する」から同じIDを入力して接続します。</p>
+      <ol>
+        <li>2つ以上の独立した実行環境でゲームを開き、1つ目でルーム作成、2つ目で4桁のルームIDを入力して参加します。</li>
+        <li>キャラクターが重複選択できないこと、全員の選択・完了報告後に同じマップへ移動することを確認します。</li>
+        <li>共有スイッチ・変数、資料タブ、カードの移動と表裏、トークン消費、タイマー、投票を順に確認します。</li>
+      </ol>
+      <h2>困ったときは？</h2>
+      <div class="table-wrap"><table>
+        <thead><tr><th>症状</th><th>確認する場所、参考にすること</th></tr></thead>
+        <tbody>
+          <tr><td>タイトルから接続できない</td><td>Webアプリの3値、匿名認証の有効化、Realtime DatabaseのURLとルール、インターネット接続。<code>FirebaseSync</code> は起動時にFirebase SDKを外部から読み込みます。</td></tr>
+          <tr><td>選択後に進まない</td><td>GM判定スイッチ、先行する一斉移動予約、完了用コモンイベント、PC登録者全員の完了報告、固定人数。</td></tr>
+          <tr><td>PC番号が食い違う</td><td><code>FirebaseSync.pcIdVar</code> に保存された値、<code>defaultGmPcId</code>、アクターの番号。</td></tr>
+          <tr><td>資料や画像が出ない</td><td><code>html/</code>・<code>img/info/</code>・<code>img/icon/</code>・<code>img/pictures/</code> の配置を確認しましょう。Web版の場合はファイル名の大文字小文字も合わせなければならない場合があります。。</td></tr>
+          <tr><td>カードが動かない・同期しない</td><td>ピクチャ表示後のカード化、カードの変更の処理や、共通変数・共通スイッチの変更は一人だけが行うことを推奨します。複数人が実行するとデータベースを同時に上書きしあうため、不具合の原因になりえます。</td></tr>
+          <tr><td>次のマップ(シーン)に進まない</td><td>SyncMapTrasnferにて次の移動先を指定してください。完了報告はそれより後に行われる必要があるため、移動先は早めに指定しましょう。必要ならばウェイトを入れて完了報告を遅らせましょう。</td></tr>
+          <tr><td>イベントの組み方がわからないところがある</td><td>RPGツクールMZの解説をWebで調べてみましょう。MZMurder特有の処理についてはデモ作品「霧雨荘の殺人」を参考にしてみましょう！</td></tr>
+          <tr><td>プラグインを改造してみたい</td><td>Visual Studio CodeやCodexにRPGツクールMZのプロジェクトフォルダを読み込ませ、改造したい内容や新規で作りたい処理をAIに指示してみましょう。</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section id="reference">
+      <h2>配布対象プラグイン一覧</h2>
+      <p>パラメータとコマンドの全項目は <a href="プラグイン一覧.html">詳細リファレンス</a> に掲載しています。</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th>No.</th><th>プラグイン</th><th>主な役割</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>AltEnter</td><td>全画面表示の切り替え</td></tr>
+          <tr><td>2</td><td>AlwaysActive</td><td>非アクティブ時もゲームを更新</td></tr>
+          <tr><td>3</td><td>ApngSupport</td><td>APNGピクチャ表示</td></tr>
+          <tr><td>4</td><td>CardPicture</td><td>表裏のあるカードと閲覧・同期</td></tr>
+          <tr><td>5</td><td>CharacterSelection</td><td>PC選択画面</td></tr>
+          <tr><td>6</td><td>ConfirmWindowClose</td><td>PC版ウィンドウ終了時の確認</td></tr>
+          <tr><td>7</td><td>ContentRenderer</td><td>HTML・画像資料の描画</td></tr>
+          <tr><td>8</td><td>CulpritVote</td><td>投票画面の生成と結果の変数格納</td></tr>
+          <tr><td>9</td><td>CustomMenuButton</td><td>メニューボタン画像の調整</td></tr>
+          <tr><td>10</td><td>DisableFunction</td><td>F5リロード抑止</td></tr>
+          <tr><td>11</td><td>EnhancedPicture</td><td>トークン・フローティング画像・座標取得</td></tr>
+          <tr><td>12</td><td>ErasePictures</td><td>ピクチャの一括消去</td></tr>
+          <tr><td>13</td><td>FirebaseSync</td><td>ルーム・参加者・スイッチ・変数の同期、ゲームの初期設定</td></tr>
+          <tr><td>14</td><td>FixScreenSize</td><td>画面比率と入力座標の補正</td></tr>
+          <tr><td>15</td><td>FixTimerOpacity</td><td>標準タイマーの透明度調整</td></tr>
+          <tr><td>16</td><td>FloatingMessageLog</td><td>文章表示とログ</td></tr>
+          <tr><td>17</td><td>GMSceneManager</td><td>GMのシーン管理</td></tr>
+          <tr><td>18</td><td>InputTriggerRelease</td><td>クリック・解放の入力監視</td></tr>
+          <tr><td>19</td><td>LogicProcessor</td><td>スイッチ・変数の論理処理</td></tr>
+          <tr><td>20</td><td>NoClickMove</td><td>クリック移動の無効化</td></tr>
+          <tr><td>21</td><td>NoFadeout</td><td>場所移動時のフェード抑止</td></tr>
+          <tr><td>22</td><td>NonstopTimer</td><td>メニュー中のタイマー更新</td></tr>
+          <tr><td>23</td><td>Options_change</td><td>タイトル・オプションの調整</td></tr>
+          <tr><td>24</td><td>SequenceController</td><td>連番ピクチャ演出</td></tr>
+          <tr><td>25</td><td>SetVariables</td><td>変数・配列操作</td></tr>
+          <tr><td>26</td><td>SetVolume</td><td>各プレイヤーの音量調整</td></tr>
+          <tr><td>27</td><td>SideMenu</td><td>資料を開くサイドメニュー</td></tr>
+          <tr><td>28</td><td>SwitchChoices</td><td>スイッチ条件付きの選択肢</td></tr>
+          <tr><td>29</td><td>SyncMapTransfer</td><td>全員が同期したマップ(シーン)移動</td></tr>
+          <tr><td>30</td><td>TabUI</td><td>資料タブの切り替え</td></tr>
+          <tr><td>31</td><td>TextInput</td><td>文字入力フォーム</td></tr>
+          <tr><td>32</td><td>TimerEx</td><td>同期カウントダウン</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+  </main>
+</div>
+<footer>資料：<a href="../エンジン要件.txt">エンジン要件.txt</a> ／ 配布対象プラグインのヘルプ・実装<br>作者：🐧Shadowgenic ／ 2026</footer>
+</body>
+</html>

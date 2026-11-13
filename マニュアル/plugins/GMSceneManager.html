@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GMSceneManager | MZ Murder</title>
+  <link rel="stylesheet" href="../plugin_reference.css">
+</head>
+<body>
+  <header class="site-header"><div class="wrap">
+    <p class="eyebrow">MZ Murder · プラグインリファレンス</p>
+    <h1>GMSceneManager</h1>
+    <p>GMがマップツリーから全プレイヤーを同じマップへ強制移動させます。</p>
+  </div></header>
+  <div class="wrap page">
+      <div class="breadcrumbs"><a href="../MZ_Murder_制作マニュアル.html">制作マニュアル</a> <span>›</span> <a href="../プラグイン一覧.html">プラグイン一覧</a> <span>›</span> GMSceneManager</div>
+      <div class="page-layout">
+        <aside class="sidebar" aria-label="ページ内目次">
+          <strong>このページ</strong>
+          <a href="#overview">役割</a><a href="#parameters">プラグインパラメータ <em>3</em></a><a href="#commands">プラグインコマンド <em>1</em></a>
+          
+          
+          <div class="sidebar-commands"><a href="#command-1">全員を指定マップへ移動</a></div>
+        </aside>
+        <main>
+          <section class="panel" id="overview"><h2>役割</h2><p>GMがマップツリーから全プレイヤーを同じマップへ強制移動させます。</p>
+            <p class="source">実装ファイル：<a href="../../js/plugins/GMSceneManager.js"><code>js/plugins/GMSceneManager.js</code></a></p>
+            
+          </section>
+          <section class="panel" id="parameters"><h2>プラグインパラメータ <span class="count">3件</span></h2>
+            <p class="hint">「ヘッダー初期値」はプラグインに記載された値、「デモ設定値」はこの作品の <code>js/plugins.js</code> に保存された値です。0や空欄は、実装側で代替値に置き換わる場合があります。</p><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">遷移先マップID変数<small><code>SceneVarId</code></small></th><td>GMが選択した移動先マップIDを一時保存する変数番号です。</td><td>型: <code>variable</code><br>ヘッダー初期値: <code>0</code><br>デモ設定値: <code>0</code></td></tr>
+<tr><th scope="row">強制移動トリガースイッチ<small><code>ForceMoveSwitchId</code></small></th><td>全員を強制移動させる処理中であることを示すスイッチ番号です。</td><td>型: <code>switch</code><br>ヘッダー初期値: <code>0</code><br>デモ設定値: <code>0</code></td></tr>
+<tr><th scope="row">GM用画面アイコン<small><code>GmSceneIcon</code></small></th><td>GM用画面を開くボタンに表示する画像です。</td><td>型: <code>file</code><br>参照先: <code>img/icon/</code><br>ヘッダー初期値: <code>Scene</code><br>デモ設定値: <code>Scene</code></td></tr></tbody></table></div>
+          </section>
+          <section class="panel" id="commands"><h2>プラグインコマンド <span class="count">1件</span></h2><article class="command-card" id="command-1"><h3><span class="number">01</span> 全員を指定マップへ移動</h3><p class="key">コマンドID <code>moveAllPlayers</code></p><p>GM権限で全参加者を指定マップへ強制移動させます。</p><h4>引数</h4><div class="table-wrap"><table><thead><tr><th>項目</th><th>役割・説明</th><th>型・値</th></tr></thead><tbody><tr><th scope="row">移動先マップID<small><code>mapId</code></small></th><td>全プレイヤーを移動させる対象のマップ番号です。</td><td>型: <code>number</code><br>ヘッダー初期値: <code>1</code></td></tr></tbody></table></div></article></section>
+          
+          
+          <div class="pager"><a href="FloatingMessageLog.html">← FloatingMessageLog</a><a href="../プラグイン一覧.html">一覧へ戻る</a><a href="InputTriggerRelease.html">InputTriggerRelease →</a></div>
+        </main>
+      </div>
+    </div>
+  <footer class="wrap">このデモの <code>js/plugins.js</code> とプラグインヘッダー・実装を基準に生成しています。</footer>
+</body>
+</html>
